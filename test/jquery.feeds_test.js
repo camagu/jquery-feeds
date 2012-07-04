@@ -138,6 +138,12 @@
 					preprocess: function( feed ) {
 						entries[ entryCounter ].source = this.source;
 						entries[ entryCounter ].publishedDateRaw = this.publishedDateRaw;
+						entries[ entryCounter ].feedUrl = data.responseData.feed.feedUrl;
+						entries[ entryCounter ].feedTitle = data.responseData.feed.title;
+						entries[ entryCounter ].feedLink = data.responseData.feed.link;
+						entries[ entryCounter ].feedDescription = data.responseData.feed.description;
+						entries[ entryCounter ].feedAuthor = data.responseData.feed.author;
+						
 						deepEqual( this, entries[ entryCounter ] );
 						entryCounter++;
 
@@ -150,6 +156,63 @@
 			}
 		} );
 	} );
+	
+	asyncTest( 'is feed data appended to entry', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$.ajax( {
+			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
+			dataType: 'jsonp',
+			data: {
+				q: 'http://googleblog.blogspot.com/atom.xml',
+				num: 1
+			},
+			success: function( data ) {
+				clearTimeout( to );
+				
+				var properties = [ 'feedUrl', 'title', 'link', 'description', 'author' ];
+				for ( var i in properties ) {
+					if ( typeof data.responseData.feed[ properties[ i ] ] === 'undefined' ) {
+						ok( false, 'Propery ' + properties[ i ] + ' is not defined' );
+						start( );
+						return;
+					}
+				}
+				
+				var feedData = {
+					feedUrl: data.responseData.feed.feedUrl,
+					feedTitle: data.responseData.feed.title,
+					feedLink: data.responseData.feed.link,
+					feedDescription: data.responseData.feed.description,
+					feedAuthor: data.responseData.feed.author
+				};
+				
+				$( '#feeds' ).feeds( {
+					feeds: {
+						'google': 'http://googleblog.blogspot.com/atom.xml'
+					},
+					max: 1,
+					onComplete: function( entries ) {
+						if ( typeof entries[ 0 ] === 'undefined' ) {
+							ok( false, 'No entries loaded' );
+							start( );
+						}
+
+						expect( feedData.length );
+						for ( var i in feedData ) {
+							equal( entries[ 0 ][ i ], feedData[ i ], 'property ' + i + ' was appended to entry' );
+						}
+						
+						start( );
+					}
+				} );
+			}
+		} );
+	});
 
 	asyncTest( 'is data manipulated in preprocess', function( ) {
 		var to = setTimeout( function( ) {
@@ -178,7 +241,7 @@
 		} );
 	} );
 
-	asyncTest( 'are entries are passed to onComplete when loading multiple feeds', function( ) {
+	asyncTest( 'are entries passed to onComplete when loading multiple feeds', function( ) {
 		var to = setTimeout( function( ) {
 			ok( false, 'Timed out' );
 			start( );
@@ -200,6 +263,11 @@
 					for ( var i in entries1 ) {
 						entries1[ i ].source = 'feed1';
 						entries1[ i ].publishedDateRaw = entries1[ i ].publishedDate;
+						entries1[ i ].feedUrl = data.responseData.feed.feedUrl;
+						entries1[ i ].feedTitle = data.responseData.feed.title;
+						entries1[ i ].feedLink = data.responseData.feed.link;
+						entries1[ i ].feedDescription = data.responseData.feed.description;
+						entries1[ i ].feedAuthor = data.responseData.feed.author;
 					}
 					loadEntries2( );
 				}
@@ -219,6 +287,11 @@
 					for ( var i in entries2 ) {
 						entries2[ i ].source = 'feed2';
 						entries2[ i ].publishedDateRaw = entries2[ i ].publishedDate;
+						entries2[ i ].feedUrl = data.responseData.feed.feedUrl;
+						entries2[ i ].feedTitle = data.responseData.feed.title;
+						entries2[ i ].feedLink = data.responseData.feed.link;
+						entries2[ i ].feedDescription = data.responseData.feed.description;
+						entries2[ i ].feedAuthor = data.responseData.feed.author;
 					}
 					loadFeeds( );
 				}

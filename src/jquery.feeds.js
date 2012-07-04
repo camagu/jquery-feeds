@@ -93,6 +93,12 @@
 						entry.source = key;
 						entry.publishedDateRaw = entry.publishedDate;
 						
+						entry.feedUrl = data.responseData.feed.feedUrl;
+						entry.feedTitle = data.responseData.feed.title;
+						entry.feedLink = data.responseData.feed.link;
+						entry.feedDescription = data.responseData.feed.description;
+						entry.feedAuthor = data.responseData.feed.author;
+						
 						this.settings.preprocess.call( entry, data.responseData.feed );
 						
 						this.entries.push( entry );

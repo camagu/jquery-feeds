@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.2pre - 2012-07-03
+/*! jQuery Feeds - v0.2pre - 2012-07-04
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
@@ -96,6 +96,12 @@
 						var entry = $.extend( {}, feedEntries[ i ] );
 						entry.source = key;
 						entry.publishedDateRaw = entry.publishedDate;
+						
+						entry.feedUrl = data.responseData.feed.feedUrl;
+						entry.feedTitle = data.responseData.feed.title;
+						entry.feedLink = data.responseData.feed.link;
+						entry.feedDescription = data.responseData.feed.description;
+						entry.feedAuthor = data.responseData.feed.author;
 						
 						this.settings.preprocess.call( entry, data.responseData.feed );
 						
