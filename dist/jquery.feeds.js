@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.1 - 2012-07-03
+/*! jQuery Feeds - v0.2pre - 2012-07-03
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
@@ -95,6 +95,7 @@
 					for ( var i in feedEntries ) {
 						var entry = $.extend( {}, feedEntries[ i ] );
 						entry.source = key;
+						entry.publishedDateRaw = entry.publishedDate;
 						
 						this.settings.preprocess.call( entry, data.responseData.feed );
 						
@@ -111,8 +112,8 @@
 					this.$loader.remove( );
 					
 					this.entries.sort( function( a, b) {
-						var aDate = new Date( a.publishedDate ).getTime( );
-						var bDate = new Date( b.publishedDate ).getTime( );
+						var aDate = new Date( a.publishedDateRaw ).getTime( );
+						var bDate = new Date( b.publishedDateRaw ).getTime( );
 
 						return bDate - aDate;
 					} );

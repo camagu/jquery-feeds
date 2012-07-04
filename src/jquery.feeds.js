@@ -91,6 +91,7 @@
 					for ( var i in feedEntries ) {
 						var entry = $.extend( {}, feedEntries[ i ] );
 						entry.source = key;
+						entry.publishedDateRaw = entry.publishedDate;
 						
 						this.settings.preprocess.call( entry, data.responseData.feed );
 						
@@ -107,8 +108,8 @@
 					this.$loader.remove( );
 					
 					this.entries.sort( function( a, b) {
-						var aDate = new Date( a.publishedDate ).getTime( );
-						var bDate = new Date( b.publishedDate ).getTime( );
+						var aDate = new Date( a.publishedDateRaw ).getTime( );
+						var bDate = new Date( b.publishedDateRaw ).getTime( );
 
 						return bDate - aDate;
 					} );

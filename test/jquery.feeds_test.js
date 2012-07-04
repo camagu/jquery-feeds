@@ -137,6 +137,7 @@
 					},
 					preprocess: function( feed ) {
 						entries[ entryCounter ].source = this.source;
+						entries[ entryCounter ].publishedDateRaw = this.publishedDateRaw;
 						deepEqual( this, entries[ entryCounter ] );
 						entryCounter++;
 
@@ -198,6 +199,7 @@
 					entries1 = data.responseData.feed.entries;
 					for ( var i in entries1 ) {
 						entries1[ i ].source = 'feed1';
+						entries1[ i ].publishedDateRaw = entries1[ i ].publishedDate;
 					}
 					loadEntries2( );
 				}
@@ -216,6 +218,7 @@
 					entries2 = data.responseData.feed.entries;
 					for ( var i in entries2 ) {
 						entries2[ i ].source = 'feed2';
+						entries2[ i ].publishedDateRaw = entries2[ i ].publishedDate;
 					}
 					loadFeeds( );
 				}
@@ -237,7 +240,7 @@
 
 					for ( var i in entries ) {
 						var entry = entries[ i ];
-
+						
 						var expected = null;
 						if ( entry.source === 'feed1' ) {
 							expected = entries1[ feed1Pointer ];
@@ -278,8 +281,8 @@
 						continue;
 					}
 
-					var currentTime = new Date( entries[ i ].publishedDate ).getTime( );
-					var prevTime = new Date( entries[ i - 1 ].publishedDate ).getTime( );
+					var currentTime = new Date( entries[ i ].publishedDateRaw ).getTime( );
+					var prevTime = new Date( entries[ i - 1 ].publishedDateRaw ).getTime( );
 					ok( currentTime <= prevTime, 'current entry is newer than prevoius one' );
 				}
 				clearTimeout( to );
