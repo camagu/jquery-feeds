@@ -468,7 +468,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p>{{title}}</p>',
+			entryTemplate: '<p><%=title%></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
@@ -496,7 +496,7 @@
 				feeds: {
 					'google': 'http://googleblog.blogspot.com/atom.xml'
 				},
-				entryTemplate: '<p>{{foo}}</p>',
+				entryTemplate: '<p><%=foo%></p>',
 				preprocess: function( ) {
 					this.foo = 'bar';
 				},
@@ -527,7 +527,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p>{{foo}}</p>',
+			entryTemplate: '<p><%=foo%></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
