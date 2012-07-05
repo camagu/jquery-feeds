@@ -133,6 +133,8 @@ $('#container').feeds({
 });
 ```
 
+*__Note:__ At this moment the properties __mediaGroup__ and __categories__ are not available inside the template.*
+
 --------------------------------------------------------------------------------------------------------------------------
 
 You can change the template of the loader by passing a HTML string to the *loadingTemplate* option:
@@ -179,6 +181,7 @@ License
 -------
 
 Copyright (c) 2012 Camilo Aguilar
+
 Licensed under the MIT and GPL licenses.
 
 Contributing
