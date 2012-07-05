@@ -30,16 +30,16 @@ $('#container').feeds({
 	feeds: {
 		feed1: 'http://url/to/rss/feed',
 		feed2: 'http://url/to/another/rss/feed'
-		// identifier: 'url', ...
+		// key: 'url', ...
 	}
 });
 ```
 	
-The feeds' keys (*feed1*, *feed2*, etc) are used to identify the source of the entries.
+The feeds' keys (i.e. *feed1* and *feed2* in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. *google*, *jquery*, *smashingmag*).
 
 -----------------------------------------------------------------------------------------------------------------------
 
-You can set the max number of items for each feeds by using the *max* option:
+You can also set the max number of items for each feed by using the *max* option:
 
 ```javascript
 $('#container').feeds({
@@ -65,7 +65,7 @@ $('#container').feeds({
         // Your feeds ...
     },
     preprocess: function ( feed ) {
-        // Cahnge the publishedDate format from UTC to dd-mm-yyyy
+        // Change the publishedDate format from UTC to dd-mm-yyyy
         var date = new Date(this.publishedDate);
         var pieces = [date.getDate(), date.getMonth(), date.getFullYear()]
         this.publishedDate = pieces.join('-');
@@ -96,7 +96,7 @@ Refer to the [Google developer's guide](https://developers.google.com/feed/v1/js
 onComplete callback
 -------------------
 
-By implementing the *onComplete* callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors' *target* to *_blank* (inside the callback *this* corresponds to the container):
+By implementing the *onComplete* callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors' *target* value to *_blank* (inside the callback *this* corresponds to the container):
 
 ```javascript
 $('#container').feeds({
