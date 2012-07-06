@@ -543,5 +543,46 @@
 			}
 		} );
 	} );*/
+	
+	asyncTest( 'entryTemplate - control structures', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml',
+				'jquery': 'http://blog.jquery.com/feed/'
+			},
+			max: 1,
+			entryTemplate:	'<div><% if ( source !== "google" ) { %>' +
+								'<p class="message">not google</p>' +
+							'<% } else if ( source === "google" ) { %>' +
+								'<p class="message">is google</p>' +
+							'<% } %><ul class="categories">' +
+							'<% for ( var i in categories) { %>' +
+								'<li><%= categories[ i ] %></li>' +
+							'<% } %></ul></div>',
+			onComplete: function( entries ) {
+				expect( 4 );
+				
+				$( '#feeds > div' ).each( function( i ) {
+					var shouldEqual = entries[ i ].source === 'google' ? 'is google' : 'not google';
+					equal( $( this ).find( '.message' ).text( ), shouldEqual, 'was conditional used' );
+					
+					var categories = [];
+					$( this ).find( '.categories li' ).each( function( ) {
+						categories.push( $( this ).text() );
+					});
+					deepEqual( categories, entries[ i ].categories, 'was loop used' );
+				} );
+
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
 
 }( jQuery ) );
