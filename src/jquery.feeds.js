@@ -1,4 +1,4 @@
-/* evil: true */
+/*jshint evil: true */
 ( function( $ ) {
 	
 	var cache = {};
@@ -150,7 +150,7 @@
 						.replace( /[\r\t\n]/g, " " )
 						.split( "<%" ).join( "\t" )
 						.replace( /((^|%>)[^\t]*)'/g, "$1\r" )
-						.replace( /\t=(.*?)%>/g, "',$1,'" )
+						.replace( /\t=(.*?)%>/g, "',typeof $1 != 'undefined' ? $1 : '','" )
 						.split( "\t" ).join( "');" )
 						.split( "%>" ).join( "p.push('" )
 						.split( "\r" ).join( "\\'" ) +

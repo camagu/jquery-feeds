@@ -516,7 +516,7 @@
 			} );
 		} );
 
-	/*asyncTest( 'are unrecognized properties stripped from entry tempate', function( ) {
+	asyncTest( 'are unrecognized properties stripped from entry tempate', function( ) {
 		var to = setTimeout( function( ) {
 			ok( false, 'Timed out' );
 			start( );
@@ -542,7 +542,7 @@
 				start( );
 			}
 		} );
-	} );*/
+	} );
 	
 	asyncTest( 'entryTemplate - control structures', function( ) {
 		var to = setTimeout( function( ) {
