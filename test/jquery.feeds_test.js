@@ -654,5 +654,27 @@
 			}
 		} );
 	} );
+	
+	asyncTest( 'entryTemplate - "this" inside callback', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate:	function( entry ) {
+				equal( this.service, 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				return '<p>' + entry.title + '</p>';
+			},
+			onComplete: function( entries ) {
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
 
 }( jQuery ) );

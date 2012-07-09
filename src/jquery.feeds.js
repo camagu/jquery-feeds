@@ -127,7 +127,7 @@
 					for ( var i in this.entries ) {
 						var entry = this.entries[ i ];
 						
-						var html = render( entry );
+						var html = render.call( this, entry );
 						
 						this.$element.append( html );
 					}
