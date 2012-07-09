@@ -121,10 +121,12 @@
 						return bDate - aDate;
 					} );
 					
+					var render = this.tmpl( this.settings.entryTemplate );
+					
 					for ( var i in this.entries ) {
 						var entry = this.entries[ i ];
 						
-						var html = this.tmpl( this.settings.entryTemplate, entry );
+						var html = render( entry );
 						
 						this.$element.append( html );
 					}
