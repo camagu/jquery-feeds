@@ -584,5 +584,26 @@
 			}
 		} );
 	} );
+	
+	asyncTest( 'entryTemplate - external template', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate:	'tmplTest',
+			onComplete: function( entries ) {
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
+
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
 
 }( jQuery ) );
