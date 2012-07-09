@@ -46,7 +46,8 @@
 				
 				this.$element = $( element );
 				
-				this.$loader = $( this.settings.loadingTemplate );
+				var render = typeof this.settings.loadingTemplate === 'function' ? this.settings.loadingTemplate : this.tmpl( this.settings.loadingTemplate );
+				this.$loader = $( render.call( this, { } ) );
 				this.$element.html( this.$loader );
 				
 				for ( var j in this.feeds ) {
