@@ -112,32 +112,63 @@ $('#container').feeds({
 Templating
 ----------
 
-You can change the way the entries are rendered. Just pass a regular HTML string with the entries' property names sorrounded by double curly brackets (e.g. ``{{title}}``) to the *entryTemplate* option.
+The plugin uses a modified version of [John Resing](http://ejohn.org/)'s [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) function to render the entries.
+
+A template is a regular HTML string where you can use javascript statements insde *<! ... !>* tags or print them by using *<!= ... !>* tags intead.
+
+```html
+<article>
+	<header>
+		<h1><a href="<!=link!>"><!=title!></a></h1>
+		<p><!=publishedDate!></p>
+		<! if (categories) { !>
+			<ul>
+				<! for (var i in categories) { !>
+					<li><!=categories[i]!></li>
+				<! } !>
+			</ul>
+		<! } !>
+	</header>
+	<div><!=contentSnippet!></div>
+	<footer>
+		<p>via: <a href="<!=feedLink!>"><!=feedTitle!></a></p>
+	</footer>
+</article>
+```
+
+All the entry's properties are passed to the template as variables.
+
+To use a template you could either pass it as a string to the *entryTemplate* option ...
 
 ```javascript
 $('#container').feeds({
     feeds: {
         // Your feeds ...
     },
-    entryTemplate:  '<article>' +
-                        '<header>' +
-                            '<h1><a href="{{link}}">{{title}}</a></h1>' +
-                            '<p>{{publishedDate}}</p>' +
-                        '</header>' +
-                        '<div>{{contentSnippet}}</div>' +
-                        '<footer>' +
-                            '<p>via: <a href="{{feedLink}}">{{feedTitle}}</a></p>' +
-                        '</footer>' +
-                    '</article>'
-    }
+	entryTemplate: '<p><!=title!></p>'
 });
 ```
 
-*__Note:__ At this moment the properties __mediaGroup__ and __categories__ are not available inside the template.*
+... or you could write it inside a *script* tag which *type* is set to *text/html* and pass it's *id* to the *entryTemplate* option:
+
+```html
+<script type="text/html" id="exampleTemplate">
+	<p><!=title!></p>
+</script>
+```
+
+```javascript
+$('#container').feeds({
+    feeds: {
+        // Your feeds ...
+    },
+	entryTemplate: 'exampleTemplate'
+});
+```
 
 --------------------------------------------------------------------------------------------------------------------------
 
-You can change the template of the loader by passing a HTML string to the *loadingTemplate* option:
+You can change the loader template as well by passing a template or it's *id* to the *loadingTemplate* option:
 
 ```javascript
 $('#container').feeds({
@@ -170,13 +201,26 @@ preprocess: function( feed ) { },
 loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
 
 // Template used to render each entry
-entryTemplate:	'<div class="feeds-entry feeds-source-{{source}}">' + 
-				'<a class="feed-entry-title" target="_blank" href="{{link}}" title="{{title}}">{{title}}</a>' +
-				'<div class="feed-entry-date">{{publishedDate}}</div>' + 
-				'<div class="feed-entry-content">{{contentSnippet}}</div>' + 
+entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
+				'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
+				'<div class="feed-entry-date"><!=publishedDate!></div>' + 
+				'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
 				'</div>'
 ```
-                    
+
+Changelog
+---------
+
+**v0.3**
+- Rewrote templating system
+
+**v0.2**
+- Cloned publishedDate property to avoid sorting problems
+- Added feed data to entries
+ 
+**v0.1**
+- First version
+                  
 License
 -------
 

@@ -468,7 +468,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p>{{title}}</p>',
+			entryTemplate: '<p><!=title!></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
@@ -496,7 +496,7 @@
 				feeds: {
 					'google': 'http://googleblog.blogspot.com/atom.xml'
 				},
-				entryTemplate: '<p>{{foo}}</p>',
+				entryTemplate: '<p><!=foo!></p>',
 				preprocess: function( ) {
 					this.foo = 'bar';
 				},
@@ -527,7 +527,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p>{{foo}}</p>',
+			entryTemplate: '<p><!=foo!></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
@@ -537,6 +537,68 @@
 						equal( $( this ).text( ), '', 'empty properties were stripped' );
 					}
 				} );
+
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'entryTemplate - control structures', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml',
+				'jquery': 'http://blog.jquery.com/feed/'
+			},
+			max: 1,
+			entryTemplate:	'<div><! if ( source !== "google" ) { !>' +
+								'<p class="message">not google</p>' +
+							'<! } else if ( source === "google" ) { !>' +
+								'<p class="message">is google</p>' +
+							'<! } !><ul class="categories">' +
+							'<! for ( var i in categories) { !>' +
+								'<li><!= categories[ i ] !></li>' +
+							'<! } !></ul></div>',
+			onComplete: function( entries ) {
+				expect( 4 );
+				
+				$( '#feeds > div' ).each( function( i ) {
+					var shouldEqual = entries[ i ].source === 'google' ? 'is google' : 'not google';
+					equal( $( this ).find( '.message' ).text( ), shouldEqual, 'was conditional used' );
+					
+					var categories = [];
+					$( this ).find( '.categories li' ).each( function( ) {
+						categories.push( $( this ).text() );
+					});
+					deepEqual( categories, entries[ i ].categories, 'was loop used' );
+				} );
+
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'entryTemplate - external template', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate:	'tmplTest',
+			onComplete: function( entries ) {
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
 
 				clearTimeout( to );
 				start( );

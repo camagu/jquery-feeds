@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.2 - 2012-07-04
+/*! jQuery Feeds - v0.3dev - 2012-07-08
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
@@ -13,10 +13,10 @@
 			
 			settings: {
 				loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
-				entryTemplate:	'<div class="feeds-entry feeds-source-{{source}}">' + 
-								'<a class="feed-entry-title" target="_blank" href="{{link}}" title="{{title}}">{{title}}</a>' +
-								'<div class="feed-entry-date">{{publishedDate}}</div>' + 
-								'<div class="feed-entry-content">{{contentSnippet}}</div>' + 
+				entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
+								'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
+								'<div class="feed-entry-date"><!=publishedDate!></div>' + 
+								'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
 								'</div>',
 				feeds: {},
 				max: -1,
@@ -127,28 +127,40 @@
 					for ( var i in this.entries ) {
 						var entry = this.entries[ i ];
 						
-						var html = this.settings.entryTemplate;
-						
-						for ( var j in entry ) {
-							if ( entry.hasOwnProperty( j ) && typeof entry[ j ] === 'string' ) {
-								var pattern = new RegExp( '\\{\\{' + j + '\\}\\}', 'g' );
-								html = html.replace( pattern, entry[ j ] );
-							}
-						}
-						
-						var emptyProperties = html.match( /\{\{.*?\}\}/g, '' );
-						for ( var k in emptyProperties ) {
-							if ( window.console && window.console.log ) {
-								console.log( 'Property ' + emptyProperties[ k ] + ' not found in entry.' );
-							}
-						}
-						html = html.replace( /\{\{.*?\}\}/g, '' );
+						var html = this.tmpl( this.settings.entryTemplate, entry );
 						
 						this.$element.append( html );
 					}
 					
 					this.settings.onComplete.call( this.$element[ 0 ], this.entries );
 				}
+			},
+			
+
+			// Simple JavaScript Templating (modified)
+			// John Resig - http://ejohn.org/ - MIT Licensed
+			// @see http://ejohn.org/blog/javascript-micro-templating/
+			tmplCache: {},
+			tmpl: function tmpl( str, data ) {
+
+				var fn = !/\W/.test( str ) ? this.tmplCache[ str ] = this.tmplCache[ str ] || this.tmpl( document.getElementById( str ).innerHTML ) :
+
+				new Function( "obj",
+					"var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+					"with(obj){p.push('" +
+					str
+						.replace( /[\r\t\n]/g, " " )
+						.split( "<!" ).join( "\t" )
+						.replace( /((^|!>)[^\t]*)'/g, "$1\r" )
+						.replace( /\t=(.*?)!>/g, "',typeof $1 != 'undefined' ? $1 : '','" )
+						.split( "\t" ).join( "');" )
+						.split( "!>" ).join( "p.push('" )
+						.split( "\r" ).join( "\\'" ) +
+					"');}return p.join('');"
+				);
+
+				return data ? fn( data ) : fn;
 			}
 		};
 		
