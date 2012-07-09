@@ -114,7 +114,7 @@ Templating
 
 The plugin uses a modified version of [John Resing](http://ejohn.org/)'s [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) function to render the entries.
 
-A template is a regular HTML string where you can insert javascript statements insde *<! ... !>* or print them by using *<!= ... !>* tags.
+A template is a regular HTML string where you can use javascript statements insde *<! ... !>* tags or print them by using *<!= ... !>* tags intead.
 
 ```html
 <article>
@@ -129,7 +129,7 @@ A template is a regular HTML string where you can insert javascript statements i
 			</ul>
 		<! } !>
 	</header>
-	<div><!=contentSnippet?></div>
+	<div><!=contentSnippet!></div>
 	<footer>
 		<p>via: <a href="<!=feedLink!>"><!=feedTitle!></a></p>
 	</footer>
@@ -168,7 +168,7 @@ $('#container').feeds({
 
 --------------------------------------------------------------------------------------------------------------------------
 
-You can change the template of the loader by passing a HTML string to the *loadingTemplate* option:
+You can change the loader template as well by passing a template or it's *id* to the *loadingTemplate* option:
 
 ```javascript
 $('#container').feeds({
