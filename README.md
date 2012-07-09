@@ -207,8 +207,7 @@ $('#container').feeds({
 // Using jsrender instead of built-in template function
 $('#container').feeds({
 	feeds: {
-		blog: 'http://url/to/blog',
-		twitter: 'http://url/to/twitter/feed'
+		// Your feeds ...
 	},
 	entryTemplate: function(entry) {
 		return $('#myJsrenderTemplate').render(entry);
@@ -220,8 +219,7 @@ $('#container').feeds({
 // Using your own presentation logic
 $('#container').feeds({
 	feeds: {
-		blog: 'http://url/to/blog',
-		twitter: 'http://url/to/twitter/feed'
+		// Your feeds ...
 	},
 	entryTemplate: function(entry) {
 		return '<p>' + entry.title + '</p>';
@@ -231,7 +229,7 @@ $('#container').feeds({
 
 --------------------------------------------------------------------------------------------------------------------------
 
-You can change the loader template as well by passing a template or it's *id* to the *loadingTemplate* option:
+You can change the loader template as well by passing a template, it's *id* or a callback to the *loadingTemplate* option:
 
 ```javascript
 $('#container').feeds({
