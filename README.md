@@ -272,6 +272,9 @@ entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 Changelog
 ---------
 
+**0.4**
+- Implemented alternative use of *entryTemplate* and *loadingTemplate* as callback
+
 **v0.3**
 - Rewrote templating system
 
