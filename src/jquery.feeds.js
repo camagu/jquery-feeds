@@ -121,7 +121,7 @@
 						return bDate - aDate;
 					} );
 					
-					var render = this.tmpl( this.settings.entryTemplate );
+					var render = typeof this.settings.entryTemplate === 'function' ? this.settings.entryTemplate : this.tmpl( this.settings.entryTemplate );
 					
 					for ( var i in this.entries ) {
 						var entry = this.entries[ i ];
