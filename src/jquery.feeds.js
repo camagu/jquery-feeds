@@ -140,7 +140,7 @@
 			tmplCache: {},
 			tmpl: function tmpl( str, data ) {
 
-				var fn = !/\W/.test( str ) ? this.tmplCache[ str ] = this.tmplCach[ str ] || this.tmpl( document.getElementById( str ).innerHTML ) :
+				var fn = !/\W/.test( str ) ? this.tmplCache[ str ] = this.tmplCache[ str ] || this.tmpl( document.getElementById( str ).innerHTML ) :
 
 				new Function( "obj",
 					"var p=[],print=function(){p.push.apply(p,arguments);};" +
