@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.3 - 2012-07-09
+/*! jQuery Feeds - v0.4 - 2012-07-09
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
@@ -49,7 +49,8 @@
 				
 				this.$element = $( element );
 				
-				this.$loader = $( this.settings.loadingTemplate );
+				var render = typeof this.settings.loadingTemplate === 'function' ? this.settings.loadingTemplate : this.tmpl( this.settings.loadingTemplate );
+				this.$loader = $( render.call( this, { } ) );
 				this.$element.html( this.$loader );
 				
 				for ( var j in this.feeds ) {
@@ -124,10 +125,12 @@
 						return bDate - aDate;
 					} );
 					
+					var render = typeof this.settings.entryTemplate === 'function' ? this.settings.entryTemplate : this.tmpl( this.settings.entryTemplate );
+					
 					for ( var i in this.entries ) {
 						var entry = this.entries[ i ];
 						
-						var html = this.tmpl( this.settings.entryTemplate, entry );
+						var html = render.call( this, entry );
 						
 						this.$element.append( html );
 					}
