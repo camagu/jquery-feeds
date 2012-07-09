@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.3dev - 2012-07-08
+/*! jQuery Feeds - v0.3 - 2012-07-09
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
