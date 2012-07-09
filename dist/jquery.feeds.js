@@ -13,10 +13,10 @@
 			
 			settings: {
 				loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
-				entryTemplate:	'<div class="feeds-entry feeds-source-<%=source%>">' + 
-								'<a class="feed-entry-title" target="_blank" href="<%=link%>" title="<%=title%>"><%=title%></a>' +
-								'<div class="feed-entry-date"><%=publishedDate%></div>' + 
-								'<div class="feed-entry-content"><%=contentSnippet%></div>' + 
+				entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
+								'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
+								'<div class="feed-entry-date"><!=publishedDate!></div>' + 
+								'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
 								'</div>',
 				feeds: {},
 				max: -1,
@@ -151,11 +151,11 @@
 					"with(obj){p.push('" +
 					str
 						.replace( /[\r\t\n]/g, " " )
-						.split( "<%" ).join( "\t" )
-						.replace( /((^|%>)[^\t]*)'/g, "$1\r" )
-						.replace( /\t=(.*?)%>/g, "',typeof $1 != 'undefined' ? $1 : '','" )
+						.split( "<!" ).join( "\t" )
+						.replace( /((^|!>)[^\t]*)'/g, "$1\r" )
+						.replace( /\t=(.*?)!>/g, "',typeof $1 != 'undefined' ? $1 : '','" )
 						.split( "\t" ).join( "');" )
-						.split( "%>" ).join( "p.push('" )
+						.split( "!>" ).join( "p.push('" )
 						.split( "\r" ).join( "\\'" ) +
 					"');}return p.join('');"
 				);

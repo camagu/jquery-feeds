@@ -468,7 +468,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p><%=title%></p>',
+			entryTemplate: '<p><!=title!></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
@@ -496,7 +496,7 @@
 				feeds: {
 					'google': 'http://googleblog.blogspot.com/atom.xml'
 				},
-				entryTemplate: '<p><%=foo%></p>',
+				entryTemplate: '<p><!=foo!></p>',
 				preprocess: function( ) {
 					this.foo = 'bar';
 				},
@@ -527,7 +527,7 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
-			entryTemplate: '<p><%=foo%></p>',
+			entryTemplate: '<p><!=foo!></p>',
 			onComplete: function( entries ) {
 				expect( $( '#feeds > p' ).length );
 				$( '#feeds > p' ).each( function( i ) {
@@ -557,14 +557,14 @@
 				'jquery': 'http://blog.jquery.com/feed/'
 			},
 			max: 1,
-			entryTemplate:	'<div><% if ( source !== "google" ) { %>' +
+			entryTemplate:	'<div><! if ( source !== "google" ) { !>' +
 								'<p class="message">not google</p>' +
-							'<% } else if ( source === "google" ) { %>' +
+							'<! } else if ( source === "google" ) { !>' +
 								'<p class="message">is google</p>' +
-							'<% } %><ul class="categories">' +
-							'<% for ( var i in categories) { %>' +
-								'<li><%= categories[ i ] %></li>' +
-							'<% } %></ul></div>',
+							'<! } !><ul class="categories">' +
+							'<! for ( var i in categories) { !>' +
+								'<li><!= categories[ i ] !></li>' +
+							'<! } !></ul></div>',
 			onComplete: function( entries ) {
 				expect( 4 );
 				

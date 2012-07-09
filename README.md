@@ -114,24 +114,24 @@ Templating
 
 The plugin uses a modified version of [John Resing](http://ejohn.org/)'s [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) function to render the entries.
 
-A template is a regular HTML string where you can use javascript statements insde *<% ... %>* tags or print them by using *<%= ... %>* tags instead.
+A template is a regular HTML string where you can insert javascript statements insde *<! ... !>* or print them by using *<!= ... !>* tags.
 
 ```html
 <article>
 	<header>
-		<h1><a href="<%=link%>"><%=title%></a></h1>
-		<p><%=publishedDate%></p>
-		<% if (categories) { %>
+		<h1><a href="<!=link!>"><!=title!></a></h1>
+		<p><!=publishedDate!></p>
+		<! if (categories) { !>
 			<ul>
-				<% for (var i in categories) { %>
-					<li><%=categories[i]%></li>
-				<% } %>
+				<! for (var i in categories) { !>
+					<li><!=categories[i]!></li>
+				<! } !>
 			</ul>
-		<% } %>
+		<! } !>
 	</header>
-	<div><%=contentSnippet?></div>
+	<div><!=contentSnippet?></div>
 	<footer>
-		<p>via: <a href="<%=feedLink%>"><%=feedTitle%></a></p>
+		<p>via: <a href="<!=feedLink!>"><!=feedTitle!></a></p>
 	</footer>
 </article>
 ```
@@ -145,7 +145,7 @@ $('#container').feeds({
     feeds: {
         // Your feeds ...
     },
-	entryTemplate: '<p><%=title%></p>'
+	entryTemplate: '<p><!=title!></p>'
 });
 ```
 
@@ -153,7 +153,7 @@ $('#container').feeds({
 
 ```html
 <script type="text/html" id="exampleTemplate">
-	<p><%=title%></p>
+	<p><!=title!></p>
 </script>
 ```
 
@@ -168,7 +168,7 @@ $('#container').feeds({
 
 --------------------------------------------------------------------------------------------------------------------------
 
-You could also change the loader template by passing the template's content or *id* to the *loadingTemplate* option.
+You can change the template of the loader by passing a HTML string to the *loadingTemplate* option:
 
 ```javascript
 $('#container').feeds({
@@ -201,12 +201,25 @@ preprocess: function( feed ) { },
 loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
 
 // Template used to render each entry
-entryTemplate:	'<div class="feeds-entry feeds-source-<%=source%>">' + 
-				'<a class="feed-entry-title" target="_blank" href="<%=link%>" title="<%=title%>"><%=title%></a>' +
-				'<div class="feed-entry-date"><%=publishedDate%></div>' + 
-				'<div class="feed-entry-content"><%=contentSnippet%></div>' + 
+entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
+				'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
+				'<div class="feed-entry-date"><!=publishedDate!></div>' + 
+				'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
 				'</div>'
 ```
+
+Changelog
+---------
+
+**v0.3**
+- Rewrote templating system
+
+**v0.2**
+- Cloned publishedDate property to avoid sorting problems
+- Added feed data to entries
+ 
+**v0.1**
+- First version
                   
 License
 -------
