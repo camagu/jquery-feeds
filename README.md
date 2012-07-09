@@ -114,7 +114,7 @@ Templating
 
 The plugin uses a modified version of [John Resing](http://ejohn.org/)'s [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) function to render the entries.
 
-A template is a regular HTML string where you can use javascript statements insde *<! ... !>* tags or print them by using *<!= ... !>* tags intead.
+A template is a regular HTML string where you can execute or print javascript statements inside *<! ... !>* or *<!= ... !>* tags respectively.
 
 ```html
 <article>
@@ -166,9 +166,70 @@ $('#container').feeds({
 });
 ```
 
+### Custom callback
+
+Alternatively, you can pass a function to *entryTemplate*. You can use this option to:
+
+- use different templates based on some arbitrary logic
+- use external template engines (e.g. [handlebars](http://handlebarsjs.com/), [jsrender](https://github.com/BorisMoore/jsrender/), [jqote](http://aefxx.com/))
+- define your own presentation logic
+
+Examples:
+
+```javascript
+// Use different templates based on source
+$('#container').feeds({
+	feeds: {
+		blog: 'http://url/to/blog',
+		twitter: 'http://url/to/twitter/feed'
+	},
+	entryTemplate: function(entry) {
+		var template = '';
+		
+		if (entry.source == 'blog') {
+			// Full view for blog entry
+			template =	'<div>' +
+						'<h1><a href="<!=link!>"><!=title!></a></h1>' +
+						'<p><!=publishedDate!></p>' +
+						'<div><!=contentSnippet!></div>';
+		} else if (entry.source == 'twitter') {
+			// Just the content for twitter entries
+			template = '<div><!=content!></div>';
+		}
+		
+		// Render the template
+		return this.tmpl(template, entry);
+	}
+});
+```
+
+```javascript
+// Using jsrender instead of built-in template function
+$('#container').feeds({
+	feeds: {
+		// Your feeds ...
+	},
+	entryTemplate: function(entry) {
+		return $('#myJsrenderTemplate').render(entry);
+	}
+});
+```
+
+```javascript
+// Using your own presentation logic
+$('#container').feeds({
+	feeds: {
+		// Your feeds ...
+	},
+	entryTemplate: function(entry) {
+		return '<p>' + entry.title + '</p>';
+	}
+});
+```
+
 --------------------------------------------------------------------------------------------------------------------------
 
-You can change the loader template as well by passing a template or it's *id* to the *loadingTemplate* option:
+You can change the loader template as well by passing a template, it's *id* or a callback to the *loadingTemplate* option:
 
 ```javascript
 $('#container').feeds({
@@ -210,6 +271,9 @@ entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 
 Changelog
 ---------
+
+**0.4**
+- Implemented alternative use of *entryTemplate* and *loadingTemplate* as callback
 
 **v0.3**
 - Rewrote templating system

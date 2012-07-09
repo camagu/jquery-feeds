@@ -385,6 +385,32 @@
 		} );
 		equal( $( '#feeds' ).html( ), '<div>my loading template</div>' );
 	} );
+	
+	test( 'loadingTemplate - as callback', function( ) {
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml?3'
+			},
+			loadingTemplate: function( ) {
+				return '<p>from callback</p>';
+			}
+		} );
+		equal( $( '#feeds' ).html( ), '<p>from callback</p>' );
+	} );
+	
+	test( 'loadingTemplate - "this" inside callback', function( ) {
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml?4'
+			},
+			loadingTemplate: function( ) {
+				equal( this.service, 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				return '<p>from callback</p>';
+			}
+		} );
+	} );
 
 	asyncTest( 'feeds container is populated', function( ) {
 		var to = setTimeout( function( ) {
@@ -600,6 +626,51 @@
 			onComplete: function( entries ) {
 				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
 
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'entryTemplate - as callback', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate:	function( entry ) {
+				return '<p>' + entry.title + '</p>';
+			},
+			onComplete: function( entries ) {
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
+
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'entryTemplate - "this" inside callback', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+		
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate:	function( entry ) {
+				equal( this.service, 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				return '<p>' + entry.title + '</p>';
+			},
+			onComplete: function( entries ) {
 				clearTimeout( to );
 				start( );
 			}
