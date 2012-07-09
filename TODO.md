@@ -1,5 +1,3 @@
-- Add *loop* function to *entryTemplate*
-- Add direct object access to *entryTemplate*
 - Implement alternative use of *entryTemplate* as a callback
 - Implement alternative use of *feeds* as selector
 - Add different jQuery versions to tests
