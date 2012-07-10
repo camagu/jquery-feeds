@@ -252,6 +252,12 @@ feeds: {
 // Maximum number of entries to fetch per feed, -1 for maximum available
 max: -1,
 
+// Use SSL connection. Option;
+//	- true: use https
+//	- false: use http
+//	- 'auto': use same as current domain
+ssl: 'auto',
+
 // Called when all entries are rendered
 onComplete: function( entries ) { },
 
@@ -271,6 +277,9 @@ entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 
 Changelog
 ---------
+
+**0.4.1**
+- Added *ssl* option
 
 **0.4**
 - Implemented alternative use of *entryTemplate* and *loadingTemplate* as callback

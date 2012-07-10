@@ -1,4 +1,4 @@
-/*! jQuery Feeds - v0.4 - 2012-07-09
+/*! jQuery Feeds - v0.4.1 - 2012-07-09
 * https://github.com/camagu/jquery-feeds
 * Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 
@@ -9,7 +9,7 @@
 	$.fn.feeds = function( options ) {
 
 		var engine = {
-			service: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
+			service: '//ajax.googleapis.com/ajax/services/feed/load?v=1.0',
 			
 			settings: {
 				loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
@@ -20,6 +20,7 @@
 								'</div>',
 				feeds: {},
 				max: -1,
+				ssl: 'auto',
 				onComplete: function( entries ) {
 
 				},
@@ -46,6 +47,13 @@
 						this.feedsLength++;
 					}
 				}
+				
+				var protocol = this.settings.ssl === 'auto' ? document.location.protocol : this.settings.ssl ? 'https:' : 'http:';
+				if ( $.inArray( protocol, [ 'http:', 'https' ]) === -1 ) {
+					protocol = 'https:';
+				}
+				
+				this.service = protocol + this.service;
 				
 				this.$element = $( element );
 				

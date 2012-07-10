@@ -2,7 +2,7 @@
   "name": "jquery-feeds",
   "title": "jQuery Feeds",
   "description": "RSS aggregator for your site.",
-  "version": "0.4",
+  "version": "0.4.1",
   "homepage": "https://github.com/camagu/jquery-feeds",
   "author": {
     "name": "Camilo Aguilar",
