@@ -367,7 +367,7 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml?1'
 			}
 		} );
-		equal( $( '#feeds' ).html( ), '<p class="feeds-loader">Loading entries ...</p>' );
+		equal( $( '#feeds p' ).text( ), 'Loading entries ...' );
 	} );
 
 	test( 'is custom loading template injected', function( ) {
@@ -378,7 +378,7 @@
 			},
 			loadingTemplate: '<div>my loading template</div>'
 		} );
-		equal( $( '#feeds' ).html( ), '<div>my loading template</div>' );
+		equal( $( '#feeds div' ).text( ), 'my loading template' );
 	} );
 	
 	test( 'loadingTemplate - as callback', function( ) {
@@ -391,7 +391,7 @@
 				return '<p>from callback</p>';
 			}
 		} );
-		equal( $( '#feeds' ).html( ), '<p>from callback</p>' );
+		equal( $( '#feeds p' ).text( ), 'from callback' );
 	} );
 	
 	test( 'loadingTemplate - "this" inside callback', function( ) {
@@ -668,6 +668,78 @@
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'ssl - autodetect', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			entryTemplate: function( entry ) {
+				var protocol = this.settings.ssl === 'auto' ? document.location.protocol : this.settings.ssl ? 'https:' : 'http:';
+				if ( $.inArray( protocol, [ 'http:', 'https:' ]) === -1 ) {
+					protocol = 'https:';
+				}
+
+				equal( protocol, this.service.substr( 0, protocol.length ), 'do protocols match' );
+				
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'ssl - force true', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			ssl: true,
+			entryTemplate: function( entry ) {
+
+				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'do protocols match' );
+				
+				clearTimeout( to );
+				start( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'ssl - force false', function( ) {
+		var to = setTimeout( function( ) {
+			ok( false, 'Timed out' );
+			start( );
+		}, 10000 );
+
+		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			ssl: false,
+			entryTemplate: function( entry ) {
+
+				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'do protocols match' );
+				
 				clearTimeout( to );
 				start( );
 			}
