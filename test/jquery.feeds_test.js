@@ -3,11 +3,6 @@
 /*global notDeepEqual:false, strictEqual:false, notStrictEqual:false, raises:false*/
 ( function( $ ) {
 	
-	// var url1 = 'http://googleblog.blogspot.com/atom.xml';
-	// var url2 = 'http://blog.jquery.com/feed/';
-	
-	// TODO use mockjax
-	
 	module( 'jQuery#feeds' );
 
 	asyncTest( 'is onComplete called', function( ) {
@@ -86,7 +81,7 @@
 			}
 		} );
 	});
-
+	
 	asyncTest( 'is preprocess called', function( ) {
 		var to = setTimeout( function( ) {
 			ok( false, 'Timed out' );
@@ -405,8 +400,9 @@
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?4'
 			},
+			ssl: false,
 			loadingTemplate: function( ) {
-				equal( this.service, 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
 				return '<p>from callback</p>';
 			}
 		} );
@@ -666,8 +662,9 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			max: 1,
+			ssl: false,
 			entryTemplate:	function( entry ) {
-				equal( this.service, 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
