@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<title>jQuery Feeds Demo</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Camilo Aguilar" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="style.css"/>
+		<style>
+			body {
+				/* font-size: 21px, line-height: 25,2px */
+				font: 1.31em/1.2em 'Oswald', sans-serif;
+				font-weight: 400;
+				color: #333;
+				text-shadow: 1px 1px 0px #fff;
+				background-color: #f9f9f9;
+			}
+
+			h1 {
+				font-size: 2em;
+				line-height: 1em;
+				text-transform: uppercase;
+				margin: 0;
+				color: #000;
+			}
+			h2 {
+				font-size: 1.5em;
+				line-height: 0.8em;
+				color: #000;
+			}
+			
+			body > div {
+				width: 940px;
+				margin: 0 auto;
+			}
+			header {
+				margin: 2em 0;
+			}
+			header h1 {
+			}
+			body > div > div {
+				
+			}
+			#feeds {
+				font-size: 11px;
+				height: 500px;
+				overflow: auto;
+				text-align: left;
+				border-top: 1px #eee solid;
+				border-bottom: 1px #eee solid;
+			}
+			article {
+				padding: 1em;
+				border-left: 2em solid;
+				margin: 1px 0;
+			}
+			article.flickr {
+				border-left-color: #0063DC;
+			}
+			article.twitter {
+				border-left-color: #3C8FC9;
+			}
+			article p {
+				
+			}
+			
+			@media only screen and (max-width: 960px) {
+				body {
+					font-size: 1em;
+					min-width: 480px;
+				}
+				body > div {
+					font-size: 1em;
+					width: auto;
+					margin: 0 2em;
+				}
+			}
+		</style>
+		
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<hgroup>
+					<h1>jQuery Feeds</h1>
+					<h2>RSS aggregator for your site</h2>
+				</hgroup>
+				<p>Multiple RSS feeds aggregator with templating and cross-domain support.</p>
+				<nav>
+					<a href="#">Download</a>
+					<a href="#">Step by step tutorial</a>
+					<a href="#">Read the docs</a>
+				</nav>
+			</header>
+
+			<div>
+				<div id="feeds"> </div>
+				
+				<script type="text/html" id="flickrTmpl">
+					<article class="flickr entry">
+						<h1><!=title!></h1>
+						<p><small><!=publishedDate!></small></p>
+						<div class="content"><!=content!></div>
+						<p>Via: <a href="<!=feedLink!>">Flickr</a></p>
+					</article>
+				</script>
+				
+				<script type="text/html" id="twitterTmpl">
+					<article class="twitter entry">
+						<p><small><!=publishedDate!></small></p>
+						<div class="content"><!=content!></div>
+						<p>Via: <a href="<!=feedLink!>">Twitter</a></p>
+					</article>
+				</script>
+			</div>
+
+			<footer>
+				<p>
+				</p>
+			</footer>
+		</div>
+	</body>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
+	<script src="../dist/jquery.feeds.min.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function() {
+			$('#feeds').feeds({
+				feeds: {
+					flickr: 'http://api.flickr.com/services/feeds/photos_public.gne?tags=graffiti&lang=en-us',
+					twitter: 'http://search.twitter.com/search.atom?q=#graffiti'
+				},
+				preprocess: function(feed) {
+					this.publishedDate = moment(this.publishedDate).fromNow();
+				},
+				entryTemplate: function(entry) {
+					return this.tmpl(entry.source + 'Tmpl', entry);
+				},
+				onComplete: function(entries) {
+					$(this).find('a').attr('target', '_blank');
+				}
+			});
+		});
+		
+	</script>
+</html>
