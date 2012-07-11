@@ -9,75 +9,141 @@
 		<meta name="description" content="" />
 		<meta name="author" content="Camilo Aguilar" />
 		
-		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="style.css"/>
 		<style>
 			body {
 				/* font-size: 21px, line-height: 25,2px */
 				font: 1.31em/1.2em 'Oswald', sans-serif;
 				font-weight: 400;
-				color: #333;
-				text-shadow: 1px 1px 0px #fff;
-				background-color: #f9f9f9;
+				background-color: #111;
+				color: #FBF2DF;
+				min-width: 320px;
+			}
+			
+			a {
+				color: #CE534D;
 			}
 
-			h1 {
-				font-size: 2em;
-				line-height: 1em;
-				text-transform: uppercase;
-				margin: 0;
-				color: #000;
-			}
-			h2 {
-				font-size: 1.5em;
-				line-height: 0.8em;
-				color: #000;
+			.page {
+				margin: 2em auto;
+				max-width: 1114px;
 			}
 			
-			body > div {
-				width: 940px;
-				margin: 0 auto;
-			}
-			header {
+			.page > .header {
 				margin: 2em 0;
 			}
-			header h1 {
+			
+			.page > .header > .brand {
+				border-left: 1em #990000 solid;
+				padding-left: 1em;
 			}
-			body > div > div {
-				
+			
+			.page > .header > .brand > .title {
+				font-size: 2em;
+				line-height: 1.2em;
+				text-transform: uppercase;
+				margin: 0 0 10px 0;
+				color: #FF9000;
 			}
-			#feeds {
-				font-size: 11px;
-				height: 500px;
-				overflow: auto;
-				text-align: left;
-				border-top: 1px #eee solid;
-				border-bottom: 1px #eee solid;
+			
+			.page > .header > .brand > .slogan {
+				font-size: 1.5em;
+				line-height: 1.2em;
+				margin: 0 0 0.25em 0;
 			}
-			article {
-				padding: 1em;
-				border-left: 2em solid;
-				margin: 1px 0;
-			}
-			article.flickr {
-				border-left-color: #0063DC;
-			}
-			article.twitter {
-				border-left-color: #3C8FC9;
-			}
-			article p {
+			
+			.page > .header > .navigation {
 				
 			}
 			
-			@media only screen and (max-width: 960px) {
+			.page > .header > .navigation .item {
+				display: inline-block;
+				padding: 0.5em;
+				color: #fff;
+				background-color: #FF9000;
+				text-decoration: none;
+				border-radius: 0.2em;
+				white-space:nowrap;
+			}
+			
+			.page > .demo {
+				
+			}
+			
+			.feed {
+				font-size: 13px;
+				color: #333;
+			}
+			
+			.feed p {
+				margin: 0 0 0.5em 0;
+			}
+			
+			.feed > .entry {
+				padding: 1.5em;
+				background-color: #fff;
+				border-radius: 1em;
+				margin: 1em 0;
+			}
+			
+			.feed > .entry .content img,
+			.feed > .entry .content iframe {
+				max-width:98%;
+			}
+			
+			.feed > .entry .link {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				text-indent: -999em;
+				background-repeat: no-repeat;
+				vertical-align: middle;
+			}
+			
+			.feed > .entry .publishedDate {
+				display: inline-block;
+				height: 16px;
+				background-color: #64B6B1;
+				color: #fff;
+				line-height: 16px;
+				vertical-align: middle;
+				font-size: 11px;
+				padding: 0 1em;
+				border-radius: 2px;
+			}
+			
+			/* Icons from http://icondock.com */
+			.feed > .facebook.entry .link {
+				background-image: url(i/facebook.png);
+			}
+			
+			.feed > .twitter.entry .link {
+				background-image: url(i/twitter.png);
+			}
+			
+			.feed > .tumblr.entry .link {
+				background-image: url(i/tumblr.png);
+			}
+			
+			.feed > .pinterest.entry .link {
+				background-image: url(i/pinterest.png);
+			}
+			
+			@media screen and (max-width: 1114px) {
 				body {
-					font-size: 1em;
-					min-width: 480px;
+					padding: 0 1em;
 				}
-				body > div {
-					font-size: 1em;
-					width: auto;
-					margin: 0 2em;
+			}
+			
+			@media screen and (max-width: 480px) {
+				.page > .header {
+					margin-bottom: 1em;
+				}
+				
+				.page > .header > .navigation > .item {
+					display:block;
+					margin-bottom: 0.5em;
 				}
 			}
 		</style>
@@ -89,22 +155,59 @@
 	</head>
 
 	<body>
-		<div>
-			<header>
-				<hgroup>
-					<h1>jQuery Feeds</h1>
-					<h2>RSS aggregator for your site</h2>
+		<div class="page">
+			<header class="header">
+				<hgroup class="brand">
+					<h1 class="title">jQuery Feeds</h1>
+					<h2 class="slogan">RSS aggregator for your site</h2>
 				</hgroup>
-				<p>Multiple RSS feeds aggregator with templating and cross-domain support.</p>
-				<nav>
-					<a href="#">Download</a>
-					<a href="#">Step by step tutorial</a>
-					<a href="#">Read the docs</a>
+				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
+				<nav class="navigation">
+					<a class="item" href="#">Download</a>
+					<a class="item" href="#">Step by step tutorial</a>
+					<a class="item" href="#">Read the docs</a>
 				</nav>
 			</header>
 
-			<div>
-				<div id="feeds"> </div>
+			<div class="demo">
+				<div class="feed"> </div>
+				
+				<script type="text/html" id="facebookTmpl">
+					<article class="facebook entry">
+						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+						<div class="content"><!=content!></div>
+					</article>
+				</script>
+				
+				<script type="text/html" id="twitterTmpl">
+					<article class="twitter entry">
+						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+						<div class="content"><!=content!></div>
+					</article>
+				</script>
+				
+				<script type="text/html" id="tumblrTmpl">
+					<article class="tumblr entry">
+						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+						<div class="content"><!=content!></div>
+					</article>
+				</script>
+				
+				<script type="text/html" id="pinterestTmpl">
+					<article class="pinterest entry">
+						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+						<div class="content"><!=content!></div>
+					</article>
+				</script>
+				
+				<script type="text/html" id="youtubeTmpl">
+					<article class="youtube entry">
+						<h1><!=title!></h1>
+						<p><small><!=publishedDate!></small></p>
+						<div class="content"><!=content!></div>
+						<p>Via: <a href="<!=feedLink!>">Youtube</a></p>
+					</article>
+				</script>
 				
 				<script type="text/html" id="flickrTmpl">
 					<article class="flickr entry">
@@ -112,14 +215,6 @@
 						<p><small><!=publishedDate!></small></p>
 						<div class="content"><!=content!></div>
 						<p>Via: <a href="<!=feedLink!>">Flickr</a></p>
-					</article>
-				</script>
-				
-				<script type="text/html" id="twitterTmpl">
-					<article class="twitter entry">
-						<p><small><!=publishedDate!></small></p>
-						<div class="content"><!=content!></div>
-						<p>Via: <a href="<!=feedLink!>">Twitter</a></p>
 					</article>
 				</script>
 			</div>
@@ -133,21 +228,25 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
-	<script src="../dist/jquery.feeds.min.js" charset="utf-8"></script>
+	<script src="../dist/jquery.feeds.js" charset="utf-8"></script>
 	<script>
 		$(document).ready(function() {
-			$('#feeds').feeds({
+			$('.feed').feeds({
 				feeds: {
-					flickr: 'http://api.flickr.com/services/feeds/photos_public.gne?tags=graffiti&lang=en-us',
-					twitter: 'http://search.twitter.com/search.atom?q=#graffiti'
+					facebook: 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
+					//youtube: 'http://gdata.youtube.com/feeds/base/users/officialalicecooper/uploads?alt=rss&amp;v=2orderby=published&client=ytapi-youtube-profile',
+					twitter: 'http://search.twitter.com/search.rss?q=from:RollingStones',
+					pinterest: 'http://pinterest.com/rollingstones50/feed.rss',
+					tumblr: 'http://rollingstonesofficial.tumblr.com/rss'
 				},
 				preprocess: function(feed) {
 					this.publishedDate = moment(this.publishedDate).fromNow();
 				},
+				entryTemplate: 'entryTmpl',
 				entryTemplate: function(entry) {
 					return this.tmpl(entry.source + 'Tmpl', entry);
 				},
-				onComplete: function(entries) {
+				onComplete: function(entries) {console.log(entries);
 					$(this).find('a').attr('target', '_blank');
 				}
 			});
