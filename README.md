@@ -278,6 +278,18 @@ entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 Changelog
 ---------
 
+**v0.5**
+
+No changes where made to the code but the package got revamped!
+- Removed 'libs' directory, using CDN instead
+- Renamed test files to 'index.html' and 'tests.js'
+- Revamped 'dist' banner
+- Removed lincese files, lincese links are included in the banner
+- Moved 'dist' files to 'root'
+- Moved package.json to feeds.jquery.json (plugins.jquery.com compatible)
+- Plugin info was tuned
+- Modified 'grunt.js' to reflect the changes
+
 **v0.4.1**
 - Added *ssl* option
 
