@@ -299,7 +299,14 @@ License
 
 Copyright (c) 2012 Camilo Aguilar
 
-Licensed under the MIT and GPL licenses.
+Dual licensed under the MIT and GPL licenses:
+- http://www.opensource.org/licenses/mit-license.php
+- http://www.gnu.org/licenses/gpl.html
+
+Includes a modified version of Simple JavaScript Templating
+http://ejohn.org/blog/javascript-micro-templating/
+Copyright (c) John Resig (http://ejohn.org)
+MIT licensed
 
 Contributing
 ------------
