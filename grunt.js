@@ -25,13 +25,13 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: ['<banner:meta.banner>', '<file_strip_banner:src/jquery.feeds.js>'],
-        dest: 'dist/jquery.feeds.js'
+        dest: 'jquery.feeds.js'
       }
     },
     min: {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/jquery.feeds.min.js'
+        dest: 'jquery.feeds.min.js'
       }
     },
     qunit: {
