@@ -1,12 +1,13 @@
 {
-  "name": "jquery-feeds",
+  "name": "feeds",
   "title": "jQuery Feeds",
   "description": "RSS aggregator for your site.",
   "version": "0.4.1",
-  "homepage": "https://github.com/camagu/jquery-feeds",
+  "homepage": "https://camagu.github.com/jquery-feeds",
   "author": {
     "name": "Camilo Aguilar",
-    "email": "camilo.aguilar.r@gmail.com"
+    "email": "camilo.aguilar.r@gmail.com",
+    "url" : "https://github.com/camagu"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     }
   ],
   "dependencies": {
-    "jquery": "~1.5"
+    "jquery": ">=1.5"
   },
-  "keywords": []
+  "keywords": ["feeds", "rss"]
 }
