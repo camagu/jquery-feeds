@@ -19,46 +19,46 @@
 	
 	module( 'feeds' );
 
-	asyncTest( 'is onComplete called', function( ) {
+	asyncTest( 'onComplete callback', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				ok( true );
+				ok( true, 'was onComplete called' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'is an unreachable feed properly handled', function( ) {
+	asyncTest( 'unreachable feed', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'feed': 'http://thisdoesntexits.wow'
 			},
 			onComplete: function( entries ) {
-				equal( 0, entries.length );
+				equal( 0, entries.length, 'was unreachable feed handled' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'is context passed to onComplete', function( ) {
+	asyncTest( 'onComplete context', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				equal( this, $( '#feeds' )[ 0 ] );
+				equal( this, $( '#feeds' )[ 0 ], 'was feeds container passed as context to onComplete' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'is max settings respected', function( ) {
+	asyncTest( 'max', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -66,13 +66,13 @@
 			},
 			max: 3,
 			onComplete: function( entries ) {
-				equal( entries.length, 3 );
+				equal( entries.length, 3, 'was "max" option respected' );
 				timeout.teardown( );
 			}
 		} );
 	});
 	
-	asyncTest( 'is preprocess called', function( ) {
+	asyncTest( 'preprocess callback', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -80,13 +80,13 @@
 			},
 			max: 1,
 			preprocess: function( feed ) {
-				ok( true );
+				ok( true, 'was preprocess called' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are entries passed to preprocess', function( ) {
+	asyncTest( 'preprocess entries', function( ) {
 		timeout.setup( );
 		$.ajax( {
 			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
@@ -114,7 +114,7 @@
 						entries[ entryCounter ].feedDescription = data.responseData.feed.description;
 						entries[ entryCounter ].feedAuthor = data.responseData.feed.author;
 						
-						deepEqual( this, entries[ entryCounter ] );
+						deepEqual( this, entries[ entryCounter ], 'was the entry passed to preprocess equal to the one passed by the service' );
 						entryCounter++;
 
 						if ( entryCounter === entries.length ) {
@@ -126,7 +126,7 @@
 		} );
 	} );
 	
-	asyncTest( 'is feed data appended to entry', function( ) {
+	asyncTest( 'feed properties', function( ) {
 		timeout.setup( );
 		$.ajax( {
 			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
@@ -168,7 +168,7 @@
 
 						expect( feedData.length );
 						for ( var i in feedData ) {
-							equal( entries[ 0 ][ i ], feedData[ i ], 'property ' + i + ' was appended to entry' );
+							equal( entries[ 0 ][ i ], feedData[ i ], 'was property ' + i + ' appended to entry' );
 						}
 						
 						start( );
@@ -178,7 +178,7 @@
 		} );
 	});
 
-	asyncTest( 'is data manipulated in preprocess', function( ) {
+	asyncTest( 'entry manipulation on preprocess', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -191,15 +191,15 @@
 			onComplete: function( entries ) {
 				expect( entries.length * 2 );
 				for ( var i in entries ) {
-					equal( entries[ i ].foo, 'bar', 'property was added to entry' );
-					equal( entries[ i ].title, 'generic', 'entry title was edited' );
+					equal( entries[ i ].foo, 'bar', 'was property added to entry' );
+					equal( entries[ i ].title, 'generic', 'was entry title edited' );
 				}
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are entries passed to onComplete when loading multiple feeds', function( ) {
+	asyncTest( 'multiple feeds entries passed to onComplete', function( ) {
 		timeout.setup( );
 		
 		var entries1 = {};
@@ -277,7 +277,7 @@
 							feed2Pointer++;
 						}
 
-						deepEqual( entry, expected, 'correct entry passed to onComplete' );
+						deepEqual( entry, expected, 'was the correct entry passed to onComplete' );
 					}
 
 					timeout.teardown( );
@@ -288,7 +288,7 @@
 		loadEntries1( );
 	} );
 
-	asyncTest( 'are multiple feeds entries ordered', function( ) {
+	asyncTest( 'multiple feeds entries sort', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -304,7 +304,7 @@
 
 					var currentTime = new Date( entries[ i ].publishedDateRaw ).getTime( );
 					var prevTime = new Date( entries[ i - 1 ].publishedDateRaw ).getTime( );
-					ok( currentTime <= prevTime, 'current entry is newer than prevoius one' );
+					ok( currentTime <= prevTime, 'is current entry newer than prevoius one' );
 				}
 				timeout.teardown( );
 			}
@@ -623,7 +623,6 @@
 			max: 1,
 			ssl: false,
 			entryTemplate: function( entry ) {
-
 				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'do protocols match' );
 				timeout.teardown( );
 			}
