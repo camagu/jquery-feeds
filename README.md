@@ -16,7 +16,7 @@ Features
 Basic usage
 -----------
 
-Download the [production version](https://raw.github.com/camagu/jquery-feeds/master/dist/jquery.feeds.min.js) or the [development version](https://raw.github.com/camagu/jquery-feeds/master/dist/jquery.feeds.js) and add it to your site:
+Download the [production version](https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js) or the [development version](https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.js) and add it to your site:
 
 ```html
 <script src="jquery.js"></script>
