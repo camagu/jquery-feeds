@@ -352,7 +352,7 @@
 			},
 			ssl: false,
 			loadingTemplate: function( ) {
-				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was context passed to loading template context' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was the feeds object passed to loading template callback as context ' );
 				return '<p>from callback</p>';
 			}
 		} );
@@ -405,7 +405,7 @@
 							$( this ).find( '.feed-entry-title' ).attr( 'href' ) === entries[ i ].link &&
 							$( this ).find( '.feed-entry-date' ).text( ) === entries[ i ].publishedDate &&
 							$( this ).find( '.feed-entry-content' ).text( ) === $( '<div />' ).html( entries[ i ].contentSnippet ).text( ),
-						'do entry passed to onCompleted corresponds to rendered one' );
+						'did entry passed to onComplete corresponded to rendered one' );
 					}
 				} );
 				timeout.teardown( );
@@ -529,7 +529,7 @@
 			max: 1,
 			entryTemplate:	'tmplTest',
 			onComplete: function( entries ) {
-				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title equal to entry title' );
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title the same as entry title' );
 
 				timeout.teardown( );
 			}
