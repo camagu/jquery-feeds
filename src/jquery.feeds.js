@@ -1,3 +1,4 @@
+/* Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
 /*jshint evil: true */
 ( function( $ ) {
 	

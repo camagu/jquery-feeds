@@ -1,7 +1,21 @@
-/*! jQuery Feeds - v0.4.1 - 2012-07-09
-* https://github.com/camagu/jquery-feeds
-* Copyright (c) 2012 Camilo Aguilar; Licensed MIT, GPL */
+/*!
+ * jQuery Feeds v0.5
+ * https://camagu.github.com/jquery-feeds
+ * 
+ * Copyright (c) 2012, Camilo Aguilar
+ * Dual licensed under the MIT and GPL licenses:
+ *     http://www.opensource.org/licenses/mit-license.php
+ *     http://www.gnu.org/licenses/gpl.html
+ * 
+ * Includes a modified version of Simple JavaScript Templating
+ * http://ejohn.org/blog/javascript-micro-templating/
+ * Copyright (c) John Resig (http://ejohn.org)
+ * MIT licensed
+ * 
+ * Date: 2012-07-12
+ */
 
+/*jshint evil: true */
 ( function( $ ) {
 	
 	var cache = {};

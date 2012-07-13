@@ -3,115 +3,91 @@
 /*global notDeepEqual:false, strictEqual:false, notStrictEqual:false, raises:false*/
 ( function( $ ) {
 	
-	module( 'jQuery#feeds' );
-
-	asyncTest( 'is onComplete called', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
+	var timeout = {
+		to: null,
+		setup: function( ) {
+			this.to = setTimeout( function( ) {
+				ok( false, 'Timed out' );
+				start( );
+			}, 10000 );
+		},
+		teardown: function( ) {
+			clearTimeout( this.to );
 			start( );
-		}, 10000 );
+		}
+	};
+		
+	module( 'feeds' );
 
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'onComplete callback', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				ok( true );
-				clearTimeout( to );
-				start( );
+				ok( true, 'was onComplete called' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'is an unreachable feed properly handled', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'unreachable feed', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'feed': 'http://thisdoesntexits.wow'
 			},
 			onComplete: function( entries ) {
-				equal( 0, entries.length );
-				clearTimeout( to );
-				start( );
+				equal( 0, entries.length, 'was unreachable feed handled' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'is context passed to onComplete', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'onComplete context', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				equal( this, $( '#feeds' )[ 0 ] );
-				clearTimeout( to );
-				start( );
+				equal( this, $( '#feeds' )[ 0 ], 'was feeds container passed as context to onComplete' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'is max settings respected', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'max', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			max: 3,
 			onComplete: function( entries ) {
-				equal( entries.length, 3 );
-				clearTimeout( to );
-				start( );
+				equal( entries.length, 3, 'was "max" option respected' );
+				timeout.teardown( );
 			}
 		} );
 	});
 	
-	asyncTest( 'is preprocess called', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		var checked = false;
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'preprocess callback', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
+			max: 1,
 			preprocess: function( feed ) {
-				if ( ! checked ) {
-					ok( true );
-					clearTimeout( to );
-					checked = true;
-					start( );
-				}
+				ok( true, 'was preprocess called' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are entries passed to preprocess', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
+	asyncTest( 'preprocess entries', function( ) {
+		timeout.setup( );
 		$.ajax( {
 			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
 			dataType: 'jsonp',
@@ -125,7 +101,6 @@
 
 				expect( entries.length );
 
-				$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 				$( '#feeds' ).feeds( {
 					feeds: {
 						'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -139,12 +114,11 @@
 						entries[ entryCounter ].feedDescription = data.responseData.feed.description;
 						entries[ entryCounter ].feedAuthor = data.responseData.feed.author;
 						
-						deepEqual( this, entries[ entryCounter ] );
+						deepEqual( this, entries[ entryCounter ], 'was the entry passed to preprocess equal to the one passed by the service' );
 						entryCounter++;
 
 						if ( entryCounter === entries.length ) {
-							clearTimeout( to );
-							start( );
+							timeout.teardown( );
 						}
 					}
 				} );
@@ -152,13 +126,8 @@
 		} );
 	} );
 	
-	asyncTest( 'is feed data appended to entry', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-		
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'feed properties', function( ) {
+		timeout.setup( );
 		$.ajax( {
 			url: 'https://ajax.googleapis.com/ajax/services/feed/load?v=1.0',
 			dataType: 'jsonp',
@@ -167,7 +136,7 @@
 				num: 1
 			},
 			success: function( data ) {
-				clearTimeout( to );
+				timeout.teardown( );
 				
 				var properties = [ 'feedUrl', 'title', 'link', 'description', 'author' ];
 				for ( var i in properties ) {
@@ -199,7 +168,7 @@
 
 						expect( feedData.length );
 						for ( var i in feedData ) {
-							equal( entries[ 0 ][ i ], feedData[ i ], 'property ' + i + ' was appended to entry' );
+							equal( entries[ 0 ][ i ], feedData[ i ], 'was property ' + i + ' appended to entry' );
 						}
 						
 						start( );
@@ -209,13 +178,8 @@
 		} );
 	});
 
-	asyncTest( 'is data manipulated in preprocess', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'entry manipulation on preprocess', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -227,21 +191,17 @@
 			onComplete: function( entries ) {
 				expect( entries.length * 2 );
 				for ( var i in entries ) {
-					equal( entries[ i ].foo, 'bar', 'property was added to entry' );
-					equal( entries[ i ].title, 'generic', 'entry title was edited' );
+					equal( entries[ i ].foo, 'bar', 'was property added to entry' );
+					equal( entries[ i ].title, 'generic', 'was entry title edited' );
 				}
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are entries passed to onComplete when loading multiple feeds', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 4000 );
-
+	asyncTest( 'multiple feeds entries passed to onComplete', function( ) {
+		timeout.setup( );
+		
 		var entries1 = {};
 		var entries2 = {};
 
@@ -294,7 +254,6 @@
 		}
 
 		function loadFeeds( ) {
-			$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 			$( '#feeds' ).feeds( {
 				feeds: {
 					'feed1': 'http://googleblog.blogspot.com/atom.xml',
@@ -318,11 +277,10 @@
 							feed2Pointer++;
 						}
 
-						deepEqual( entry, expected, 'correct entry passed to onComplete' );
+						deepEqual( entry, expected, 'was the correct entry passed to onComplete' );
 					}
 
-					clearTimeout( to );
-					start( );
+					timeout.teardown( );
 				}
 			} );
 		}
@@ -330,13 +288,8 @@
 		loadEntries1( );
 	} );
 
-	asyncTest( 'are multiple feeds entries ordered', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 4000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'multiple feeds entries sort', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'feed1': 'http://googleblog.blogspot.com/atom.xml',
@@ -351,38 +304,36 @@
 
 					var currentTime = new Date( entries[ i ].publishedDateRaw ).getTime( );
 					var prevTime = new Date( entries[ i - 1 ].publishedDateRaw ).getTime( );
-					ok( currentTime <= prevTime, 'current entry is newer than prevoius one' );
+					ok( currentTime <= prevTime, 'is current entry newer than prevoius one' );
 				}
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 
 	} );
+	
+	module( 'loadingTemplate' );
 
-	test( 'is default loading template injected', function( ) {
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	test( 'default', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?1'
 			}
 		} );
-		equal( $( '#feeds p' ).text( ), 'Loading entries ...' );
+		equal( $( '#feeds p' ).text( ), 'Loading entries ...', 'was default loading template injected' );
 	} );
 
-	test( 'is custom loading template injected', function( ) {
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	test( 'custom', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?2'
 			},
 			loadingTemplate: '<div>my loading template</div>'
 		} );
-		equal( $( '#feeds div' ).text( ), 'my loading template' );
+		equal( $( '#feeds div' ).text( ), 'my loading template', 'was custom template injected' );
 	} );
 	
-	test( 'loadingTemplate - as callback', function( ) {
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	test( 'as callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?3'
@@ -391,75 +342,59 @@
 				return '<p>from callback</p>';
 			}
 		} );
-		equal( $( '#feeds p' ).text( ), 'from callback' );
+		equal( $( '#feeds p' ).text( ), 'from callback', 'was callback for loading template called' );
 	} );
 	
-	test( 'loadingTemplate - "this" inside callback', function( ) {
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	test( 'context in callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?4'
 			},
 			ssl: false,
 			loadingTemplate: function( ) {
-				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was the feeds object passed to loading template callback as context ' );
 				return '<p>from callback</p>';
 			}
 		} );
 	} );
+	
+	module( 'entryTemplate' );
+	
+	asyncTest( 'populating feeds container', function( ) {
+		timeout.setup( );
 
-	asyncTest( 'feeds container is populated', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				ok( $( this ).find( '> * ' ).length > 0, 'feeds container was populated' );
-				clearTimeout( to );
-				start( );
+				ok( $( this ).find( '> * ' ).length > 0, 'was feeds container populated' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are all entries passed to onComplete drawn', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	asyncTest( 'render entries', function( ) {
+		timeout.setup( );
 
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				equal( $( this ).find( '> *' ).length, entries.length );
-
-				clearTimeout( to );
-				start( );
+				equal( $( this ).find( '> *' ).length, entries.length, 'where all entries rendered' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'entries passed to onComplete correspond to entries drawn in feeds container', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'rendered entries properties', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				clearTimeout( to );
 				expect( $( '.feeds-entry' ).length );
 				$( '.feeds-entry' ).each( function( i ) {
 					if ( typeof entries[ i ] === 'undefined' ) {
@@ -470,22 +405,16 @@
 							$( this ).find( '.feed-entry-title' ).attr( 'href' ) === entries[ i ].link &&
 							$( this ).find( '.feed-entry-date' ).text( ) === entries[ i ].publishedDate &&
 							$( this ).find( '.feed-entry-content' ).text( ) === $( '<div />' ).html( entries[ i ].contentSnippet ).text( ),
-						'entry passed to onCompleted corrsponds to injected entry' );
+						'did entry passed to onComplete corresponded to rendered one' );
 					}
 				} );
-	
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'is custom entry template used', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'custom template', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -497,54 +426,42 @@
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false, 'entry is not defined' );
 					} else {
-						equal( $( this ).text( ), entries[ i ].title, 'entry was drawn using the custom template' );
+						equal( $( this ).text( ), entries[ i ].title, 'was entry rendered using the custom template' );
 					}
 				} );
 
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are custom properties injected to custom entry template', function( ) {
-			var to = setTimeout( function( ) {
-				ok( false, 'Timed out' );
-				start( );
-			}, 10000 );
+	asyncTest( 'render custom entry properties', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			entryTemplate: '<p><!=foo!></p>',
+			preprocess: function( ) {
+				this.foo = 'bar';
+			},
+			onComplete: function( entries ) {
+				expect( $( '#feeds > p' ).length );
+				$( '#feeds > p' ).each( function( i ) {
+					if ( typeof entries[ i ] === 'undefined' ) {
+						ok( false, 'entry is not defined' );
+					} else {
+						equal( $( this ).text( ), 'bar', 'was custom property rendered' );
+					}
+				} );
 
-			$( '#qunit-fixture' ).append( '<div id="feeds" />' );
-			$( '#feeds' ).feeds( {
-				feeds: {
-					'google': 'http://googleblog.blogspot.com/atom.xml'
-				},
-				entryTemplate: '<p><!=foo!></p>',
-				preprocess: function( ) {
-					this.foo = 'bar';
-				},
-				onComplete: function( entries ) {
-					expect( $( '#feeds > p' ).length );
-					$( '#feeds > p' ).each( function( i ) {
-						if ( typeof entries[ i ] === 'undefined' ) {
-							ok( false, 'entry is not defined' );
-						} else {
-							equal( $( this ).text( ), 'bar', 'custom property was drawn' );
-						}
-					} );
-
-					clearTimeout( to );
-					start( );
-				}
-			} );
+				timeout.teardown( );
+			}
 		} );
+	} );
 
-	asyncTest( 'are unrecognized properties stripped from entry tempate', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'ignore unrecognized properties', function( ) {
+		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -556,21 +473,17 @@
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false, 'entry is not defined' );
 					} else {
-						equal( $( this ).text( ), '', 'empty properties were stripped' );
+						equal( $( this ).text( ), '', 'was unrecognized property ignored' );
 					}
 				} );
 
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - control structures', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	asyncTest( 'control structures', function( ) {
+		timeout.setup( );
 
 		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 		$( '#feeds' ).feeds( {
@@ -601,17 +514,13 @@
 					deepEqual( categories, entries[ i ].categories, 'was loop used' );
 				} );
 
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - external template', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	asyncTest( 'external template', function( ) {
+		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -620,19 +529,15 @@
 			max: 1,
 			entryTemplate:	'tmplTest',
 			onComplete: function( entries ) {
-				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title the same as entry title' );
 
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - as callback', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	asyncTest( 'as callback', function( ) {
+		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -643,19 +548,14 @@
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
-				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
-
-				clearTimeout( to );
-				start( );
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title equal to entry title' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - "this" inside callback', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	asyncTest( 'context in callback', function( ) {
+		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -664,23 +564,20 @@
 			max: 1,
 			ssl: false,
 			entryTemplate:	function( entry ) {
-				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was context passed' );
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'ssl - autodetect', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
+	module( 'ssl' );
+	
+	asyncTest( 'auto', function( ) {
+		timeout.setup( );
 
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -692,21 +589,16 @@
 					protocol = 'https:';
 				}
 
-				equal( protocol, this.service.substr( 0, protocol.length ), 'do protocols match' );
+				equal( protocol, this.service.substr( 0, protocol.length ), 'did protocols matched' );
 				
-				clearTimeout( to );
-				start( );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'ssl - force true', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'true', function( ) {
+		timeout.setup( );
+		
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -715,21 +607,15 @@
 			ssl: true,
 			entryTemplate: function( entry ) {
 
-				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'do protocols match' );
-				
-				clearTimeout( to );
-				start( );
+				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'did protocols matched' );
+				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'ssl - force false', function( ) {
-		var to = setTimeout( function( ) {
-			ok( false, 'Timed out' );
-			start( );
-		}, 10000 );
-
-		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
+	asyncTest( 'false', function( ) {
+		timeout.setup( );
+		
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -737,11 +623,8 @@
 			max: 1,
 			ssl: false,
 			entryTemplate: function( entry ) {
-
-				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'do protocols match' );
-				
-				clearTimeout( to );
-				start( );
+				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'did protocols matched' );
+				timeout.teardown( );
 			}
 		} );
 	} );
