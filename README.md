@@ -16,7 +16,7 @@ Features
 Basic usage
 -----------
 
-Download the [production version](https://raw.github.com/camagu/jquery-feeds/master/dist/jquery.feeds.min.js) or the [development version](https://raw.github.com/camagu/jquery-feeds/master/dist/jquery.feeds.js) and add it to your site:
+Download the [production version](https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js) or the [development version](https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.js) and add it to your site:
 
 ```html
 <script src="jquery.js"></script>
@@ -278,10 +278,23 @@ entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 Changelog
 ---------
 
-**0.4.1**
+**v0.5**
+
+No changes where made to the code but the package got revamped!
+- Removed 'libs' directory, using CDN instead
+- Renamed test files to 'index.html' and 'tests.js'
+- Organized tests
+- Revamped 'dist' banner
+- Removed lincese files, lincese links were included in the banner
+- Moved 'dist' files to root
+- Moved 'package.json' to 'feeds.jquery.json' (plugins.jquery.com compatible)
+- Plugin info was tuned
+- Modified 'grunt.js' to reflect the changes
+
+**v0.4.1**
 - Added *ssl* option
 
-**0.4**
+**v0.4**
 - Implemented alternative use of *entryTemplate* and *loadingTemplate* as callback
 
 **v0.3**
@@ -299,11 +312,16 @@ License
 
 Copyright (c) 2012 Camilo Aguilar
 
-Licensed under the MIT and GPL licenses.
+Dual licensed under the MIT and GPL licenses:
+- http://www.opensource.org/licenses/mit-license.php
+- http://www.gnu.org/licenses/gpl.html
+
+Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/)
+- Copyright (c) John Resig (http://ejohn.org), MIT licensed
 
 Contributing
 ------------
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
-Please don't edit files in the `dist` subdirectory as they are generated via grunt. You'll find source code in the `src` subdirectory!
+Please don't edit files in the root directory as they are generated via grunt. You'll find source code in the `src` subdirectory!

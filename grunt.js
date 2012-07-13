@@ -3,24 +3,35 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: '<json:package.json>',
+    pkg: '<json:feeds.jquery.json>',
     meta: {
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+      banner: '/*!\n' +
+              ' * <%= pkg.title || pkg.name %> v<%= pkg.version %>\n' +
+              '<%= pkg.homepage ? " * " + pkg.homepage + "\n" : "" %>' +
+              ' * \n' +
+              ' * Copyright (c) <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %>\n' +
+              ' * Dual licensed under the MIT and GPL licenses:\n' +
+              ' *     http://www.opensource.org/licenses/mit-license.php\n' +
+              ' *     http://www.gnu.org/licenses/gpl.html\n' +
+              ' * \n' +
+              ' * Includes a modified version of Simple JavaScript Templating\n' +
+              ' * http://ejohn.org/blog/javascript-micro-templating/\n' +
+              ' * Copyright (c) John Resig (http://ejohn.org)\n' +
+              ' * MIT licensed\n' +
+              ' * \n' +
+              ' * Date: <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+              ' */'
     },
     concat: {
       dist: {
         src: ['<banner:meta.banner>', '<file_strip_banner:src/jquery.feeds.js>'],
-        dest: 'dist/jquery.feeds.js'
+        dest: 'jquery.feeds.js'
       }
     },
     min: {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/jquery.feeds.min.js'
+        dest: 'jquery.feeds.min.js'
       }
     },
     qunit: {
@@ -57,5 +68,4 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', 'lint qunit concat min');
-
 };
