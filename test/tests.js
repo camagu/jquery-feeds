@@ -314,26 +314,26 @@
 	
 	module( 'loadingTemplate' );
 
-	test( 'is default loading template injected', function( ) {
+	test( 'default', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?1'
 			}
 		} );
-		equal( $( '#feeds p' ).text( ), 'Loading entries ...' );
+		equal( $( '#feeds p' ).text( ), 'Loading entries ...', 'was default loading template injected' );
 	} );
 
-	test( 'is custom loading template injected', function( ) {
+	test( 'custom', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?2'
 			},
 			loadingTemplate: '<div>my loading template</div>'
 		} );
-		equal( $( '#feeds div' ).text( ), 'my loading template' );
+		equal( $( '#feeds div' ).text( ), 'my loading template', 'was custom template injected' );
 	} );
 	
-	test( 'loadingTemplate - as callback', function( ) {
+	test( 'as callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?3'
@@ -342,17 +342,17 @@
 				return '<p>from callback</p>';
 			}
 		} );
-		equal( $( '#feeds p' ).text( ), 'from callback' );
+		equal( $( '#feeds p' ).text( ), 'from callback', 'was callback for loading template called' );
 	} );
 	
-	test( 'loadingTemplate - "this" inside callback', function( ) {
+	test( 'context in callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml?4'
 			},
 			ssl: false,
 			loadingTemplate: function( ) {
-				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was context passed to loading template context' );
 				return '<p>from callback</p>';
 			}
 		} );
@@ -360,7 +360,7 @@
 	
 	module( 'entryTemplate' );
 	
-	asyncTest( 'feeds container is populated', function( ) {
+	asyncTest( 'populating feeds container', function( ) {
 		timeout.setup( );
 
 		$( '#feeds' ).feeds( {
@@ -368,13 +368,13 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				ok( $( this ).find( '> * ' ).length > 0, 'feeds container was populated' );
+				ok( $( this ).find( '> * ' ).length > 0, 'was feeds container populated' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'are all entries passed to onComplete drawn', function( ) {
+	asyncTest( 'render entries', function( ) {
 		timeout.setup( );
 
 		$( '#feeds' ).feeds( {
@@ -382,13 +382,13 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				equal( $( this ).find( '> *' ).length, entries.length );
+				equal( $( this ).find( '> *' ).length, entries.length, 'where all entries rendered' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 
-	asyncTest( 'entries passed to onComplete correspond to entries drawn in feeds container', function( ) {
+	asyncTest( 'rendered entries properties', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -405,7 +405,7 @@
 							$( this ).find( '.feed-entry-title' ).attr( 'href' ) === entries[ i ].link &&
 							$( this ).find( '.feed-entry-date' ).text( ) === entries[ i ].publishedDate &&
 							$( this ).find( '.feed-entry-content' ).text( ) === $( '<div />' ).html( entries[ i ].contentSnippet ).text( ),
-						'entry passed to onCompleted corrsponds to injected entry' );
+						'do entry passed to onCompleted corresponds to rendered one' );
 					}
 				} );
 				timeout.teardown( );
@@ -413,7 +413,7 @@
 		} );
 	} );
 
-	asyncTest( 'is custom entry template used', function( ) {
+	asyncTest( 'custom template', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -426,7 +426,7 @@
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false, 'entry is not defined' );
 					} else {
-						equal( $( this ).text( ), entries[ i ].title, 'entry was drawn using the custom template' );
+						equal( $( this ).text( ), entries[ i ].title, 'was entry rendered using the custom template' );
 					}
 				} );
 
@@ -435,7 +435,7 @@
 		} );
 	} );
 
-	asyncTest( 'are custom properties injected to custom entry template', function( ) {
+	asyncTest( 'render custom entry properties', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -451,7 +451,7 @@
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false, 'entry is not defined' );
 					} else {
-						equal( $( this ).text( ), 'bar', 'custom property was drawn' );
+						equal( $( this ).text( ), 'bar', 'was custom property rendered' );
 					}
 				} );
 
@@ -460,7 +460,7 @@
 		} );
 	} );
 
-	asyncTest( 'are unrecognized properties stripped from entry tempate', function( ) {
+	asyncTest( 'ignore unrecognized properties', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -473,7 +473,7 @@
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false, 'entry is not defined' );
 					} else {
-						equal( $( this ).text( ), '', 'empty properties were stripped' );
+						equal( $( this ).text( ), '', 'was unrecognized property ignored' );
 					}
 				} );
 
@@ -482,7 +482,7 @@
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - control structures', function( ) {
+	asyncTest( 'control structures', function( ) {
 		timeout.setup( );
 
 		$( '#qunit-fixture' ).append( '<div id="feeds" />' );
@@ -519,7 +519,7 @@
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - external template', function( ) {
+	asyncTest( 'external template', function( ) {
 		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
@@ -529,14 +529,14 @@
 			max: 1,
 			entryTemplate:	'tmplTest',
 			onComplete: function( entries ) {
-				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title equal to entry title' );
 
 				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - as callback', function( ) {
+	asyncTest( 'as callback', function( ) {
 		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
@@ -548,13 +548,13 @@
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
-				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'is rendered title equal to entry title' );
+				equal( $( '#feeds p' ).text( ), entries[ 0 ].title, 'was rendered title equal to entry title' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'entryTemplate - "this" inside callback', function( ) {
+	asyncTest( 'context in callback', function( ) {
 		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
@@ -564,7 +564,7 @@
 			max: 1,
 			ssl: false,
 			entryTemplate:	function( entry ) {
-				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'is context passed' );
+				equal( this.service, 'http://ajax.googleapis.com/ajax/services/feed/load?v=1.0', 'was context passed' );
 				return '<p>' + entry.title + '</p>';
 			},
 			onComplete: function( entries ) {
@@ -575,7 +575,7 @@
 	
 	module( 'ssl' );
 	
-	asyncTest( 'ssl - autodetect', function( ) {
+	asyncTest( 'auto', function( ) {
 		timeout.setup( );
 
 		$( '#feeds' ).feeds( {
@@ -589,14 +589,14 @@
 					protocol = 'https:';
 				}
 
-				equal( protocol, this.service.substr( 0, protocol.length ), 'do protocols match' );
+				equal( protocol, this.service.substr( 0, protocol.length ), 'did protocols matched' );
 				
 				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'ssl - force true', function( ) {
+	asyncTest( 'true', function( ) {
 		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
@@ -607,13 +607,13 @@
 			ssl: true,
 			entryTemplate: function( entry ) {
 
-				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'do protocols match' );
+				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'did protocols matched' );
 				timeout.teardown( );
 			}
 		} );
 	} );
 	
-	asyncTest( 'ssl - force false', function( ) {
+	asyncTest( 'false', function( ) {
 		timeout.setup( );
 		
 		$( '#feeds' ).feeds( {
@@ -623,7 +623,7 @@
 			max: 1,
 			ssl: false,
 			entryTemplate: function( entry ) {
-				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'do protocols match' );
+				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'did protocols matched' );
 				timeout.teardown( );
 			}
 		} );
