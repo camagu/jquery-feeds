@@ -15,8 +15,8 @@
 			clearTimeout( this.to );
 			start( );
 		}
-	}
-	
+	};
+		
 	module( 'feeds' );
 
 	asyncTest( 'onComplete callback', function( ) {

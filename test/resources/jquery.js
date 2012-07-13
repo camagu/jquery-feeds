@@ -1,4 +1,6 @@
 /* Taken from  https://github.com/jquery/jquery/blob/master/src/intro.js */
+
+/*jshint evil: true */
 (function() {
 
 var parts = document.location.search.slice( 1 ).split( "&" ),
@@ -31,4 +33,4 @@ switch (version) {
 
 document.write( "<script src='" + file + "'></script>" );
 
-})();
+}());
