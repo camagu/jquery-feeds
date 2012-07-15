@@ -281,6 +281,7 @@ Changelog
 **v0.5**
 
 No changes where made to the code but the package got revamped!
+
 - Removed 'libs' directory, using CDN instead
 - Renamed test files to 'index.html' and 'tests.js'
 - Organized tests
@@ -313,10 +314,12 @@ License
 Copyright (c) 2012 Camilo Aguilar
 
 Dual licensed under the MIT and GPL licenses:
+
 - http://www.opensource.org/licenses/mit-license.php
 - http://www.gnu.org/licenses/gpl.html
 
 Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/)
+
 - Copyright (c) John Resig (http://ejohn.org), MIT licensed
 
 Contributing
