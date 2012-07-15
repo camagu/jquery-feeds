@@ -10,67 +10,9 @@
 		<meta name="author" content="Camilo Aguilar" />
 		
 		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="style.css"/>
+		<link rel="stylesheet" href="../ui/normalize.css"/>
+		<link rel="stylesheet" href="../ui/theme.css" type="text/css" title="franz"/>
 		<style>
-			body {
-				/* font-size: 21px, line-height: 25,2px */
-				font: 1.31em/1.2em 'Oswald', sans-serif;
-				font-weight: 400;
-				background-color: #111;
-				color: #FBF2DF;
-				min-width: 320px;
-			}
-			
-			a {
-				color: #CE534D;
-			}
-
-			.page {
-				margin: 2em auto;
-				max-width: 1114px;
-			}
-			
-			.page > .header {
-				margin: 2em 0;
-			}
-			
-			.page > .header > .brand {
-				border-left: 1em #990000 solid;
-				padding-left: 1em;
-			}
-			
-			.page > .header > .brand > .title {
-				font-size: 2em;
-				line-height: 1.2em;
-				text-transform: uppercase;
-				margin: 0 0 10px 0;
-				color: #FF9000;
-			}
-			
-			.page > .header > .brand > .slogan {
-				font-size: 1.5em;
-				line-height: 1.2em;
-				margin: 0 0 0.25em 0;
-			}
-			
-			.page > .header > .navigation {
-				
-			}
-			
-			.page > .header > .navigation .item {
-				display: inline-block;
-				padding: 0.5em;
-				color: #fff;
-				background-color: #FF9000;
-				text-decoration: none;
-				border-radius: 0.2em;
-				white-space:nowrap;
-			}
-			
-			.page > .demo {
-				
-			}
-			
 			.feed {
 				color: #333;
 				-moz-column-width: 320px;
@@ -134,23 +76,6 @@
 			.feed > .pinterest.entry .link {
 				background-image: url(i/pinterest.png);
 			}
-			
-			@media screen and (max-width: 1114px) {
-				body {
-					padding: 0 1em;
-				}
-			}
-			
-			@media screen and (max-width: 480px) {
-				.page > .header {
-					margin-bottom: 1em;
-				}
-				
-				.page > .header > .navigation > .item {
-					display:block;
-					margin-bottom: 0.5em;
-				}
-			}
 		</style>
 		
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -166,74 +91,44 @@
 					<h1 class="title">jQuery Feeds</h1>
 					<h2 class="slogan">RSS aggregator for your site</h2>
 				</hgroup>
+
 				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
-				<nav class="navigation">
-					<a class="item" href="#">Download</a>
-					<a class="item" href="#">Step by step tutorial</a>
-					<a class="item" href="#">Read the docs</a>
+				
+				<nav class="menu">
+					<a class="item" href="#">Documentation</a>
+					<a class="item" href="#">Examples</a>
+					<a class="item" href="test">Tests</a>
+					<a class="item" href="#">Github</a>
 				</nav>
 			</header>
-
-			<div class="demo">
+			
+			<div class="download">
+				<h2 class="title">Get current version</h2>
+				<nav class="menu">
+					<a class="item" href="#">Production</a>
+					<a class="item" href="#">Development</a>
+				</nav>
+			</div>
+			
+			<div class="content">
+				<h1>Example</h1>
+				<p>Rolling Stone's Facebook, Twitter, Tumblr and Pinterest feeds. Want to make your own social widget?</p>
+				<p></p>
 				<div class="feed"> </div>
 				
-				<script type="text/html" id="facebookTmpl">
-					<article class="facebook entry">
+				<script type="text/html" id="entryTmpl">
+					<article class="<!=source!> entry">
 						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
 						<div class="content"><!=content!></div>
-					</article>
-				</script>
-				
-				<script type="text/html" id="twitterTmpl">
-					<article class="twitter entry">
-						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
-						<div class="content"><!=content!></div>
-					</article>
-				</script>
-				
-				<script type="text/html" id="tumblrTmpl">
-					<article class="tumblr entry">
-						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
-						<div class="content"><!=content!></div>
-					</article>
-				</script>
-				
-				<script type="text/html" id="pinterestTmpl">
-					<article class="pinterest entry">
-						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
-						<div class="content"><!=content!></div>
-					</article>
-				</script>
-				
-				<script type="text/html" id="youtubeTmpl">
-					<article class="youtube entry">
-						<h1><!=title!></h1>
-						<p><small><!=publishedDate!></small></p>
-						<div class="content"><!=content!></div>
-						<p>Via: <a href="<!=feedLink!>">Youtube</a></p>
-					</article>
-				</script>
-				
-				<script type="text/html" id="flickrTmpl">
-					<article class="flickr entry">
-						<h1><!=title!></h1>
-						<p><small><!=publishedDate!></small></p>
-						<div class="content"><!=content!></div>
-						<p>Via: <a href="<!=feedLink!>">Flickr</a></p>
 					</article>
 				</script>
 			</div>
-
-			<footer>
-				<p>
-				</p>
-			</footer>
 		</div>
 	</body>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
 	<script src="../jquery.feeds.js" charset="utf-8"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
 	<script>
 		$(document).ready(function() {
 			$('.feed').feeds({
@@ -247,9 +142,6 @@
 					this.publishedDate = moment(this.publishedDate).fromNow();
 				},
 				entryTemplate: 'entryTmpl',
-				entryTemplate: function(entry) {
-					return this.tmpl(entry.source + 'Tmpl', entry);
-				},
 				onComplete: function(entries) {console.log(entries);
 					$(this).find('a').attr('target', '_blank');
 				}

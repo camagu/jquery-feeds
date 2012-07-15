@@ -1,0 +1,89 @@
+body {
+	/* font-size: 21px, line-height: 25,2px */
+	font: 1.31em/1.2em 'Oswald', sans-serif;
+	font-weight: 400;
+	background-color: #000;
+	color: #FBF2DF;
+	min-width: 320px;
+}
+
+a {
+	color: #CE534D;
+}
+
+p:last-of-type {
+	margin-bottom: 0;
+}
+
+.page {
+	margin: 0 auto;
+	max-width: 1114px;
+}
+
+.page > .header {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: inline-block;
+	width: 65%;
+	margin: 2em 0;
+}
+
+.brand {
+	border-left: 1em #990000 solid;
+	padding-left: 1em;
+}
+
+.brand > .title {
+	font-size: 2em;
+	line-height: 1.2em;
+	text-transform: uppercase;
+	margin: 0 0 10px 0;
+	color: #FF9000;
+}
+
+.brand > .slogan {
+	font-size: 1.5em;
+	line-height: 1.2em;
+	margin: 0 0 0.25em 0;
+}
+
+.page > .download {
+	display: inline-block;
+	vertical-align: top;
+	margin: 2em;
+}
+
+.page > .download > .title {
+	margin: 0 0 0.83em 0;
+}
+
+.page > .download > .menu {
+	
+}
+
+.page > .download > .menu > .item {
+	display: block;
+	padding: 0.5em;
+	color: #fff;
+	background-color: #FF9000;
+	text-decoration: none;
+	border-radius: 0.2em;
+	white-space: nowrap; 
+	margin-bottom: 0.5em;
+}
+
+.page > .header > .menu {
+	margin: 1em 0;
+}
+
+.page > .header > .menu > .item {
+	background-color: #990000;
+	border-radius: 0.2em;
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 0.8em;
+	padding: 0.2em 1em;
+	text-decoration: none;
+	white-space: nowrap;
+}
