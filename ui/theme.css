@@ -59,6 +59,11 @@ p:last-of-type {
 	white-space: nowrap;
 }
 
+.page > .header > .menu > .item a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
 .page > .header > .menu > .download.item {
 	background-color: #FF9000;
 }
