@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo 'Updating repo ...'
+git merge master
+
+echo 'Updating index.html...'
+pandoc -s --template=.index.html -o index.html README.md
+
+echo 'Done.'
