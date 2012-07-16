@@ -9,7 +9,13 @@
 		<meta name="description" content="" />
 		<meta name="author" content="Camilo Aguilar" />
 		
-		<link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+		<!-- <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'> -->
+		
+
+		<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
+
 		<link rel="stylesheet" href="ui/normalize.css"/>
 		<link rel="stylesheet" href="ui/theme.css" type="text/css" title="franz"/>
 		
@@ -36,6 +42,36 @@
   code > span.fu { color: #06287e; }
   code > span.er { color: #ff0000; font-weight: bold; }
   		</style>
+  		
+  		<style>
+  			.content > .menu {
+  				margin: 1em 0;
+  			}
+  			
+  			.content > .menu > .item {
+  				display: inline-block;
+  				margin-right: 0.2em;
+  				padding: 0.2em 0.5em;
+  				color: #CC9999;
+  				text-decoration: none;
+  			}
+  			
+  			.content > .menu > .title {
+  				font-family: 'Bree Serif', Georgia, serif;
+  				margin-right: 0.2em;
+  			}
+  			
+  			.content > .menu > .item:before {
+  				content: "";
+  				display:inline-block;
+  			}
+  			
+  			.content > .menu > .active.item {
+  				background-color:#CCCC33;
+  				color: #fff;
+  				border-radius: 0.8em;
+  			}
+  		</style>
 				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -54,12 +90,14 @@
 				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
 				
 				<nav class="menu">
-					<a class="download item">Download (XXkb)</a>
-					<a class="download item">Min (XXkb)</a>
-					<a class="item" href="#">Documentation</a>
-					<a class="item" href="#">Examples</a>
-					<a class="item" href="test">Tests</a>
-					<a class="item" href="#">Github</a>
+					<a class="download item">Download</a>
+					<a class="documentation item" href="#">Read the docs</a>
+					<a class="demo item" href="examples">Launch the demo</a>
+				</nav>
+				
+				<nav class="submenu">
+					<a class="test item" href="test">Run the tests</a>
+					<a class="github item" href="#">Visit in GitHub</a>
 				</nav>
 			</header>
 			
@@ -300,5 +338,41 @@ $(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
 <p>Please don’t edit files in the root directory as they are generated via grunt. You’ll find source code in the <code>src</code> subdirectory!</p>
 			</div>
 		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
+		<script>
+			/*$(document).ready(function() {
+				var $insertPoint = $('.content h2').first().prev();
+				
+				var $menu = $('<nav class="menu"><span class="title">Contents:</span></nav>');
+				$insertPoint.after($menu);
+				
+				$('.content h2').each(function() {
+					var $a = $('<a class="item"/>').attr('href', '#' + $(this).attr('id')).text($(this).text());
+					$menu.append($a);
+					
+					$div = $('<div class="container"/>').attr('data-id', $(this).attr('id')).hide();
+					$(this).add($(this).nextUntil('h2')).wrapAll($div);
+					
+					$(this).attr('id', '');
+				});
+				
+				var hash = window.location.hash.replace("#", "") || 'features';
+				//$('*[data-id=' + hash + ']').show();
+				$menu.find('a[href=#' + hash + ']').addClass('active');
+				
+				var oldHash = hash;
+				setInterval(function() {
+					hash = window.location.hash.replace("#", "") || 'features';
+					if (hash !== oldHash) {
+						$('.container').hide();
+						$('*[data-id=' + hash + ']').show();
+						$menu.find('a.active').removeClass('active');
+						$menu.find('a[href=#' + hash + ']').addClass('active');
+						oldHash = hash;
+					}
+				}, 100);
+			});*/
+		</script>
 	</body>
 </html>

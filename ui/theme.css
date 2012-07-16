@@ -1,19 +1,23 @@
+/* http://www.colourlovers.com/palette/1069659/Simple_Classic_4 */
+/* http://www.colourlovers.com/palette/1338317/phreestyleDESIGN */
 body {
-	font: 400 1em/1.5em 'Oswald', sans-serif; /* font-size: 16px, line-height: 24px */
-	background-color: #111111;
-	color: #FBF2DF;
+	background-color: #FFFFFF;
+	color: #333333;
+	font: 400 16px/1.6 'Open Sans', Verdana, Helvetica, sans-serif;
 	min-width: 320px;
 }
 
 a {
-	color: #FF9000;
+	color: #E09020;
 }
 
 h1, h2, h3, h4, h5 {
+	font-family: 'Bree Serif', Georgia, serif;
+	font-weight:400;
 }
 
 p:last-of-type {
-	margin-bottom: 0;
+	margin: 0;
 }
 
 .page {
@@ -22,37 +26,38 @@ p:last-of-type {
 }
 
 .page > .header {
-	font-size: 1.31em; /* 21px */
-	line-height: 1.2em; /* 25.2 */
+	background-color: #F1F2F3;
+	font-size: 1em;
+	line-height: 1.2em;
 	margin: 2em 0;
+	padding: 2em;
+	text-align: center;
 }
 
 .brand {
-	border-left: 1em #990000 solid;
-	padding-left: 1em;
+
 }
 
 .brand > .title {
-	font-size: 2em;
+	color: #222222;
+	font-size: 4em;
 	line-height: 1.2em;
-	text-transform: uppercase;
-	margin: 0 0 10px 0;
-	color: #FF9000;
+	margin: 0 0 10px;
 }
 
 .brand > .slogan {
-	font-size: 1.5em;
-	line-height: 1.2em;
-	margin: 0 0 0.25em 0;
+	font-size: 2em;
+	line-height: 1em;
+	margin: 0 0 0.5em;
 }
-
 .page > .header > .menu {
+	font-size: 1.2em;
 	margin: 1em 0;
 }
 
 .page > .header > .menu > .item {
-	background-color: #990000;
-	border-radius: 0.2em;
+	background-color: #999900;
+	border-radius: 0.2em 0.2em 0.2em 0.2em;
 	color: #FFFFFF;
 	display: inline-block;
 	font-size: 1em;
@@ -63,49 +68,86 @@ p:last-of-type {
 	white-space: nowrap;
 }
 
-.page > .header > .menu > .item a {
-	color: #FFFFFF;
-	text-decoration: none;
+.page > .header > .menu > .item:before {
+	background: url("icons.png") no-repeat scroll 0 0 transparent;
+	content: " ";
+	display: inline-block;
+	height: 1em;
+	width: 20px;
+	vertical-align: bottom;
+	margin-right: 0.5em;
 }
 
-.page > .header > .menu > .download.item {
-	background-color: #FF9000;
-	color: #990000;
+.page > .header > .menu > .download.item:before {
+	background-position: 0 0;
 }
+
+.page > .header > .menu > .documentation.item:before {
+	background-position: -40px 0;
+}
+
+.page > .header > .menu > .demo.item:before {
+	background-position: -20px 0;
+}
+
+.page > .header > .submenu {
+
+}
+
+.page > .header > .submenu > .item {
+	color: #666;
+	text-decoration: none;
+	margin-right: 1em;
+	display: inline-block;
+	line-height: 1em;
+}
+
+.page > .header > .submenu > .item:before {
+	background: url(icons.png) no-repeat;
+	width: 1em;
+	height: 1em;
+	content: " ";
+	vertical-align: bottom;
+	display:inline-block;
+	margin-right: 0.5em;
+}
+
+.page > .header > .submenu > .test.item:before {
+	background-position: -60px 0;
+}
+
+.page > .header > .submenu > .github.item:before {
+	background-position: -80px 0;
+}
+
 
 .page > .content {
 	font-weight: 300;
 }
 
-.page > .content h1,
-.page > .content h2,
-.page > .content h3,
-.page > .content h4,
-.page > .content h5,
-.page > .content h6 {
-	border-bottom: 1px solid #333;
-	color: #990000;
+.page > .content h1, .page > .content h2, .page > .content h3, .page > .content h4, .page > .content h5, .page > .content h6 {
+	color: #222222;
 	line-height: 1.5em;
 }
 
 .page > .content hr {
-	border: none;
+	background-color: #333333;
+	border: medium none;
 	height: 1px;
-	background-color: #333;
 }
 
 .page > .content ul {
-	list-style: circle outside;
+	list-style: circle outside none;
 	padding: 0;
 }
 
 .page > .content em {
-	color: #666;
+	color: #666666;
 	font-style: normal;
 }
 
 .page > .content pre {
-	background-color: #000;
+	background-color: #F1F2F3;
 	font-size: 0.875em;
 	line-height: 1.2em;
 	padding: 1em;
