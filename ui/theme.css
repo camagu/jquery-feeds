@@ -1,14 +1,12 @@
 body {
-	/* font-size: 21px, line-height: 25,2px */
-	font: 1.31em/1.2em 'Oswald', sans-serif;
-	font-weight: 400;
-	background-color: #000;
+	font: 400 1em/1.5em 'Oswald', sans-serif; /* font-size: 16px, line-height: 24px */
+	background-color: #111111;
 	color: #FBF2DF;
 	min-width: 320px;
 }
 
 a {
-	color: #CE534D;
+	color: #FF9000;
 }
 
 p:last-of-type {
@@ -21,6 +19,8 @@ p:last-of-type {
 }
 
 .page > .header {
+	font-size: 1.31em; /* 21px */
+	line-height: 1.2em; /* 25.2 */
 	margin: 2em 0;
 }
 
@@ -66,4 +66,42 @@ p:last-of-type {
 
 .page > .header > .menu > .download.item {
 	background-color: #FF9000;
+}
+
+.page > .content {
+	font-weight: 300;
+}
+
+.page > .content h1,
+.page > .content h2,
+.page > .content h3,
+.page > .content h4,
+.page > .content h5,
+.page > .content h6 {
+	border-bottom: 1px solid #333;
+	color: #990000;
+	line-height: 1.5em;
+}
+
+.page > .content hr {
+	border: none;
+	height: 1px;
+	background-color: #333;
+}
+
+.page > .content ul {
+	list-style: circle outside;
+	padding: 0;
+}
+
+.page > .content em {
+	color: #666;
+	font-style: normal;
+}
+
+.page > .content pre {
+	background-color: #000;
+	font-size: 0.875em;
+	line-height: 1.2em;
+	padding: 1em;
 }

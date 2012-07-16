@@ -13,6 +13,30 @@
 		<link rel="stylesheet" href="ui/normalize.css"/>
 		<link rel="stylesheet" href="ui/theme.css" type="text/css" title="franz"/>
 		
+		<!-- <link rel="stylesheet" href="ui/highlightjs/styles/arta.css">
+		<script src="ui/highlightjs/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> -->
+		
+		  		<style type="text/css">
+		table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+    margin: 0; padding: 0; vertical-align: baseline; border: none; }
+  table.sourceCode { width: 100%; }
+  td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+  td.sourceCode { padding-left: 5px; }
+  code > span.kw { color: #007020; font-weight: bold; }
+  code > span.dt { color: #902000; }
+  code > span.dv { color: #40a070; }
+  code > span.bn { color: #40a070; }
+  code > span.fl { color: #40a070; }
+  code > span.ch { color: #4070a0; }
+  code > span.st { color: #4070a0; }
+  code > span.co { color: #60a0b0; font-style: italic; }
+  code > span.ot { color: #007020; }
+  code > span.al { color: #ff0000; font-weight: bold; }
+  code > span.fu { color: #06287e; }
+  code > span.er { color: #ff0000; font-weight: bold; }
+  		</style>
+				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 		<link rel="shortcut icon" href="/favicon.ico" />
@@ -40,222 +64,240 @@
 			</header>
 			
 			<div class="content">
-				<h1 id="jquery-feeds---rss-aggregator-for-your-site">jQuery Feeds - RSS aggregator for your site</h1>
-    <p>Use the jQuery Feeds Plugin to retrieve and display multiple RSS feeds' entries in chronological order.</p>
-    <h2 id="features">Features</h2>
-    <ul>
-    <li>Fetches multiple feeds</li>
-    <li>Entries are combined and displayed in chronological order</li>
-    <li>Fully customizable markup</li>
-    <li>Fully customizable loader</li>
-    <li>Manipulate entries' properties</li>
-    <li>Uses the <a href="https://developers.google.com/feed/">Google Feed API</a> to retrieve feeds</li>
-    </ul>
-    <h2 id="basic-usage">Basic usage</h2>
-    <p>Download the <a href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">production version</a> or the <a href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.js">development version</a> and add it to your site:</p>
-    <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;jquery.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
-    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;jquery.feeds.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
-    <p>And attach some feeds to a container:</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="dt">feed1</span>: <span class="ch">&#39;http://url/to/rss/feed&#39;</span>,
-            <span class="dt">feed2</span>: <span class="ch">&#39;http://url/to/another/rss/feed&#39;</span>
-            <span class="co">// key: &#39;url&#39;, ...</span>
-        }
-    });</code></pre>
-    <p>The feeds' keys (i.e. <em>feed1</em> and <em>feed2</em> in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. <em>google</em>, <em>jquery</em>, <em>smashingmag</em>).</p>
-    <hr />
-    <p>You can also set the max number of items for each feed by using the <em>max</em> option:</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">max</span>: <span class="dv">3</span>
-    });</code></pre>
-    <p>By default <em>max</em> is set to -1, which means it should fetch the maximum number of entries supported by the Google Feed API (which is 100).</p>
-    <p><em><strong>Note:</strong> the more feeds you load and the more entries you get the longer it will take the plugin to load them.</em></p>
-    <h2 id="manipulating-entries">Manipulating entries</h2>
-    <p>You can manipulate the properties of each entry by implementing the <em>preprocess</em> callback. Say you want to modify the entries' <em>publishedDate</em> format (inside the callback <em>this</em> corresponds to the current entry):</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">preprocess</span>: <span class="kw">function</span> ( feed ) {
-            <span class="co">// Change the publishedDate format from UTC to dd-mm-yyyy</span>
-    <span class="er">        var date = new Date(this.publishedDate);</span>
-            <span class="kw">var</span> pieces = [<span class="kw">date</span>.<span class="fu">getDate</span>(), <span class="kw">date</span>.<span class="fu">getMonth</span>(), <span class="kw">date</span>.<span class="fu">getFullYear</span>()]
-            <span class="kw">this</span>.<span class="fu">publishedDate</span> = <span class="kw">pieces</span>.<span class="fu">join</span>(<span class="ch">&#39;-&#39;</span>);
-        }
-    });</code></pre>
-    <p><em><strong>Tip:</strong> you can use js libraries such as <a href="http://momentjs.com">moment.js</a> to format your dates.</em></p>
-    <p>Available properties are:</p>
-    <ul>
-    <li>title</li>
-    <li>publishedDate</li>
-    <li>content</li>
-    <li>contentSnippet (&lt; 120 characters, no html tags)</li>
-    <li>link</li>
-    <li>mediaGroup</li>
-    <li>categories</li>
-    <li>source (the feed identifier, added by the plugin)</li>
-    <li>feedUrl (the url of the rss feed)</li>
-    <li>feedTitle (the title of the feed)</li>
-    <li>feedLink (the url of the HTML version of the feed)</li>
-    <li>feedDescription (the feed description)</li>
-    <li>feedAuthor (the feed author)</li>
-    </ul>
-    <p>Refer to the <a href="https://developers.google.com/feed/v1/jsondevguide#resultJson">Google developer's guide</a> for more information.</p>
-    <h2 id="oncomplete-callback">onComplete callback</h2>
-    <p>By implementing the <em>onComplete</em> callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors' <em>target</em> value to <em>_blank</em> (inside the callback <em>this</em> corresponds to the container):</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">onComplete</span>: <span class="kw">function</span> (entries) {
-            $(<span class="kw">this</span>).<span class="fu">find</span>(<span class="ch">&#39;a&#39;</span>).<span class="fu">attr</span>(<span class="ch">&#39;target&#39;</span>, <span class="ch">&#39;_blank&#39;</span>);
-        }
-    });</code></pre>
-    <h2 id="templating">Templating</h2>
-    <p>The plugin uses a modified version of <a href="http://ejohn.org/">John Resing</a>'s <a href="http://ejohn.org/blog/javascript-micro-templating/">JavaScript Micro-Templating</a> function to render the entries.</p>
-    <p>A template is a regular HTML string where you can execute or print javascript statements inside <em><!-- ... !--></em> tags respectively.</p>
-    <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;article&gt;</span>
-        <span class="kw">&lt;header&gt;</span>
-            <span class="kw">&lt;h1&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">!=link!&gt;&quot;</span><span class="kw">&gt;</span><span class="er">&lt;</span>!=title!&gt;<span class="kw">&lt;/a&gt;&lt;/h1&gt;</span>
-            <span class="kw">&lt;p&gt;</span><span class="er">&lt;</span>!=publishedDate!&gt;<span class="kw">&lt;/p&gt;</span>
-            <span class="er">&lt;</span>! if (categories) { !&gt;
-                <span class="kw">&lt;ul&gt;</span>
-                    <span class="er">&lt;</span>! for (var i in categories) { !&gt;
-                        <span class="kw">&lt;li&gt;</span><span class="er">&lt;</span>!=categories[i]!&gt;<span class="kw">&lt;/li&gt;</span>
-                    <span class="er">&lt;</span>! } !&gt;
-                <span class="kw">&lt;/ul&gt;</span>
-            <span class="er">&lt;</span>! } !&gt;
-        <span class="kw">&lt;/header&gt;</span>
-        <span class="kw">&lt;div&gt;</span><span class="er">&lt;</span>!=contentSnippet!&gt;<span class="kw">&lt;/div&gt;</span>
-        <span class="kw">&lt;footer&gt;</span>
-            <span class="kw">&lt;p&gt;</span>via: <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">!=feedLink!&gt;&quot;</span><span class="kw">&gt;</span><span class="er">&lt;</span>!=feedTitle!&gt;<span class="kw">&lt;/a&gt;&lt;/p&gt;</span>
-        <span class="kw">&lt;/footer&gt;</span>
-    <span class="kw">&lt;/article&gt;</span></code></pre>
-    <p>All the entry's properties are passed to the template as variables.</p>
-    <p>To use a template you could either pass it as a string to the <em>entryTemplate</em> option ...</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">entryTemplate</span>: <span class="ch">&#39;&lt;p&gt;&lt;!=title!&gt;&lt;/p&gt;&#39;</span>
-    });</code></pre>
-    <p>... or you could write it inside a <em>script</em> tag which <em>type</em> is set to <em>text/html</em> and pass it's <em>id</em> to the <em>entryTemplate</em> option:</p>
-    <pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/html&quot;</span><span class="ot"> id=</span><span class="st">&quot;exampleTemplate&quot;</span><span class="kw">&gt;</span>
-        &lt;p&gt;&lt;!=title!&gt;&lt;/p&gt;
-    <span class="kw">&lt;/script&gt;</span></code></pre>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">entryTemplate</span>: <span class="ch">&#39;exampleTemplate&#39;</span>
-    });</code></pre>
-    <h3 id="custom-callback">Custom callback</h3>
-    <p>Alternatively, you can pass a function to <em>entryTemplate</em>. You can use this option to:</p>
-    <ul>
-    <li>use different templates based on some arbitrary logic</li>
-    <li>use external template engines (e.g. <a href="http://handlebarsjs.com/">handlebars</a>, <a href="https://github.com/BorisMoore/jsrender/">jsrender</a>, <a href="http://aefxx.com/">jqote</a>)</li>
-    <li>define your own presentation logic</li>
-    </ul>
-    <p>Examples:</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Use different templates based on source</span>
-    $(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="dt">blog</span>: <span class="ch">&#39;http://url/to/blog&#39;</span>,
-            <span class="dt">twitter</span>: <span class="ch">&#39;http://url/to/twitter/feed&#39;</span>
-        },
-        <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
-            <span class="kw">var</span> template = <span class="ch">&#39;&#39;</span>;
-            
-            <span class="kw">if</span> (<span class="kw">entry</span>.<span class="fu">source</span> == <span class="ch">&#39;blog&#39;</span>) {
-                <span class="co">// Full view for blog entry</span>
-                template =  <span class="ch">&#39;&lt;div&gt;&#39;</span> +
-                            <span class="ch">&#39;&lt;h1&gt;&lt;a href=&quot;&lt;!=link!&gt;&quot;&gt;&lt;!=title!&gt;&lt;/a&gt;&lt;/h1&gt;&#39;</span> +
-                            <span class="ch">&#39;&lt;p&gt;&lt;!=publishedDate!&gt;&lt;/p&gt;&#39;</span> +
-                            <span class="ch">&#39;&lt;div&gt;&lt;!=contentSnippet!&gt;&lt;/div&gt;&#39;</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> (<span class="kw">entry</span>.<span class="fu">source</span> == <span class="ch">&#39;twitter&#39;</span>) {
-                <span class="co">// Just the content for twitter entries</span>
-                template = <span class="ch">&#39;&lt;div&gt;&lt;!=content!&gt;&lt;/div&gt;&#39;</span>;
-            }
-            
-            <span class="co">// Render the template</span>
-            <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">tmpl</span>(template, entry);
-        }
-    });</code></pre>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Using jsrender instead of built-in template function</span>
-    $(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
-            <span class="kw">return</span> $(<span class="ch">&#39;#myJsrenderTemplate&#39;</span>).<span class="fu">render</span>(entry);
-        }
-    });</code></pre>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Using your own presentation logic</span>
-    $(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
-            <span class="kw">return</span> <span class="ch">&#39;&lt;p&gt;&#39;</span> + <span class="kw">entry</span>.<span class="fu">title</span> + <span class="ch">&#39;&lt;/p&gt;&#39;</span>;
-        }
-    });</code></pre>
-    <hr />
-    <p>You can change the loader template as well by passing a template, it's <em>id</em> or a callback to the <em>loadingTemplate</em> option:</p>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
-        <span class="dt">feeds</span>: {
-            <span class="co">// Your feeds ...</span>
-        },
-        <span class="dt">loadingTemplate</span>: <span class="ch">&#39;&lt;p&gt;Fetching entries, please wait.&lt;/p&gt;&#39;</span>
-    });</code></pre>
-    <h2 id="options">Options</h2>
-    <pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Feeds to retrieve</span>
+<h1 id="jquery-feeds---rss-aggregator-for-your-site">jQuery Feeds - RSS aggregator for your site</h1>
+<p>Use the jQuery Feeds Plugin to retrieve and display multiple RSS feeds’ entries in chronological order.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Fetches multiple feeds</li>
+<li>Entries are combined and displayed in chronological order</li>
+<li>Fully customizable markup</li>
+<li>Fully customizable loader</li>
+<li>Manipulate entries’ properties</li>
+<li>Uses the <a href="https://developers.google.com/feed/">Google Feed API</a> to retrieve feeds</li>
+</ul>
+<h2 id="basic-usage">Basic usage</h2>
+<p>Download the <a href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">production version</a> or the <a href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.js">development version</a> and add it to your site:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;jquery.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;jquery.feeds.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre>
+<p>And attach some feeds to a container:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
     <span class="dt">feeds</span>: {
-        <span class="co">// identifier: url, ...</span>
+        <span class="dt">feed1</span>: <span class="ch">&#39;http://url/to/rss/feed&#39;</span>,
+        <span class="dt">feed2</span>: <span class="ch">&#39;http://url/to/another/rss/feed&#39;</span>
+        <span class="co">// key: &#39;url&#39;, ...</span>
+    }
+});</code></pre>
+<p>The feeds’ keys (i.e. <em>feed1</em> and <em>feed2</em> in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. <em>google</em>, <em>jquery</em>, <em>smashingmag</em>).</p>
+<hr />
+<p>You can also set the max number of items for each feed by using the <em>max</em> option:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
     },
-    
-    <span class="co">// Maximum number of entries to fetch per feed, -1 for maximum available</span>
-    <span class="dt">max</span>: -<span class="dv">1</span>,
-    
-    <span class="co">// Use SSL connection. Option;</span>
-    <span class="co">//  - true: use https</span>
-    <span class="co">//  - false: use http</span>
-    <span class="co">//  - &#39;auto&#39;: use same as current domain</span>
-    <span class="dt">ssl</span>: <span class="ch">&#39;auto&#39;</span>,
-    
-    <span class="co">// Called when all entries are rendered</span>
-    <span class="dt">onComplete</span>: <span class="kw">function</span>( entries ) { },
-    
-    <span class="co">// Called for each entry</span>
-    <span class="dt">preprocess</span>: <span class="kw">function</span>( feed ) { },
-    
-    <span class="co">// Template injected to container while feeds are loaded</span>
-    <span class="dt">loadingTemplate</span>: <span class="ch">&#39;&lt;p class=&quot;feeds-loader&quot;&gt;Loading entries ...&lt;/p&gt;&#39;</span>,
-    
-    <span class="co">// Template used to render each entry</span>
-    <span class="dt">entryTemplate</span>:  <span class="ch">&#39;&lt;div class=&quot;feeds-entry feeds-source-&lt;!=source!&gt;&quot;&gt;&#39;</span> + 
-                    <span class="ch">&#39;&lt;a class=&quot;feed-entry-title&quot; target=&quot;_blank&quot; href=&quot;&lt;!=link!&gt;&quot; title=&quot;&lt;!=title!&gt;&quot;&gt;&lt;!=title!&gt;&lt;/a&gt;&#39;</span> +
-                    <span class="ch">&#39;&lt;div class=&quot;feed-entry-date&quot;&gt;&lt;!=publishedDate!&gt;&lt;/div&gt;&#39;</span> + 
-                    <span class="ch">&#39;&lt;div class=&quot;feed-entry-content&quot;&gt;&lt;!=contentSnippet!&gt;&lt;/div&gt;&#39;</span> + 
-                    <span class="ch">&#39;&lt;/div&gt;&#39;</span></code></pre>
-    <h2 id="changelog">Changelog</h2>
-    <p><strong>v0.5</strong></p>
-    <p>No changes where made to the code but the package got revamped! - Removed 'libs' directory, using CDN instead - Renamed test files to 'index.html' and 'tests.js' - Organized tests - Revamped 'dist' banner - Removed lincese files, lincese links were included in the banner - Moved 'dist' files to root - Moved 'package.json' to 'feeds.jquery.json' (plugins.jquery.com compatible) - Plugin info was tuned - Modified 'grunt.js' to reflect the changes</p>
-    <p><strong>v0.4.1</strong> - Added <em>ssl</em> option</p>
-    <p><strong>v0.4</strong> - Implemented alternative use of <em>entryTemplate</em> and <em>loadingTemplate</em> as callback</p>
-    <p><strong>v0.3</strong> - Rewrote templating system</p>
-    <p><strong>v0.2</strong> - Cloned publishedDate property to avoid sorting problems - Added feed data to entries</p>
-    <p><strong>v0.1</strong> - First version</p>
-    <h2 id="license">License</h2>
-    <p>Copyright (c) 2012 Camilo Aguilar</p>
-    <p>Dual licensed under the MIT and GPL licenses: - http://www.opensource.org/licenses/mit-license.php - http://www.gnu.org/licenses/gpl.html</p>
-    <p>Includes a modified version of <a href="http://ejohn.org/blog/javascript-micro-templating/">Simple JavaScript Templating</a> - Copyright (c) John Resig (http://ejohn.org), MIT licensed</p>
-    <h2 id="contributing">Contributing</h2>
-    <p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using <a href="https://github.com/cowboy/grunt">grunt</a>.</p>
-    <p>Please don't edit files in the root directory as they are generated via grunt. You'll find source code in the <code>src</code> subdirectory!</p>
+    <span class="dt">max</span>: <span class="dv">3</span>
+});</code></pre>
+<p>By default <em>max</em> is set to -1, which means it should fetch the maximum number of entries supported by the Google Feed API (which is 100).</p>
+<p><em><strong>Note:</strong> the more feeds you load and the more entries you get the longer it will take the plugin to load them.</em></p>
+<h2 id="manipulating-entries">Manipulating entries</h2>
+<p>You can manipulate the properties of each entry by implementing the <em>preprocess</em> callback. Say you want to modify the entries’ <em>publishedDate</em> format (inside the callback <em>this</em> corresponds to the current entry):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">preprocess</span>: <span class="kw">function</span> ( feed ) {
+        <span class="co">// Change the publishedDate format from UTC to dd-mm-yyyy</span>
+<span class="er">        var date = new Date(this.publishedDate);</span>
+        <span class="kw">var</span> pieces = [<span class="kw">date</span>.<span class="fu">getDate</span>(), <span class="kw">date</span>.<span class="fu">getMonth</span>(), <span class="kw">date</span>.<span class="fu">getFullYear</span>()]
+        <span class="kw">this</span>.<span class="fu">publishedDate</span> = <span class="kw">pieces</span>.<span class="fu">join</span>(<span class="ch">&#39;-&#39;</span>);
+    }
+});</code></pre>
+<p><em><strong>Tip:</strong> you can use js libraries such as <a href="http://momentjs.com">moment.js</a> to format your dates.</em></p>
+<p>Available properties are:</p>
+<ul>
+<li>title</li>
+<li>publishedDate</li>
+<li>content</li>
+<li>contentSnippet (&lt; 120 characters, no html tags)</li>
+<li>link</li>
+<li>mediaGroup</li>
+<li>categories</li>
+<li>source (the feed identifier, added by the plugin)</li>
+<li>feedUrl (the url of the rss feed)</li>
+<li>feedTitle (the title of the feed)</li>
+<li>feedLink (the url of the HTML version of the feed)</li>
+<li>feedDescription (the feed description)</li>
+<li>feedAuthor (the feed author)</li>
+</ul>
+<p>Refer to the <a href="https://developers.google.com/feed/v1/jsondevguide#resultJson">Google developer’s guide</a> for more information.</p>
+<h2 id="oncomplete-callback">onComplete callback</h2>
+<p>By implementing the <em>onComplete</em> callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors’ <em>target</em> value to <em>_blank</em> (inside the callback <em>this</em> corresponds to the container):</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">onComplete</span>: <span class="kw">function</span> (entries) {
+        $(<span class="kw">this</span>).<span class="fu">find</span>(<span class="ch">&#39;a&#39;</span>).<span class="fu">attr</span>(<span class="ch">&#39;target&#39;</span>, <span class="ch">&#39;_blank&#39;</span>);
+    }
+});</code></pre>
+<h2 id="templating">Templating</h2>
+<p>The plugin uses a modified version of <a href="http://ejohn.org/">John Resing</a>’s <a href="http://ejohn.org/blog/javascript-micro-templating/">JavaScript Micro-Templating</a> function to render the entries.</p>
+<p>A template is a regular HTML string where you can execute or print javascript statements inside <em><!-- ... !--></em> tags respectively.</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;article&gt;</span>
+    <span class="kw">&lt;header&gt;</span>
+        <span class="kw">&lt;h1&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">!=link!&gt;&quot;</span><span class="kw">&gt;</span><span class="er">&lt;</span>!=title!&gt;<span class="kw">&lt;/a&gt;&lt;/h1&gt;</span>
+        <span class="kw">&lt;p&gt;</span><span class="er">&lt;</span>!=publishedDate!&gt;<span class="kw">&lt;/p&gt;</span>
+        <span class="er">&lt;</span>! if (categories) { !&gt;
+            <span class="kw">&lt;ul&gt;</span>
+                <span class="er">&lt;</span>! for (var i in categories) { !&gt;
+                    <span class="kw">&lt;li&gt;</span><span class="er">&lt;</span>!=categories[i]!&gt;<span class="kw">&lt;/li&gt;</span>
+                <span class="er">&lt;</span>! } !&gt;
+            <span class="kw">&lt;/ul&gt;</span>
+        <span class="er">&lt;</span>! } !&gt;
+    <span class="kw">&lt;/header&gt;</span>
+    <span class="kw">&lt;div&gt;</span><span class="er">&lt;</span>!=contentSnippet!&gt;<span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;footer&gt;</span>
+        <span class="kw">&lt;p&gt;</span>via: <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;</span><span class="er">&lt;</span><span class="st">!=feedLink!&gt;&quot;</span><span class="kw">&gt;</span><span class="er">&lt;</span>!=feedTitle!&gt;<span class="kw">&lt;/a&gt;&lt;/p&gt;</span>
+    <span class="kw">&lt;/footer&gt;</span>
+<span class="kw">&lt;/article&gt;</span></code></pre>
+<p>All the entry’s properties are passed to the template as variables.</p>
+<p>To use a template you could either pass it as a string to the <em>entryTemplate</em> option …</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">entryTemplate</span>: <span class="ch">&#39;&lt;p&gt;&lt;!=title!&gt;&lt;/p&gt;&#39;</span>
+});</code></pre>
+<p>… or you could write it inside a <em>script</em> tag which <em>type</em> is set to <em>text/html</em> and pass it’s <em>id</em> to the <em>entryTemplate</em> option:</p>
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/html&quot;</span><span class="ot"> id=</span><span class="st">&quot;exampleTemplate&quot;</span><span class="kw">&gt;</span>
+    &lt;p&gt;&lt;!=title!&gt;&lt;/p&gt;
+<span class="kw">&lt;/script&gt;</span></code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">entryTemplate</span>: <span class="ch">&#39;exampleTemplate&#39;</span>
+});</code></pre>
+<h3 id="custom-callback">Custom callback</h3>
+<p>Alternatively, you can pass a function to <em>entryTemplate</em>. You can use this option to:</p>
+<ul>
+<li>use different templates based on some arbitrary logic</li>
+<li>use external template engines (e.g. <a href="http://handlebarsjs.com/">handlebars</a>, <a href="https://github.com/BorisMoore/jsrender/">jsrender</a>, <a href="http://aefxx.com/">jqote</a>)</li>
+<li>define your own presentation logic</li>
+</ul>
+<p>Examples:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Use different templates based on source</span>
+$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="dt">blog</span>: <span class="ch">&#39;http://url/to/blog&#39;</span>,
+        <span class="dt">twitter</span>: <span class="ch">&#39;http://url/to/twitter/feed&#39;</span>
+    },
+    <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
+        <span class="kw">var</span> template = <span class="ch">&#39;&#39;</span>;
+        
+        <span class="kw">if</span> (<span class="kw">entry</span>.<span class="fu">source</span> == <span class="ch">&#39;blog&#39;</span>) {
+            <span class="co">// Full view for blog entry</span>
+            template =  <span class="ch">&#39;&lt;div&gt;&#39;</span> +
+                        <span class="ch">&#39;&lt;h1&gt;&lt;a href=&quot;&lt;!=link!&gt;&quot;&gt;&lt;!=title!&gt;&lt;/a&gt;&lt;/h1&gt;&#39;</span> +
+                        <span class="ch">&#39;&lt;p&gt;&lt;!=publishedDate!&gt;&lt;/p&gt;&#39;</span> +
+                        <span class="ch">&#39;&lt;div&gt;&lt;!=contentSnippet!&gt;&lt;/div&gt;&#39;</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (<span class="kw">entry</span>.<span class="fu">source</span> == <span class="ch">&#39;twitter&#39;</span>) {
+            <span class="co">// Just the content for twitter entries</span>
+            template = <span class="ch">&#39;&lt;div&gt;&lt;!=content!&gt;&lt;/div&gt;&#39;</span>;
+        }
+        
+        <span class="co">// Render the template</span>
+        <span class="kw">return</span> <span class="kw">this</span>.<span class="fu">tmpl</span>(template, entry);
+    }
+});</code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Using jsrender instead of built-in template function</span>
+$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
+        <span class="kw">return</span> $(<span class="ch">&#39;#myJsrenderTemplate&#39;</span>).<span class="fu">render</span>(entry);
+    }
+});</code></pre>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Using your own presentation logic</span>
+$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">entryTemplate</span>: <span class="kw">function</span>(entry) {
+        <span class="kw">return</span> <span class="ch">&#39;&lt;p&gt;&#39;</span> + <span class="kw">entry</span>.<span class="fu">title</span> + <span class="ch">&#39;&lt;/p&gt;&#39;</span>;
+    }
+});</code></pre>
+<hr />
+<p>You can change the loader template as well by passing a template, it’s <em>id</em> or a callback to the <em>loadingTemplate</em> option:</p>
+<pre class="sourceCode javascript"><code class="sourceCode javascript">$(<span class="ch">&#39;#container&#39;</span>).<span class="fu">feeds</span>({
+    <span class="dt">feeds</span>: {
+        <span class="co">// Your feeds ...</span>
+    },
+    <span class="dt">loadingTemplate</span>: <span class="ch">&#39;&lt;p&gt;Fetching entries, please wait.&lt;/p&gt;&#39;</span>
+});</code></pre>
+<h2 id="options">Options</h2>
+<pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Feeds to retrieve</span>
+<span class="dt">feeds</span>: {
+    <span class="co">// identifier: url, ...</span>
+},
+
+<span class="co">// Maximum number of entries to fetch per feed, -1 for maximum available</span>
+<span class="dt">max</span>: -<span class="dv">1</span>,
+
+<span class="co">// Use SSL connection. Option;</span>
+<span class="co">//  - true: use https</span>
+<span class="co">//  - false: use http</span>
+<span class="co">//  - &#39;auto&#39;: use same as current domain</span>
+<span class="dt">ssl</span>: <span class="ch">&#39;auto&#39;</span>,
+
+<span class="co">// Called when all entries are rendered</span>
+<span class="dt">onComplete</span>: <span class="kw">function</span>( entries ) { },
+
+<span class="co">// Called for each entry</span>
+<span class="dt">preprocess</span>: <span class="kw">function</span>( feed ) { },
+
+<span class="co">// Template injected to container while feeds are loaded</span>
+<span class="dt">loadingTemplate</span>: <span class="ch">&#39;&lt;p class=&quot;feeds-loader&quot;&gt;Loading entries ...&lt;/p&gt;&#39;</span>,
+
+<span class="co">// Template used to render each entry</span>
+<span class="dt">entryTemplate</span>:  <span class="ch">&#39;&lt;div class=&quot;feeds-entry feeds-source-&lt;!=source!&gt;&quot;&gt;&#39;</span> + 
+                <span class="ch">&#39;&lt;a class=&quot;feed-entry-title&quot; target=&quot;_blank&quot; href=&quot;&lt;!=link!&gt;&quot; title=&quot;&lt;!=title!&gt;&quot;&gt;&lt;!=title!&gt;&lt;/a&gt;&#39;</span> +
+                <span class="ch">&#39;&lt;div class=&quot;feed-entry-date&quot;&gt;&lt;!=publishedDate!&gt;&lt;/div&gt;&#39;</span> + 
+                <span class="ch">&#39;&lt;div class=&quot;feed-entry-content&quot;&gt;&lt;!=contentSnippet!&gt;&lt;/div&gt;&#39;</span> + 
+                <span class="ch">&#39;&lt;/div&gt;&#39;</span></code></pre>
+<h2 id="changelog">Changelog</h2>
+<p><strong>v0.5</strong></p>
+<p>No changes where made to the code but the package got revamped!</p>
+<ul>
+<li>Removed ‘libs’ directory, using CDN instead</li>
+<li>Renamed test files to ‘index.html’ and ‘tests.js’</li>
+<li>Organized tests</li>
+<li>Revamped ‘dist’ banner</li>
+<li>Removed lincese files, lincese links were included in the banner</li>
+<li>Moved ‘dist’ files to root</li>
+<li>Moved ‘package.json’ to ‘feeds.jquery.json’ (plugins.jquery.com compatible)</li>
+<li>Plugin info was tuned</li>
+<li>Modified ‘grunt.js’ to reflect the changes</li>
+</ul>
+<p><strong>v0.4.1</strong> - Added <em>ssl</em> option</p>
+<p><strong>v0.4</strong> - Implemented alternative use of <em>entryTemplate</em> and <em>loadingTemplate</em> as callback</p>
+<p><strong>v0.3</strong> - Rewrote templating system</p>
+<p><strong>v0.2</strong> - Cloned publishedDate property to avoid sorting problems - Added feed data to entries</p>
+<p><strong>v0.1</strong> - First version</p>
+<h2 id="license">License</h2>
+<p>Copyright (c) 2012 Camilo Aguilar</p>
+<p>Dual licensed under the MIT and GPL licenses:</p>
+<ul>
+<li>http://www.opensource.org/licenses/mit-license.php</li>
+<li>http://www.gnu.org/licenses/gpl.html</li>
+</ul>
+<p>Includes a modified version of <a href="http://ejohn.org/blog/javascript-micro-templating/">Simple JavaScript Templating</a></p>
+<ul>
+<li>Copyright (c) John Resig (http://ejohn.org), MIT licensed</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using <a href="https://github.com/cowboy/grunt">grunt</a>.</p>
+<p>Please don’t edit files in the root directory as they are generated via grunt. You’ll find source code in the <code>src</code> subdirectory!</p>
 			</div>
 		</div>
 	</body>
