@@ -106,7 +106,7 @@
     },
     <span class="dt">preprocess</span>: <span class="kw">function</span> ( feed ) {
         <span class="co">// Change the publishedDate format from UTC to dd-mm-yyyy</span>
-<span class="er">        var date = new Date(this.publishedDate);</span>
+        <span class="kw">var</span> date = <span class="kw">new</span> <span class="kw">Date</span>(<span class="kw">this</span>.<span class="fu">publishedDate</span>);
         <span class="kw">var</span> pieces = [<span class="kw">date</span>.<span class="fu">getDate</span>(), <span class="kw">date</span>.<span class="fu">getMonth</span>(), <span class="kw">date</span>.<span class="fu">getFullYear</span>()]
         <span class="kw">this</span>.<span class="fu">publishedDate</span> = <span class="kw">pieces</span>.<span class="fu">join</span>(<span class="ch">&#39;-&#39;</span>);
     }
