@@ -169,7 +169,7 @@ $('#container').feeds({
 });
 {% endhighlight %}
 
-### Custom callback {#custom-callback}
+### Custom callback
 
 Alternatively, you can pass a function to *entryTemplate*. You can use this option to:
 
