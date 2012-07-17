@@ -1,6 +1,0 @@
-#!/bin/bash
-
-echo 'Updating index.html...'
-pandoc -s -S --template=.index.html -o index.html README.md 
-
-echo 'Done.'
