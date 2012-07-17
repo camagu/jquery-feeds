@@ -14,6 +14,7 @@ File.open readme_path, "r" do |readme|
 
     # write the jekyll front matter
     index.puts "---"
+    insex.puts "title: Documentation"
     index.puts "layout: default"
     index.puts "---"
 
@@ -26,11 +27,11 @@ File.open readme_path, "r" do |readme|
       line.gsub!("```", "{% endhighlight %}")
 
       # convert headers so they are linkable
-      if line =~ /^#+/
-        leader = line[0, line.index(/\s/)]
-        text = line[line.index(/\s./)..-1].strip
-        line = "#{leader} #{text} {##{text.downcase.gsub(/\s/, "-")}}"
-      end
+      # if line =~ /^#+/
+        # leader = line[0, line.index(/\s/)]
+        # text = line[line.index(/\s./)..-1].strip
+        # line = "#{leader} #{text} {##{text.downcase.gsub(/\s/, "-")}}"
+      # end
 
       index.puts line
     end
