@@ -125,13 +125,13 @@ a:hover {
 h1 {
     font-size: 2em;
     line-height: 1.5em;
-    margin: 0 0 0.75em;
+    margin: 1.125em 0 0.375em;
 }
 
 h2 {
     font-size: 1.5em;
     line-height: 1em;
-    margin: 0 0 1em;
+    margin: 1.5em 0 0.5em;
 }
 
 h3 {
@@ -230,10 +230,10 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     
-    font-size: 0.875em;
-	line-height: 1.714em;
-	padding: 1.714em;
-	margin: 0 0 1.714em;
+    font-size: 0.75em;
+	line-height: 2em;
+	padding: 2em;
+	margin: 0 0 2em;
 }
 
 /*

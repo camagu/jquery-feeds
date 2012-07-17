@@ -1,16 +1,14 @@
-/* http://www.colourlovers.com/palette/1069659/Simple_Classic_4 */
-/* http://www.colourlovers.com/palette/1338317/phreestyleDESIGN */
 body {
 	color: #333333;
 	font: 400 1em/1.5em 'Open Sans', Verdana, Helvetica, sans-serif;
 	min-width: 320px;
 	
-	background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
+	/*background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
     background-image:    -moz-linear-gradient(#eee 1px, transparent 1px);
     background-image:     -ms-linear-gradient(#eee 1px, transparent 1px);
     background-image:      -o-linear-gradient(#eee 1px, transparent 1px);
     background-image:         linear-gradient(#eee 1px, transparent 1px);
-    background-size: 100% 1.5em;
+    background-size: 100% 1.5em;*/
 }
 
 a {
@@ -22,19 +20,14 @@ h1, h2, h3, h4, h5 {
 	font-weight:400;
 }
 
-
-
 .page {
-	margin: 0 auto;
-	max-width: 1114px;
+	
 }
 
 .page > .header {
 	background-color: #F1F2F3;
-	font-size: 1em;
-	line-height: 1.2em;
-	margin: 2em 0;
-	padding: 2em;
+	margin: 0 0 1.5em 0;
+	padding: 3em;
 	text-align: center;
 }
 
@@ -44,19 +37,19 @@ h1, h2, h3, h4, h5 {
 
 .brand > .title {
 	color: #222222;
-	font-size: 4em;
-	line-height: 1.2em;
-	margin: 0 0 10px;
+    font-size: 4em;
+    line-height: 1.125em;
+    margin: 0;
 }
 
 .brand > .slogan {
 	font-size: 2em;
-	line-height: 1em;
-	margin: 0 0 0.5em;
+    line-height: 1.5em;
+    margin: 0;
 }
 .page > .header > .menu {
-	font-size: 1.2em;
-	margin: 1em 0;
+	font-size: 1.25em;
+	margin: 0;
 }
 
 .page > .header > .menu > .item {
@@ -67,7 +60,8 @@ h1, h2, h3, h4, h5 {
 	font-size: 1em;
 	line-height: 1em;
 	margin-right: 0.3em;
-	padding: 0.5em 1em;
+	margin-bottom: 1.2em;
+	padding: 0.7em 1.2em;
 	text-decoration: none;
 	white-space: nowrap;
 }
@@ -126,27 +120,10 @@ h1, h2, h3, h4, h5 {
 
 
 .page > .content {
+	margin: 0 auto;
+	max-width: 1114px;
 	padding: 0 2em;
 }
-
-/*.page > .content h1,
-.page > .content h2,
-.page > .content h3,
-.page > .content h4,
-.page > .content h5,
-.page > .content h6 {
-	color: #222222;
-	line-height: 1.5em;
-}
-
-.page > .content h1 + *,
-.page > .content h2 + *,
-.page > .content h3 + *,
-.page > .content h4 + *,
-.page > .content h5 + *,
-.page > .content h6 + * {
-	margin-top: 0;
-}*/
 
 .page > .content hr {
 	background-color: #333333;
