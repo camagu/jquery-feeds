@@ -1,149 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+---
+title: Demo
+layout: default
+---
+<h1>Example</h1>
+<p>Rolling Stone's Facebook, Twitter, Tumblr and Pinterest feeds. Want to make your own social widget?</p>
 
-		<title>jQuery Feeds Demo</title>
-		<meta name="description" content="" />
-		<meta name="author" content="Camilo Aguilar" />
-		
-		<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="../ui/normalize.css"/>
-		<link rel="stylesheet" href="../ui/theme.css" type="text/css" title="franz"/>
-		<style>
-			.feed {
-				color: #333;
-				-moz-column-width: 320px;
-				-webkit-column-width: 320px;
-				column-width: 320px;
-				font-size: 13px;
-			}
-			
-			.feed p {
-				margin: 0 0 0.5em 0;
-			}
-			
-			.feed > .entry {
-				padding: 1.5em;
-				background-color: #fff;
-				border-radius: 1em;
-				margin: 0.5em 0;
-				display: inline-block;
-				width:320px;
-			}
-			
-			.feed > .entry .content img,
-			.feed > .entry .content iframe {
-				max-width:98%;
-			}
-			
-			.feed > .entry .link {
-				display: inline-block;
-				width: 16px;
-				height: 16px;
-				text-indent: -999em;
-				background-repeat: no-repeat;
-				vertical-align: middle;
-			}
-			
-			.feed > .entry .publishedDate {
-				display: inline-block;
-				height: 16px;
-				background-color: #64B6B1;
-				color: #fff;
-				line-height: 16px;
-				vertical-align: middle;
-				font-size: 11px;
-				padding: 0 1em;
-				border-radius: 2px;
-			}
-			
-			/* Icons from http://icondock.com */
-			.feed > .facebook.entry .link {
-				background-image: url(i/facebook.png);
-			}
-			
-			.feed > .twitter.entry .link {
-				background-image: url(i/twitter.png);
-			}
-			
-			.feed > .tumblr.entry .link {
-				background-image: url(i/tumblr.png);
-			}
-			
-			.feed > .pinterest.entry .link {
-				background-image: url(i/pinterest.png);
-			}
-		</style>
-		
-		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<div class="feed">&nbsp;</div>
 
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-	</head>
+<script type="text/html" id="entryTmpl">
+	<article class="<!=source!> entry">
+	<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+	<div class="content"><!=content!></div>
+	</article>
+</script>
 
-	<body>
-		<div class="page">
-			<header class="header">
-				<hgroup class="brand">
-					<h1 class="title">jQuery Feeds</h1>
-					<h2 class="slogan">RSS aggregator for your site</h2>
-				</hgroup>
-
-				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
-				
-				<nav class="menu">
-					<a class="download item">Download</a>
-					<a class="documentation item" href="#">Read the docs</a>
-					<a class="demo item" href="examples">Launch the demo</a>
-				</nav>
-				
-				<nav class="submenu">
-					<a class="test item" href="test">Run the tests</a>
-					<a class="github item" href="#">Visit in GitHub</a>
-				</nav>
-			</header>
-			
-			<div class="content">
-				<h1>Example</h1>
-				<p>Rolling Stone's Facebook, Twitter, Tumblr and Pinterest feeds. Want to make your own social widget?</p>
-				<p></p>
-				<div class="feed"> </div>
-				
-				<script type="text/html" id="entryTmpl">
-					<article class="<!=source!> entry">
-						<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
-						<div class="content"><!=content!></div>
-					</article>
-				</script>
-			</div>
-		</div>
-	</body>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
-	<script src="../jquery.feeds.js" charset="utf-8"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
-	<script>
-		$(document).ready(function() {
-			$('.feed').feeds({
-				feeds: {
-					facebook: 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
-					twitter: 'http://search.twitter.com/search.rss?q=from:RollingStones',
-					pinterest: 'http://pinterest.com/rollingstones50/feed.rss',
-					tumblr: 'http://rollingstonesofficial.tumblr.com/rss'
-				},
-				preprocess: function(feed) {
-					this.publishedDate = moment(this.publishedDate).fromNow();
-				},
-				entryTemplate: 'entryTmpl',
-				onComplete: function(entries) {console.log(entries);
-					$(this).find('a').attr('target', '_blank');
-				}
-			});
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
+<script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
+<script>
+	$(document).ready(function() {
+		$('.feed').feeds({
+			feeds : {
+				facebook : 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
+				twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones',
+				pinterest : 'http://pinterest.com/rollingstones50/feed.rss',
+				tumblr : 'http://rollingstonesofficial.tumblr.com/rss'
+			},
+			preprocess : function(feed) {
+				this.publishedDate = moment(this.publishedDate).fromNow();
+			},
+			entryTemplate : 'entryTmpl',
+			onComplete : function(entries) {
+				console.log(entries);
+				$(this).find('a').attr('target', '_blank');
+			}
 		});
-		
-	</script>
-</html>
+	});
+
+</script>
