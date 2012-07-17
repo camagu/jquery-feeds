@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 
-		<title>{{title}} &bull; jQuery Feeds</title>
+		<title>{{page.title}} &bull; jQuery Feeds</title>
 		<meta name="description" content="" />
 		<meta name="author" content="Camilo Aguilar" />
 		
@@ -19,8 +19,23 @@
 				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<!-- <link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
+		
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-33169238-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
 	</head>
 
 	<body>
@@ -53,5 +68,13 @@
 				<p>Menu icons by <a href="http://icons8.com/">Icon8</a>. Demo icons by <a href="http://icondock.com">Icon Dock</a>.</p>
 			</footer>
 		</div>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
+		{% if page.is_demo %}{% include scripts.html %}{% endif %}
+		<script>
+		$("#content a[href^='http://']").attr('target', '_blank').click(function(e) {
+			_gat._getTrackerByName()._trackEvent('Outbound Links', $(this).attr('href'));
+		});
+		</script>
 	</body>
 </html>
