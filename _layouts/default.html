@@ -13,12 +13,9 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 
-		<link rel="stylesheet" href="ui/normalize.css"/>
-		<link rel="stylesheet" href="ui/theme.css" type="text/css" title="franz"/>
-		
-		<!-- <link rel="stylesheet" href="ui/highlightjs/styles/arta.css">
-		<script src="ui/highlightjs/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script> -->
+		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/normalize.css"/>
+		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/theme.css" title="franz"/>
+		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/pygment.css" />
 				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -37,14 +34,14 @@
 				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
 				
 				<nav class="menu">
-					<a class="download item" title="jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
-					<a class="documentation item" href="#">Read the docs</a>
-					<a class="demo item" href="examples">Launch the demo</a>
+					<a class="download item" title="Get jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
+					<a class="documentation item" href="{{ ASSET_PATH }}/">Read the docs</a>
+					<a class="demo item" href="{{ ASSET_PATH }}/examples">Launch the demo</a>
 				</nav>
 				
 				<nav class="submenu">
-					<a class="test item" href="test">Run the tests</a>
-					<a class="github item" href="#">Visit in GitHub</a>
+					<a class="test item" title="qUnit tests" href="{{ ASSET_PATH }}/test">Run the tests</a>
+					<a class="github item" href="https://github.com/camagu/jquery-feeds/">Fork on GitHub</a>
 				</nav>
 			</header>
 			
@@ -53,7 +50,7 @@
 			</div>
 			
 			<footer class="footer">
-				<p>jQuery Feeds dual lincesed under MIT and GPL linceses. Menu icons by <a href="http://icons8.com/">Icon8</a>. Demo icons by <a href="http://icondock.com">Icon Dock</a>. Other stuff: consider it public domain.</p>
+				<p>Menu icons by <a href="http://icons8.com/">Icon8</a>. Demo icons by <a href="http://icondock.com">Icon Dock</a>.</p>
 			</footer>
 		</div>
 	</body>
