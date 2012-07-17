@@ -1,10 +1,16 @@
 /* http://www.colourlovers.com/palette/1069659/Simple_Classic_4 */
 /* http://www.colourlovers.com/palette/1338317/phreestyleDESIGN */
 body {
-	background-color: #FFFFFF;
 	color: #333333;
-	font: 400 16px/1.6 'Open Sans', Verdana, Helvetica, sans-serif;
+	font: 400 1em/1.5em 'Open Sans', Verdana, Helvetica, sans-serif;
 	min-width: 320px;
+	
+	background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
+    background-image:    -moz-linear-gradient(#eee 1px, transparent 1px);
+    background-image:     -ms-linear-gradient(#eee 1px, transparent 1px);
+    background-image:      -o-linear-gradient(#eee 1px, transparent 1px);
+    background-image:         linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 1.5em;
 }
 
 a {
@@ -16,9 +22,7 @@ h1, h2, h3, h4, h5 {
 	font-weight:400;
 }
 
-p:last-of-type {
-	margin: 0;
-}
+
 
 .page {
 	margin: 0 auto;
@@ -122,18 +126,30 @@ p:last-of-type {
 
 
 .page > .content {
-	font-weight: 300;
+	padding: 0 2em;
 }
 
-.page > .content h1, .page > .content h2, .page > .content h3, .page > .content h4, .page > .content h5, .page > .content h6 {
+/*.page > .content h1,
+.page > .content h2,
+.page > .content h3,
+.page > .content h4,
+.page > .content h5,
+.page > .content h6 {
 	color: #222222;
 	line-height: 1.5em;
 }
 
+.page > .content h1 + *,
+.page > .content h2 + *,
+.page > .content h3 + *,
+.page > .content h4 + *,
+.page > .content h5 + *,
+.page > .content h6 + * {
+	margin-top: 0;
+}*/
+
 .page > .content hr {
 	background-color: #333333;
-	border: medium none;
-	height: 1px;
 }
 
 .page > .content ul {
@@ -148,7 +164,18 @@ p:last-of-type {
 
 .page > .content pre {
 	background-color: #F1F2F3;
-	font-size: 0.875em;
+}
+
+.page > .footer {
+	font-size: 0.625em;
 	line-height: 1.2em;
-	padding: 1em;
+	color: #666;
+	margin: -1px 0 0;
+	padding: 1.2em 0;
+	border-top: #F1F2F3 solid 1px;
+	text-align: center;
+}
+
+.page > .footer p {
+	margin-bottom: 1.2em;
 }

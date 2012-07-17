@@ -124,17 +124,20 @@ a:hover {
 
 h1 {
     font-size: 2em;
-    margin: 0.67em 0;
+    line-height: 1.5em;
+    margin: 0 0 0.75em;
 }
 
 h2 {
     font-size: 1.5em;
-    margin: 0.83em 0;
+    line-height: 1em;
+    margin: 0 0 1em;
 }
 
 h3 {
-    font-size: 1.17em;
-    margin: 1em 0;
+    font-size: 1.25em;
+    line-height: 1.2em;
+    margin: 0 0 1.2em;
 }
 
 h4 {
@@ -194,9 +197,14 @@ mark {
  * Addresses margins set differently in IE6/7.
  */
 
-p,
-pre {
-    margin: 1em 0;
+p {
+    margin: 0 0 1.5em;
+}
+
+hr {
+	border: none;
+    height: 1px;
+    margin: -1px 0 1.5em;
 }
 
 /*
@@ -221,6 +229,11 @@ pre {
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
+    
+    font-size: 0.875em;
+	line-height: 1.714em;
+	padding: 1.714em;
+	margin: 0 0 1.714em;
 }
 
 /*
@@ -278,7 +291,7 @@ dl,
 menu,
 ol,
 ul {
-    margin: 1em 0;
+    margin: 0 0 1.5em;
 }
 
 dd {
