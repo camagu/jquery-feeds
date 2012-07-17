@@ -1,0 +1,21 @@
+<script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
+<script>
+	$(document).ready(function() {
+		$('.feed').feeds({
+			feeds : {
+				facebook : 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
+				twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones',
+				pinterest : 'http://pinterest.com/rollingstones50/feed.rss',
+				tumblr : 'http://rollingstonesofficial.tumblr.com/rss'
+			},
+			preprocess : function(feed) {
+				this.publishedDate = moment(this.publishedDate).fromNow();
+			},
+			entryTemplate : 'entryTmpl',
+			onComplete : function(entries) {
+				$(this).find('a').attr('target', '_blank');
+			}
+		});
+	});
+</script>
