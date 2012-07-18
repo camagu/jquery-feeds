@@ -207,6 +207,14 @@ pre {
     overflow: auto;
 }
 
+code {
+	background-color: #F1F2F3;
+}
+
+pre code {
+	background-color: none;
+}
+
 q {
     quotes: none;
 }
