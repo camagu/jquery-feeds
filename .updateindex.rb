@@ -15,6 +15,7 @@ File.open readme_path, "r" do |readme|
     # write the jekyll front matter
     index.puts "---"
     insex.puts "title: Documentation"
+    insex.puts "class: docs"
     index.puts "layout: default"
     index.puts "---"
 
