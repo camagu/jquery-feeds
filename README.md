@@ -6,7 +6,7 @@ Use the jQuery Feeds Plugin to retrieve and display multiple RSS feeds' entries 
 Features
 --------
 
-- Fetches multiple feeds
+- Fetch entries from multiple RSS sources
 - Entries are combined and displayed in chronological order
 - Fully customizable markup
 - Fully customizable loader
@@ -23,7 +23,7 @@ Download the [production version](https://raw.github.com/camagu/jquery-feeds/mas
 <script src="jquery.feeds.js"></script>
 ```
 
-And attach some feeds to a container:
+Attach some feeds to a container:
 
 ```javascript
 $('#container').feeds({
@@ -35,11 +35,11 @@ $('#container').feeds({
 });
 ```
 	
-The feeds' keys (i.e. *feed1* and *feed2* in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. *google*, *jquery*, *smashingmag*).
+The `feeds`' keys (i.e. *feed1* and *feed2* in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. *google*, *jquery*, *smashingmag*).
 
------------------------------------------------------------------------------------------------------------------------
+----
 
-You can also set the max number of items for each feed by using the *max* option:
+You can also set the max number of items for each feed by using the `max` option:
 
 ```javascript
 $('#container').feeds({
@@ -50,14 +50,14 @@ $('#container').feeds({
 });
 ```
 
-By default *max* is set to -1, which means it should fetch the maximum number of entries supported by the Google Feed API (which is 100).
+By default `max` is set to -1, which means it should fetch the maximum number of entries supported by the Google Feed API (which is 100).
 
 *__Note:__ the more feeds you load and the more entries you get the longer it will take the plugin to load them.*
 
 Manipulating entries
 --------------------
 
-You can manipulate the properties of each entry by implementing the *preprocess* callback. Say you want to modify the entries' *publishedDate* format (inside the callback *this* corresponds to the current entry):
+You can manipulate the properties of each entry by implementing the `preprocess` callback. Say you want to modify the entries' `publishedDate` format:
 
 ```javascript
 $('#container').feeds({
@@ -66,6 +66,8 @@ $('#container').feeds({
     },
     preprocess: function ( feed ) {
         // Change the publishedDate format from UTC to dd-mm-yyyy
+        
+        // Inside the callback 'this' corresponds to the entry being processed
         var date = new Date(this.publishedDate);
         var pieces = [date.getDate(), date.getMonth(), date.getFullYear()]
         this.publishedDate = pieces.join('-');
@@ -78,6 +80,7 @@ $('#container').feeds({
 Available properties are:
 
 - title
+- author
 - publishedDate
 - content
 - contentSnippet (< 120 characters, no html tags)
@@ -96,7 +99,7 @@ Refer to the [Google developer's guide](https://developers.google.com/feed/v1/js
 onComplete callback
 -------------------
 
-By implementing the *onComplete* callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors' *target* value to *_blank* (inside the callback *this* corresponds to the container):
+By implementing the `onComplete` callback you can manipulate the container after the entries are rendered. Say you want to change all the anchors' `target` value to `_blank`:
 
 ```javascript
 $('#container').feeds({
@@ -104,6 +107,7 @@ $('#container').feeds({
         // Your feeds ...
     },
     onComplete: function (entries) {
+    	// inside the callback this corresponds to the container
         $(this).find('a').attr('target', '_blank');
     }
 });
@@ -114,7 +118,7 @@ Templating
 
 The plugin uses a modified version of [John Resing](http://ejohn.org/)'s [JavaScript Micro-Templating](http://ejohn.org/blog/javascript-micro-templating/) function to render the entries.
 
-A template is a regular HTML string where you can execute or print javascript statements inside *<! ... !>* or *<!= ... !>* tags respectively.
+A template is a regular HTML string where you can execute or print javascript statements inside `<! ... !>` or `<!= ... !>` tags respectively.
 
 ```html
 <article>
@@ -138,7 +142,7 @@ A template is a regular HTML string where you can execute or print javascript st
 
 All the entry's properties are passed to the template as variables.
 
-To use a template you could either pass it as a string to the *entryTemplate* option ...
+To use a template you could either pass it as a string to the `entryTemplate` option ...
 
 ```javascript
 $('#container').feeds({
@@ -149,7 +153,7 @@ $('#container').feeds({
 });
 ```
 
-... or you could write it inside a *script* tag which *type* is set to *text/html* and pass it's *id* to the *entryTemplate* option:
+... or you could write it inside a `script` tag which `type` is set to `text/html` and pass it's `id` to the `entryTemplate` option:
 
 ```html
 <script type="text/html" id="exampleTemplate">
@@ -168,11 +172,11 @@ $('#container').feeds({
 
 ### Custom callback
 
-Alternatively, you can pass a function to *entryTemplate*. You can use this option to:
+Alternatively, you can pass a function to `entryTemplate`. You can use this option to:
 
-- use different templates based on some arbitrary logic
-- use external template engines (e.g. [handlebars](http://handlebarsjs.com/), [jsrender](https://github.com/BorisMoore/jsrender/), [jqote](http://aefxx.com/))
-- define your own presentation logic
+- use different templates based on some arbitrary logic,
+- use external template engines (e.g. [handlebars](http://handlebarsjs.com/), [jsrender](https://github.com/BorisMoore/jsrender/), [jqote](http://aefxx.com/)), or
+- define your own presentation logic.
 
 Examples:
 
@@ -227,9 +231,9 @@ $('#container').feeds({
 });
 ```
 
---------------------------------------------------------------------------------------------------------------------------
+-----
 
-You can change the loader template as well by passing a template, it's *id* or a callback to the *loadingTemplate* option:
+You can change the loader template as well by passing a template, it's `id` or a callback to the `loadingTemplate` option:
 
 ```javascript
 $('#container').feeds({
@@ -293,19 +297,24 @@ No changes where made to the code but the package got revamped!
 - Modified 'grunt.js' to reflect the changes
 
 **v0.4.1**
+
 - Added *ssl* option
 
 **v0.4**
-- Implemented alternative use of *entryTemplate* and *loadingTemplate* as callback
+
+- Implemented alternative use of `entryTemplate` and `loadingTemplate` as callback
 
 **v0.3**
+
 - Rewrote templating system
 
 **v0.2**
-- Cloned publishedDate property to avoid sorting problems
+
+- Cloned `publishedDate` property to avoid sorting problems
 - Added feed data to entries
  
 **v0.1**
+
 - First version
                   
 License
@@ -313,14 +322,13 @@ License
 
 Copyright (c) 2012 Camilo Aguilar
 
-Dual licensed under the MIT and GPL licenses:
+Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
 
-- http://www.opensource.org/licenses/mit-license.php
-- http://www.gnu.org/licenses/gpl.html
+----
 
 Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/)
 
-- Copyright (c) John Resig (http://ejohn.org), MIT licensed
+Copyright (c) John Resig (http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
 
 Contributing
 ------------
