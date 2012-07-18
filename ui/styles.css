@@ -72,13 +72,28 @@ body {
     margin: 0;
     line-height: 1.5em;
     min-width: 320px;
+    
+    /*
+       Uncomment to check vertical rythm
+       --------------------------------------------------------------------------
+       http://forrst.com/posts/Check_Your_Vertical_Rhythm_With_CSS3_gradients-6XE */
+      
+    /*
+    background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
+    background-image:    -moz-linear-gradient(#eee 1px, transparent 1px);
+    background-image:     -ms-linear-gradient(#eee 1px, transparent 1px);
+    background-image:      -o-linear-gradient(#eee 1px, transparent 1px);
+    background-image:         linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 1.5em;
+    */
 }
 
 /* ==========================================================================
    Links
    ========================================================================== */
 a {
-	color: #5C5C00;
+	/*color: #5C5C00;*/
+	color: #A7A9AC;
 }
 
 a:focus {
@@ -150,8 +165,7 @@ blockquote {
 
 i,
 em {
-	color: #666;
-	font-style: normal;
+	
 }
 
 dfn {
@@ -190,8 +204,7 @@ pre {
 	padding: 2em;
 	margin: 0 0 2em;
     white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+    overflow: auto;
 }
 
 q {
@@ -244,7 +257,7 @@ dd {
 menu,
 ol,
 ul {
-    padding: 0 0 0 40px;
+    padding: 0;
 }
 
 nav ul,
@@ -512,18 +525,37 @@ table {
 }
 
 /* ==========================================================================
-   Demo
+   Docs
    ========================================================================== */
   
+  
+
+/* ==========================================================================
+   Demo
+   ========================================================================== */
+
+.demos.page > .content > .code {
+	display:none;
+}
+
+.demos.page > .content .openCode:after {
+	content: "»";
+}
+
 .feed {
-	column-gap: 0;
-	-moz-column-gap: 0;
-	-webkit-column-gap: 0;
-	column-width: 320px;
-	-moz-column-width: 320px;
-	-webkit-column-width: 320px;
+	column-gap: 1em;
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	column-width: 359px;
+	-moz-column-width: 359px;
+	-webkit-column-width: 359px;
 	font-size: 0.75em;
 	line-height: 1.5em;
+}
+
+.feed > .loading.entry {
+	text-align: center;
+	width: auto;
 }
 
 .feed > .entry {
@@ -602,7 +634,7 @@ table {
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f0f0f0; }
 .highlight .c { color: #60a0b0; font-style: italic } /* Comment */
-.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .err { color: #666666 } /* Error, hijacked, displays as o */
 .highlight .k { color: #007020; font-weight: bold } /* Keyword */
 .highlight .o { color: #666666 } /* Operator */
 .highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
@@ -661,3 +693,58 @@ table {
 .highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
 .highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
 .highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+  
+/* --------------------------------------------------------------------------
+   Single column on distort
+   -------------------------------------------------------------------------- */
+  
+@media screen and (max-width: 794px) {
+	.feed {
+		column-gap: 0;
+		-moz-column-gap: 0;
+		-webkit-column-gap: 0;
+		column-width: auto;
+		-moz-column-width: auto;
+		-webkit-column-width: auto;
+	}
+	
+	.feed > .entry {
+		width: auto;
+		display: block;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   Small devices
+   -------------------------------------------------------------------------- */
+  
+@media screen and (max-width: 493px) {
+	body {
+		font-size: 0.75em;
+	}
+	
+	pre {
+		font-size: 1em;
+	}
+	
+	.page > .header > .brand > .slogan {
+		margin-bottom: 1.5em;
+	}
+	
+	.page > .header > .menu > .item {
+		display: block;
+		margin-bottom: 0.5em;
+	}
+	
+	.page > .header > .menu > .item:before {
+		display:none;
+	}
+	
+	.page > .header > .submenu > .item:before {
+		display: none;
+	}
+}

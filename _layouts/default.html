@@ -12,7 +12,7 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
 
-		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/normalize.css"/>
+		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/styles.css"/>
 				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -20,7 +20,7 @@
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
 		
 		<script type="text/javascript">
-			var _gaq = _gaq || [];
+			/*var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-33169238-1']);
 			_gaq.push(['_trackPageview']);
 
@@ -31,12 +31,12 @@
 				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(ga, s);
-			})();
+			})();*/
 		</script>
 	</head>
 
 	<body>
-		<div class="page">
+		<div class="{{page.class}} page">
 			<header class="header">
 				<hgroup class="brand">
 					<h1 class="title">jQuery Feeds</h1>
@@ -48,7 +48,7 @@
 				<nav class="menu">
 					<a class="download item" title="Get jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
 					<a class="documentation item" href="{{ ASSET_PATH }}/">Read the docs</a>
-					<a class="demo item" href="{{ ASSET_PATH }}/examples">Launch the demo</a>
+					<a class="demo item" href="{{ ASSET_PATH }}/demos">Launch the demo</a>
 				</nav>
 				
 				<nav class="submenu">
@@ -56,13 +56,13 @@
 					<a class="github item" href="https://github.com/camagu/jquery-feeds/">Fork on GitHub</a>
 				</nav>
 			</header>
-			
+
 			<div class="content">
 {{content}}
 			</div>
 			
 			<footer class="footer">
-				<p>Menu icons by <a href="http://icons8.com/">Icon8</a>. Demo icons by <a href="http://icondock.com">Icon Dock</a>.</p>
+				<p>Camilo Aguilar. Except for the icons and the js libraries this site is <a href="http://unlicense.org/" title="Check lincense specifics">UNLICENSED</a>. Icons by <a href="http://icons8.com/">Icon8</a> and <a href="http://icondock.com">Icon Dock</a>.</p>
 			</footer>
 		</div>
 		

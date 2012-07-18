@@ -1,4 +1,6 @@
 ---
+title: Documentation
+class: docs
 layout: default
 ---
 jQuery Feeds - RSS aggregator for your site
