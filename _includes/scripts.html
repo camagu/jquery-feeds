@@ -2,7 +2,7 @@
 		<!-- Load jQuery Feeds -->
 		<script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
 		
-		<!-- Load moment.js, used to format dates -->
+		<!-- Load moment.js, used to format dates, totally optional. -->
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
 		
 		<!-- Using Pure CSS Masonry which is not supported by IE. Fallback: original lib. -->
@@ -28,7 +28,7 @@
 					// Preprocess: manipulated entries data before it's rendered
 					preprocess : function(feed) {
 						// Inside the callback 'this' corresponds to the entry being processed
-						// Example: Using moment.js to format dates as time ago
+						// Example: Using moment.js to format dates as time ago, totally optional.
 						this.publishedDate = moment(this.publishedDate).fromNow();
 					},
 					

@@ -1,3 +1,10 @@
+<!--
+jQuery Feeds and site by Camilo Aguilar.
+
+Except for the icons and the js libraries this site is UNLICENSED (http://unlicense.org/).
+
+Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
+-->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,7 +27,7 @@
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
 		
 		<script type="text/javascript">
-			/*var _gaq = _gaq || [];
+			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', 'UA-33169238-1']);
 			_gaq.push(['_trackPageview']);
 
@@ -31,7 +38,7 @@
 				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 				var s = document.getElementsByTagName('script')[0];
 				s.parentNode.insertBefore(ga, s);
-			})();*/
+			})();
 		</script>
 	</head>
 
@@ -62,16 +69,23 @@
 			</div>
 			
 			<footer class="footer">
-				<p>Camilo Aguilar. Except for the icons and the js libraries this site is <a href="http://unlicense.org/" title="Check lincense specifics">UNLICENSED</a>. Icons by <a href="http://icons8.com/">Icon8</a> and <a href="http://icondock.com">Icon Dock</a>.</p>
+				<p>jQuery Feeds and site by Camilo Aguilar. Except for the icons and the js libraries this site is <a href="http://unlicense.org/" title="Check lincense specifics">UNLICENSED</a>. Icons by <a href="http://icons8.com/">Icon8</a> and <a href="http://icondock.com">Icon Dock</a>.</p>
 			</footer>
 		</div>
 		
+		<!-- Include jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="utf-8"></script>
-		{% if page.is_demo %}{% include scripts.html %}{% endif %}
+		
+		<!-- GA Outbound links tracking -->
 		<script>
-		$("#content a[href^='http://']").attr('target', '_blank').click(function(e) {
-			_gat._getTrackerByName()._trackEvent('Outbound Links', $(this).attr('href'));
+		$(".content a[href^='http://']").attr('target', '_blank').click(function(e) {
+			if (_gaq) {
+				console.log('pum');
+				_gaq.push(['trackEvent', 'Outbound Links', $(this).attr('href')]);
+			}
 		});
 		</script>
+		
+		{% if page.is_demo %}{% include scripts.html %}{% endif %}
 	</body>
 </html>
