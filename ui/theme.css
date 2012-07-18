@@ -16,8 +16,8 @@ a {
 }
 
 h1, h2, h3, h4, h5 {
-	font-family: 'Bree Serif', Georgia, serif;
-	font-weight:400;
+	/*font-family: 'Bree Serif', Georgia, serif;*/
+	font-weight:600;
 }
 
 .page {
@@ -126,7 +126,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .page > .content hr {
-	background-color: #333333;
+	background-color: #ccc;
 }
 
 .page > .content ul {
@@ -155,4 +155,85 @@ h1, h2, h3, h4, h5 {
 
 .page > .footer p {
 	margin-bottom: 1.2em;
+}
+
+/**
+ * 	Demos
+ */
+.feed {
+	column-gap: 0;
+	-moz-column-gap: 0;
+	-webkit-column-gap: 0;
+	column-width: 320px;
+	-moz-column-width: 320px;
+	-webkit-column-width: 320px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+.feed > .entry {
+	border: 1px solid #ccc;
+	border-radius: 2em;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: inline-block;
+	padding: 3em;
+	margin: 0 0 1em 0;
+	width: 359px;
+}
+
+.feed > .entry p {
+	margin-bottom: 1.5em;
+}
+
+.feed > .entry img,
+.feed > .entry iframe {
+	display: block;
+	max-width: 100%;
+}
+
+.feed > .entry .author {
+	font-weight: 600;
+	margin-bottom: 0.75em;
+}
+
+.feed > .entry .publishedDate {
+	display: inline-block;
+	height: 16px;
+	background-color: #64B6B1;
+	color: #fff;
+	line-height: 16px;
+	vertical-align: middle;
+	font-size: 11px;
+	padding: 0 1em;
+	border-radius: 2px;
+}
+
+.feed > .entry .link {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	text-indent: -999em;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+}
+
+.feed > .facebook.entry .link {
+	background-image: url(i/facebook.png);
+}
+
+.feed > .twitter.entry .link {
+	background-image: url(i/twitter.png);
+}
+
+.feed > .tumblr.entry .link {
+	background-image: url(i/tumblr.png);
+}
+
+br + br {
+	height: 0;
+}
+.feed > .pinterest.entry .link {
+	background-image: url(i/pinterest.png);
 }

@@ -1,11 +1,12 @@
 <script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
+<!--[if lte IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/2.1.04/jquery.masonry.min.js"></script><![endif]-->
 <script>
 	$(document).ready(function() {
 		$('.feed').feeds({
 			feeds : {
 				facebook : 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
-				twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones',
+				twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones&rpp=100',
 				pinterest : 'http://pinterest.com/rollingstones50/feed.rss',
 				tumblr : 'http://rollingstonesofficial.tumblr.com/rss'
 			},
@@ -15,6 +16,12 @@
 			entryTemplate : 'entryTmpl',
 			onComplete : function(entries) {
 				$(this).find('a').attr('target', '_blank');
+
+				if ($.browser.msie && parseInt($.browser.version.substr(0, 1)) < 10) {
+					$('.feed').masonry({
+						gutterWidth: 12
+					});
+				}
 			}
 		});
 	});
