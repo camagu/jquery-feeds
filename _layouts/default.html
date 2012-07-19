@@ -1,0 +1,74 @@
+<!--
+jQuery Feeds and site by Camilo Aguilar.
+
+Except for the icons and the js libraries this site is UNLICENSED (http://unlicense.org/).
+
+Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
+-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<title>{{page.title}} &bull; jQuery Feeds</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Camilo Aguilar" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/styles.css"/>
+				
+		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+		<!-- <link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
+		
+		<!-- Analytics -->
+		{% include ga.html %}
+	</head>
+
+	<body>
+		<div class="{{page.class}} page">
+			<header class="header">
+				<hgroup class="brand">
+					<h1 class="title">jQuery Feeds</h1>
+					<h2 class="slogan">RSS aggregator for your site</h2>
+				</hgroup>
+
+				<p class="description">Multiple RSS feeds aggregator with templating and cross-domain support.</p>
+				
+				<nav class="menu">
+					<a class="download item" title="Get jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
+					<a class="documentation item" href="{{ ASSET_PATH }}/">Read the docs</a>
+					<a class="demo item" href="{{ ASSET_PATH }}/demos">Launch the demo</a>
+				</nav>
+				
+				<nav class="submenu">
+					<a class="test item" title="qUnit tests" href="{{ ASSET_PATH }}/test">Run the tests</a>
+					<a class="github item" href="https://github.com/camagu/jquery-feeds/">Fork on GitHub</a>
+					<a href="https://twitter.com/share" class="twitter item twitter-share-button" data-url="http://bit.ly/MJpeK2" data-text="#jQuery Feeds is a multiple RSS feeds aggregator with templating and cross-domain support. Check it out!" data-via="camagu_" data-count="none">Tweet</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</nav>
+			</header>
+
+			<div class="content">
+{{content}}
+			</div>
+			
+			<footer class="footer">
+				<p>jQuery Feeds and site by Camilo Aguilar. Except for the icons and the js libraries this site is <a href="http://unlicense.org/" title="Check lincense specifics">UNLICENSED</a>. Icons by <a href="http://icons8.com/">Icon8</a> and <a href="http://icondock.com">Icon Dock</a>.</p>
+			</footer>
+		</div>
+		
+		<!-- Include jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		
+		<!-- Include site script -->
+		<script src="{{ ASSET_PATH }}/ui/site.js"></script>
+		
+		{% if page.is_demo %}{% include scripts.html %}{% endif %}
+
+	</body>
+</html>

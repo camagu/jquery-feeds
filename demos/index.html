@@ -1,0 +1,71 @@
+---
+title: Demo
+class: demos
+layout: default
+is_demo: true
+---
+			<h1>Demo</h1>
+			<p>Rolling Stone social activity widget built with jQuery Feeds. <a href="http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286" title="The Rolling Stones' Wall RSS feed">Facebook</a>, <a href="http://search.twitter.com/search.rss?q=from:RollingStones&rpp=100" title="@RollingStones RSS feed">Twitter</a>, <a href="http://pinterest.com/rollingstones50/feed.rss" title="Pinterest RSS feed">Pinterest</a> and <a href="http://rollingstonesofficial.tumblr.com/rss" title="Tumblr RSS feed">Tumblr</a> RSS feeds included.</p>
+			
+			<div class="code">
+				<h2>In your markup:</h2>
+{% highlight html %}
+<script type="text/html" id="entryTmpl">
+	<article class="<!=source!> entry">
+		<p>
+			<a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a>
+			<span class="publishedDate"><!=publishedDate!></span>
+		</p>
+		<p class="author"><!=author!></p>
+		<div class="content"><!=content!></div>
+	</article>
+</script>
+{% endhighlight %}
+			
+				<h2>In your script:</h2>
+{% highlight javascript %}
+$('.feed').feeds({
+	feeds : {
+		facebook : 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
+		twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones&rpp=100',
+		pinterest : 'http://pinterest.com/rollingstones50/feed.rss',
+		tumblr : 'http://rollingstonesofficial.tumblr.com/rss'
+	},
+	preprocess : function(feed) {
+		// Using moment.js to diplay dates as time ago
+		this.publishedDate = moment(this.publishedDate).fromNow();
+	},
+	entryTemplate : 'entryTmpl',
+	onComplete : function(entries) {
+		$(this).find('a').attr('target', '_blank');
+	}
+});
+{% endhighlight %}
+			
+				<p>Check the source code of this page for more information.</p>
+			</div>
+			
+			<p><a class="openCode" href="#">Check the code</a></p>
+			
+			<!----------------------------------------------------------------/
+				 jQuery Feeds Demo
+			/----------------------------------------------------------------->
+			
+			<!-- Define the container --> 
+			<div class="feed">&nbsp;</div>
+			
+			<!-- Define the entries' template inside a script tag.
+				 Set it's *type* to *text/html* and assign it an *id*.
+				 You can print the entry's properties by writting their name inside <!= !>. -->
+			<script type="text/html" id="entryTmpl">
+				<article class="<!=source!> entry">
+					<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+					<p class="author"><!=author!></p>
+					<div class="content"><!=content!></div>
+				</article>
+			</script>
+			
+			<!-- Got to the bottom of the source to check the scripts. -->
+			
+			<!----------------------------------------------------------------/
+			/----------------------------------------------------------------->

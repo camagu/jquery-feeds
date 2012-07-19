@@ -1,0 +1,62 @@
+
+		<!-- Load jQuery Feeds -->
+		<script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
+		
+		<!-- Load moment.js, used to format dates, totally optional -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
+		
+		<!-- Using Pure CSS Masonry which is not supported by IE. Fallback: original lib. -->
+		<!--[if lte IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/2.1.04/jquery.masonry.min.js"></script><![endif]-->
+		<script>
+			$(document).ready(function() {
+				
+				/* ==================================================================
+				   Demo scripts
+				   ================================================================== */
+				
+				// Attach feeds to container - $( container ).feeds({ options...});
+				$('.feed').feeds({
+					
+					// Feeds: Set keys and paths of feeds
+					feeds : {
+						facebook : 'http://www.facebook.com/feeds/page.php?format=atom10&id=8305888286',
+						twitter : 'http://search.twitter.com/search.rss?q=from:RollingStones&rpp=100',
+						pinterest : 'http://pinterest.com/rollingstones50/feed.rss',
+						tumblr : 'http://rollingstonesofficial.tumblr.com/rss'
+					},
+					
+					// Preprocess: manipulated entries data before it's rendered
+					preprocess : function(feed) {
+						// Inside the callback 'this' corresponds to the entry being processed
+						// Example: Using moment.js to format dates as time ago, totally optional.
+						this.publishedDate = moment(this.publishedDate).fromNow();
+					},
+					
+					// entryTemplate: template used to render entries. Can be a string, an id or a callback.
+					// Using the id of the template defined in the markup.
+					entryTemplate : 'entryTmpl',
+					
+					// loadingTemplate: template used to show while entries are being retrieved. Can be a string, an id or a callback.
+					loadingTemplate: '<p class="loading entry">Loading entries, hold on.</p>',
+					
+					// onComplete: called when all entries are rendered.
+					onComplete : function(entries) {
+						// Setting all links as external.
+						// Inside the callback 'this' corresponds to the feeds' container.
+						$(this).find('a').attr('target', '_blank');
+						
+						// Pure CSS Masonry fallback for IE
+						if ($.browser.msie && parseInt($.browser.version.substr(0, 1)) < 10) {
+							$('.feed').masonry({
+								gutterWidth: 12
+							});
+						}
+						
+						// Tracking outbound links, ignore
+						$(this).find('a').click(function() {
+							_gaq.push(['_trackEvent', 'Outbound Demo Links', 'Click', $(this).attr('href')]);
+						});
+					}
+				});
+			});
+		</script>

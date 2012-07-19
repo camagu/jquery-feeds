@@ -1,0 +1,790 @@
+/*!
+ * jQuery Feeds' site style definitions.
+ * http://camagu.github.com/jquery-feeds
+ * Camilo Aguilar
+ * 
+ * Used http://github.com/necolas/normalize.css as boilerplate.
+ * 
+ * Unlicense http://unlicense.org/
+ * 
+ * Icons from:
+ *     - http://icons8.com/
+ *     - http://icondock.com/
+ */
+
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+    display: block;
+}
+
+audio,
+canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden] {
+    display: none;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+html,
+button,
+input,
+select,
+textarea {
+    font-family: 'Open Sans', Verdana, Helvetica, sans-serif;
+}
+
+body {
+	color: #333;
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.5em;
+    min-width: 320px;
+    
+    /*
+       Uncomment to check vertical rythm
+       --------------------------------------------------------------------------
+       http://forrst.com/posts/Check_Your_Vertical_Rhythm_With_CSS3_gradients-6XE */
+      
+    /*
+    background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
+    background-image:    -moz-linear-gradient(#eee 1px, transparent 1px);
+    background-image:     -ms-linear-gradient(#eee 1px, transparent 1px);
+    background-image:      -o-linear-gradient(#eee 1px, transparent 1px);
+    background-image:         linear-gradient(#eee 1px, transparent 1px);
+    background-size: 100% 1.5em;
+    */
+}
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+a {
+	color: #A7A9AC;
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-weight:600;
+}
+
+h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+    margin: 1.125em 0 0.375em;
+}
+
+h2 {
+    font-size: 1.5em;
+    line-height: 1em;
+    margin: 1.5em 0 0.5em;
+}
+
+h3 {
+    font-size: 1.25em;
+    line-height: 1.2em;
+    margin: 0 0 1.2em;
+}
+
+h4 {
+    font-size: 1em;
+    margin: 1.33em 0;
+}
+
+h5 {
+    font-size: 0.83em;
+    margin: 1.67em 0;
+}
+
+h6 {
+    font-size: 0.75em;
+    margin: 2.33em 0;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+blockquote {
+    margin: 1em 40px;
+}
+
+i,
+em {
+	
+}
+
+dfn {
+    font-style: italic;
+}
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+p {
+    margin: 0 0 1.5em;
+}
+
+hr {
+	background-color: #ccc;
+	border: none;
+    height: 1px;
+    margin: -1px 0 1.5em;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+    font-size: 1em;
+}
+
+pre {
+	background-color: #F1F2F3;
+    font-size: 0.75em;
+	line-height: 2em;
+	padding: 2em;
+	margin: 0 0 2em;
+    white-space: pre;
+    overflow: auto;
+}
+
+code {
+	background-color: #F1F2F3;
+	border: 1px solid #A7A9AC;
+	border-radius: 2px;
+	padding: 0 0.2em;
+}
+
+pre code {
+	background-color: none;
+	border: none;
+	border-radius: 0;
+	padding: 0;
+}
+
+q {
+    quotes: none;
+}
+
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+small {
+    font-size: 75%;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+/* ==========================================================================
+   Lists
+   ========================================================================== */
+
+dl,
+menu,
+ol,
+ul {
+    list-style: circle outside none;
+    margin: 0 0 1.5em;
+	padding: 0;
+}
+
+dd {
+    margin: 0 0 0 40px;
+}
+
+menu,
+ol,
+ul {
+    padding: 0;
+}
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+  
+figure {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+  
+form {
+    margin: 0;
+}
+
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+    border: 0; /* 1 */
+    padding: 0;
+    white-space: normal; /* 2 */
+    *margin-left: -7px; /* 3 */
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%; /* 1 */
+    margin: 0; /* 2 */
+    vertical-align: baseline; /* 3 */
+    *vertical-align: middle; /* 3 */
+}
+
+button,
+input {
+    line-height: normal;
+}
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+    *overflow: visible;  /* 4 */
+}
+
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+    *height: 13px; /* 3 */
+    *width: 13px; /* 3 */
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+textarea {
+    overflow: auto; /* 1 */
+    vertical-align: top; /* 2 */
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* ==========================================================================
+   Theme shared elements
+   ========================================================================== */
+
+.page {
+	
+}
+
+/* --------------------------------------------------------------------------
+   Theme header
+   -------------------------------------------------------------------------- */
+  
+.page > .header {
+	background-color: #F1F2F3;
+	margin: 0 0 1.5em 0;
+	padding: 3em;
+	text-align: center;
+}
+
+/*
+   Branding
+   -------------------------------------------------------------------------- */
+  
+.page > .header > .brand {
+
+}
+
+.page > .header > .brand > .title {
+	color: #222222;
+    font-size: 4em;
+    line-height: 1.125em;
+    margin: 0;
+}
+
+.page > .header > .brand > .slogan {
+	font-size: 2em;
+    line-height: 1.5em;
+    margin: 0;
+}
+
+/*
+   Primary menu
+   -------------------------------------------------------------------------- */
+
+.page > .header > .menu {
+	font-size: 1.25em;
+	margin: 0;
+}
+
+.page > .header > .menu > .item {
+	background-color: #999900;
+	border-radius: 0.2em 0.2em 0.2em 0.2em;
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 1em;
+	line-height: 1em;
+	margin-right: 0.3em;
+	margin-bottom: 1.2em;
+	padding: 0.7em 1.2em;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.page > .header > .menu > .item:before {
+	background: url("icons.png") no-repeat scroll 0 0 transparent;
+	content: " ";
+	display: inline-block;
+	height: 1em;
+	margin-right: 0.5em;
+	vertical-align: bottom;
+	width: 20px;
+}
+
+.page > .header > .menu > .download.item:before {
+	background-position: 0 0;
+}
+
+.page > .header > .menu > .documentation.item:before {
+	background-position: -40px 0;
+}
+
+.page > .header > .menu > .demo.item:before {
+	background-position: -20px 0;
+}
+
+/*
+   Secondary menu
+   -------------------------------------------------------------------------- */
+  
+.page > .header > .submenu {
+
+}
+
+.page > .header > .submenu > .item {
+	color: #666;
+	display: inline-block;
+	line-height: 1em;
+	margin-right: 1em;
+	text-decoration: none;
+}
+
+.page > .header > .submenu > .item:before {
+	background: url(icons.png) no-repeat;
+	content: " ";
+	display:inline-block;
+	height: 1em;
+	margin-right: 0.5em;
+	vertical-align: bottom;
+	width: 1em;
+}
+
+.page > .header > .submenu > .test.item:before {
+	background-position: -60px 0;
+}
+
+.page > .header > .submenu > .github.item:before {
+	background-position: -80px 0;
+}
+
+.page > .header > .submenu > .twitter.item {
+	vertical-align: top;
+	margin-top: 2px;
+}
+
+.page > .header > .submenu > .twitter.item:before {
+	content: "";
+	display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Theme header
+   -------------------------------------------------------------------------- */
+  
+.page > .content {
+	margin: 0 auto;
+	max-width: 1114px;
+	padding: 0 2em;
+}
+
+/* --------------------------------------------------------------------------
+   Theme footer
+   -------------------------------------------------------------------------- */
+  
+.page > .footer {
+	border-top: #F1F2F3 solid 1px;
+	color: #666;
+	font-size: 0.625em;
+	line-height: 1.2em;
+	margin: -1px 0 0;
+	padding: 1.2em 0;
+	text-align: center;
+}
+
+.page > .footer p {
+	margin-bottom: 1.2em;
+}
+
+/* ==========================================================================
+   Docs
+   ========================================================================== */
+  
+  
+
+/* ==========================================================================
+   Demo
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Show code
+   -------------------------------------------------------------------------- */
+
+.demos.page > .content > .code {
+	display:none;
+}
+
+.demos.page > .content .openCode:after {
+	content: "»";
+}
+
+/* --------------------------------------------------------------------------
+   Feed's container
+   -------------------------------------------------------------------------- */
+  
+.feed {
+	column-gap: 1em;
+	-moz-column-gap: 1em;
+	-webkit-column-gap: 1em;
+	column-width: 359px;
+	-moz-column-width: 359px;
+	-webkit-column-width: 359px;
+	font-size: 0.75em;
+	line-height: 1.5em;
+}
+
+/* --------------------------------------------------------------------------
+   Loading template
+   -------------------------------------------------------------------------- */
+  
+.feed > .loading.entry {
+	text-align: center;
+	width: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Entry
+   -------------------------------------------------------------------------- */
+  
+.feed > .entry {
+	border: 1px solid #ccc;
+	border-radius: 2em;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: inline-block; /* Avoid breaks between columns */
+	padding: 3em;
+	margin: 0 0 1em 0;
+	width: 359px;
+}
+
+.feed > .entry br + br {
+	height: 0; /* avoid extra spaces */
+}
+
+.feed > .entry p {
+	margin-bottom: 1.5em;
+}
+
+.feed > .entry img,
+.feed > .entry iframe {
+	display: block;
+	max-width: 100%;
+}
+
+.feed > .entry .author {
+	font-weight: 600;
+	margin-bottom: 0.75em;
+}
+
+.feed > .entry .publishedDate {
+	background-color: #64B6B1;
+	border-radius: 2px;
+	color: #fff;
+	display: inline-block;
+	font-size: 11px;
+	height: 16px;
+	line-height: 16px;
+	padding: 0 1em;
+	vertical-align: middle;
+}
+
+.feed > .entry .link {
+	background: url(icons.png) no-repeat;
+	display: inline-block;
+	height: 16px;
+	text-indent: -999em;
+	vertical-align: middle;
+	width: 16px;
+}
+
+.feed > .facebook.entry .link {
+	background-position: 0 -20px;
+}
+
+.feed > .pinterest.entry .link {
+	background-position: -20px -20px;
+}
+
+.feed > .twitter.entry .link {
+	
+	background-position: -40px -20px;
+}
+
+.feed > .tumblr.entry .link {
+	background-position: -60px -20px;
+}
+
+/* ==========================================================================
+   Pygments' code highlighting - http://pygments.org/
+   Based on 'friendly' style
+   ========================================================================== */
+  
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { color: #666666 } /* Error, hijacked, displays as o */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+  
+/* --------------------------------------------------------------------------
+   Single column on distort
+   -------------------------------------------------------------------------- */
+  
+@media screen and (max-width: 794px) {
+	.feed {
+		column-gap: 0;
+		-moz-column-gap: 0;
+		-webkit-column-gap: 0;
+		column-width: auto;
+		-moz-column-width: auto;
+		-webkit-column-width: auto;
+	}
+	
+	.feed > .entry {
+		width: auto;
+		display: block;
+	}
+}
+
+/* --------------------------------------------------------------------------
+   Small devices
+   -------------------------------------------------------------------------- */
+  
+@media screen and (max-width: 493px) {
+	body {
+		font-size: 0.75em;
+	}
+	
+	pre {
+		font-size: 1em;
+	}
+	
+	.page > .header > .brand > .slogan {
+		margin-bottom: 1.5em;
+	}
+	
+	.page > .header > .menu > .item {
+		display: block;
+		margin-bottom: 0.5em;
+	}
+	
+	.page > .header > .menu > .item:before {
+		display:none;
+	}
+	
+	.page > .header > .submenu > .item:before {
+		display: none;
+	}
+}
