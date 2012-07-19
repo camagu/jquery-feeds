@@ -92,7 +92,6 @@ body {
    Links
    ========================================================================== */
 a {
-	/*color: #5C5C00;*/
 	color: #A7A9AC;
 }
 
@@ -209,10 +208,16 @@ pre {
 
 code {
 	background-color: #F1F2F3;
+	border: 1px solid #A7A9AC;
+	border-radius: 2px;
+	padding: 0 0.2em;
 }
 
 pre code {
 	background-color: none;
+	border: none;
+	border-radius: 0;
+	padding: 0;
 }
 
 q {
