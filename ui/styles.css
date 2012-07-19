@@ -547,6 +547,10 @@ table {
    Demo
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   Show code
+   -------------------------------------------------------------------------- */
+
 .demos.page > .content > .code {
 	display:none;
 }
@@ -555,6 +559,10 @@ table {
 	content: "»";
 }
 
+/* --------------------------------------------------------------------------
+   Feed's container
+   -------------------------------------------------------------------------- */
+  
 .feed {
 	column-gap: 1em;
 	-moz-column-gap: 1em;
@@ -566,11 +574,19 @@ table {
 	line-height: 1.5em;
 }
 
+/* --------------------------------------------------------------------------
+   Loading template
+   -------------------------------------------------------------------------- */
+  
 .feed > .loading.entry {
 	text-align: center;
 	width: auto;
 }
 
+/* --------------------------------------------------------------------------
+   Entry
+   -------------------------------------------------------------------------- */
+  
 .feed > .entry {
 	border: 1px solid #ccc;
 	border-radius: 2em;
@@ -615,7 +631,7 @@ table {
 }
 
 .feed > .entry .link {
-	background-repeat: no-repeat;
+	background: url(icons.png) no-repeat;
 	display: inline-block;
 	height: 16px;
 	text-indent: -999em;
@@ -624,19 +640,20 @@ table {
 }
 
 .feed > .facebook.entry .link {
-	background-image: url(i/facebook.png);
-}
-
-.feed > .twitter.entry .link {
-	background-image: url(i/twitter.png);
-}
-
-.feed > .tumblr.entry .link {
-	background-image: url(i/tumblr.png);
+	background-position: 0 -20px;
 }
 
 .feed > .pinterest.entry .link {
-	background-image: url(i/pinterest.png);
+	background-position: -20px -20px;
+}
+
+.feed > .twitter.entry .link {
+	
+	background-position: -40px -20px;
+}
+
+.feed > .tumblr.entry .link {
+	background-position: -60px -20px;
 }
 
 /* ==========================================================================

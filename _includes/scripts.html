@@ -2,7 +2,7 @@
 		<!-- Load jQuery Feeds -->
 		<script src="{{ ASSET_PATH }}/jquery.feeds.js" charset="utf-8"></script>
 		
-		<!-- Load moment.js, used to format dates, totally optional. -->
+		<!-- Load moment.js, used to format dates, totally optional -->
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/1.6.2/moment.min.js" charset="utf-8"></script>
 		
 		<!-- Using Pure CSS Masonry which is not supported by IE. Fallback: original lib. -->
@@ -36,7 +36,7 @@
 					// Using the id of the template defined in the markup.
 					entryTemplate : 'entryTmpl',
 					
-					// laodingTemplate: template used to show while entries are being retrieved. Can be a string, an id or a callback.
+					// loadingTemplate: template used to show while entries are being retrieved. Can be a string, an id or a callback.
 					loadingTemplate: '<p class="loading entry">Loading entries, hold on.</p>',
 					
 					// onComplete: called when all entries are rendered.
@@ -51,17 +51,12 @@
 								gutterWidth: 12
 							});
 						}
+						
+						// Tracking outbound links, ignore
+						$(this).find('a').click(function() {
+							_gaq.push(['_trackEvent', 'Outbound Demo Links', 'Click', $(this).attr('href')]);
+						});
 					}
-				});
-				
-				/* ==================================================================
-				   Site scripts
-				   ================================================================== */
-				  
-				$('.openCode').click(function(e) {
-					e.preventDefault();
-					$('.content .code').slideDown();
-					$(this).remove();
 				});
 			});
 		</script>
