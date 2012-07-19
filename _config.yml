@@ -3,5 +3,6 @@ markdown: rdiscount
 lsi: false
 pygments: true
 exclude: [README.md, grunt.js, feeds.jquery.json]
+baseurl: jquery-feeds/
 rdiscount:
   extensions: []
