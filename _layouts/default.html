@@ -18,7 +18,7 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 		
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
-		<link rel="stylesheet" href="{{ ASSET_PATH }}/ui/styles.css"/>
+		<link rel="stylesheet" href="{{ site.basepath }}/ui/styles.css"/>
 				
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -41,12 +41,12 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 				
 				<nav class="menu">
 					<a class="download item" title="Get jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
-					<a class="documentation item" href="{{ ASSET_PATH }}/">Read the docs</a>
-					<a class="demo item" href="{{ ASSET_PATH }}/demos">Launch the demo</a>
+					<a class="documentation item" href="{{ site.basepath }}/">Read the docs</a>
+					<a class="demo item" href="{{ site.basepath }}/demos">Launch the demo</a>
 				</nav>
 				
 				<nav class="submenu">
-					<a class="test item" title="qUnit tests" href="{{ ASSET_PATH }}/test">Run the tests</a>
+					<a class="test item" title="qUnit tests" href="{{ site.basepath }}/test">Run the tests</a>
 					<a class="github item" href="https://github.com/camagu/jquery-feeds/">Fork on GitHub</a>
 					<a href="https://twitter.com/share" class="twitter item twitter-share-button" data-url="http://bit.ly/MJpeK2" data-text="#jQuery Feeds is a multiple RSS feeds aggregator with templating and cross-domain support. Check it out!" data-via="camagu_" data-count="none">Tweet</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -66,7 +66,7 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 		
 		<!-- Include site script -->
-		<script src="{{ ASSET_PATH }}/ui/site.js"></script>
+		<script src="{{ site.basepath }}/ui/site.js"></script>
 		
 		{% if page.is_demo %}{% include scripts.html %}{% endif %}
 
