@@ -15,6 +15,7 @@ File.open readme_path, "r" do |readme|
     # write the jekyll front matter
     index.puts "---"
     index.puts "title: Documentation"
+    index.puts "description: RSS/Atom aggregator with templating and cross-domain support using jQuery."
     index.puts "class: docs"
     index.puts "layout: default"
     index.puts "---"

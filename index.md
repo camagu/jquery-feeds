@@ -1,5 +1,6 @@
 ---
 title: Documentation
+description: RSS/Atom aggregator with templating and cross-domain support using jQuery.
 class: docs
 layout: default
 ---
@@ -326,9 +327,9 @@ No changes where made to the code but the package got revamped!
 License
 -------
 
-Copyright (c) 2012 Camilo Aguilar &bull; Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
+Copyright (c) 2012 Camilo Aguilar • Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
 
-Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/) &bull; Copyright (c) [John Resig](http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
+Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/) • Copyright (c) [John Resig](http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
 
 Contributing
 ------------
