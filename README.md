@@ -3,6 +3,8 @@ jQuery Feeds - RSS/Atom aggregator using jQuery
 
 Easily create news streams and social activity widgets using the jQuery Feeds Plugin.
 
+**[Launch the demo!](http://camagu.github.com/jquery-feeds/demos/)**
+
 Features
 --------
 
