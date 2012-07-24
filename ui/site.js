@@ -43,8 +43,8 @@ $(document).ready(function() {
 	  
 	$('.openCode').click(function(e) {
 		e.preventDefault();
+		$(this).parent().hide();
 		$('.content .code').slideDown();
-		$(this).remove();
 		
 		_gaq.push(['_trackEvent', 'Internal Actions', 'Show code']);
 	});
