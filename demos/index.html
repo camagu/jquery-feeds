@@ -60,7 +60,9 @@ $('.feed').feeds({
 				 You can print the entry's properties by writting their name inside <!= !>. -->
 			<script type="text/html" id="entryTmpl">
 				<article class="<!=source!> entry">
-					<p><a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a> <span class="publishedDate"><!=publishedDate!></span></p>
+					<p>
+						<a class="link" href="<!=feedLink!>" title="<!=feedDescription!>"><!=feedTitle!></a>
+						<! if (publishedDate) { !><span class="publishedDate"><!=publishedDate!></span><! } !></p>
 					<p class="author"><!=author!></p>
 					<div class="content"><!=content!></div>
 				</article>

@@ -28,6 +28,11 @@
 					// Preprocess: manipulated entries data before it's rendered
 					preprocess : function(feed) {
 						// Inside the callback 'this' corresponds to the entry being processed
+						
+						if (!this.publishedDate) {
+							return;
+						}
+						
 						// Example: Using moment.js to format dates as time ago, totally optional.
 						this.publishedDate = moment(this.publishedDate).fromNow();
 					},
