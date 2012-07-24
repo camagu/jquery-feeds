@@ -3,20 +3,21 @@ title: Documentation
 class: docs
 layout: default
 ---
-jQuery Feeds - RSS aggregator for your site
-===========================================
+jQuery Feeds - RSS/Atom aggregator using jQuery
+===============================================
 
-Use the jQuery Feeds Plugin to retrieve and display multiple RSS feeds' entries in chronological order.
+Easily create news streams and social activity widgets using the jQuery Feeds Plugin.
 
 Features
 --------
 
-- Fetch entries from multiple RSS sources
+- Fetch entries from multiple RSS or Atom feeds
 - Entries are combined and displayed in chronological order
 - Fully customizable markup
 - Fully customizable loader
 - Manipulate entries' properties
 - Uses the [Google Feed API](https://developers.google.com/feed/) to retrieve feeds
+- No need for sever-side scripts
 
 Basic usage
 -----------
