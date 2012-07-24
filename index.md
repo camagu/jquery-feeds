@@ -326,18 +326,14 @@ No changes where made to the code but the package got revamped!
 License
 -------
 
-Copyright (c) 2012 Camilo Aguilar
+Copyright (c) 2012 Camilo Aguilar &bull; Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
 
-Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
-
-----
-
-Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/)
-
-Copyright (c) John Resig (http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
+Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/) &bull; Copyright (c) [John Resig](http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
 
 Contributing
 ------------
+
+Get the code at [https://github.com/camagu/jquery-feeds](https://github.com/camagu/jquery-feeds).
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
