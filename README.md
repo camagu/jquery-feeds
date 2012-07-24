@@ -1,17 +1,18 @@
-jQuery Feeds - RSS aggregator for your site
-===========================================
+jQuery Feeds - RSS/Atom aggregator using jQuery
+===============================================
 
-Use the jQuery Feeds Plugin to retrieve and display multiple RSS feeds' entries in chronological order.
+Easily create news streams and social activity widgets using the jQuery Feeds Plugin.
 
 Features
 --------
 
-- Fetch entries from multiple RSS sources
+- Fetch entries from multiple RSS or Atom feeds
 - Entries are combined and displayed in chronological order
 - Fully customizable markup
 - Fully customizable loader
 - Manipulate entries' properties
 - Uses the [Google Feed API](https://developers.google.com/feed/) to retrieve feeds
+- No need for sever-side scripts
 
 Basic usage
 -----------
@@ -320,18 +321,14 @@ No changes where made to the code but the package got revamped!
 License
 -------
 
-Copyright (c) 2012 Camilo Aguilar
+Copyright (c) 2012 Camilo Aguilar • Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
 
-Dual licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php) and [GPL](http://www.gnu.org/licenses/gpl.html) licenses.
-
-----
-
-Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/)
-
-Copyright (c) John Resig (http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
+Includes a modified version of [Simple JavaScript Templating](http://ejohn.org/blog/javascript-micro-templating/) • Copyright (c) [John Resig](http://ejohn.org) 2008, [MIT](http://www.opensource.org/licenses/mit-license.php) licensed.
 
 Contributing
 ------------
+
+Get the code at [https://github.com/camagu/jquery-feeds](https://github.com/camagu/jquery-feeds).
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
