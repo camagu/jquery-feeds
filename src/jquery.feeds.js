@@ -18,6 +18,7 @@
 								'</div>',
 				feeds: {},
 				max: -1,
+				xml: false,
 				ssl: 'auto',
 				onComplete: function( entries ) {
 
@@ -59,15 +60,17 @@
 				this.$loader = $( render.call( this, { } ) );
 				this.$element.html( this.$loader );
 				
+				var output = this.settings.xml ? 'json_xml' : 'json';
+				
 				for ( var j in this.feeds ) {
-					this.fetchFeed( j, this.feeds[ j ], this.settings.max );
+					this.fetchFeed( j, this.feeds[ j ], this.settings.max, output );
 				}
 			},
 			
-			fetchFeed: function( key, feed, max ) {
+			fetchFeed: function( key, feed, max, output ) {
 				var self = this;
 				
-				var cacheKey = feed + '**' + max;
+				var cacheKey = feed + '**' + max + '**' + output;
 				if ( typeof cache[ cacheKey ] !== 'undefined' ) {
 					self.processResponse( cache[ cacheKey ], key, feed );
 					return;
@@ -78,7 +81,8 @@
 					dataType: 'jsonp',
 					data: {
 						q: feed,
-						num: max
+						num: max,
+						output: output
 					},
 					beforeSend: function( ) {
 						this.feed = feed;
@@ -97,20 +101,45 @@
 						console.log( 'Unable to load feed ' + feed + ': (' + data.responseStatus + ') ' + data.responseDetails );
 					}
 				} else {
-					var feedEntries = data.responseData.feed.entries;
+					var currentFeed = data.responseData.feed;
+					var feedEntries = currentFeed.entries;
+					
+					var type = data.responseData.feed.type;
+					
+					if ( this.settings.xml ) {
+						var $xml = $( data.responseData.xmlString );
+						
+						if ( type.match( /^rss.*/ ) ) {
+							$xml = $xml.filter( 'rss' ).find( 'channel' );
+						} else if ( type.match( /^atom.*/ ) ) {
+							$xml = $xml.filter( 'feed' );
+						}
+						
+						currentFeed.xml = $xml;
+					}
 					
 					for ( var i in feedEntries ) {
 						var entry = $.extend( {}, feedEntries[ i ] );
 						entry.source = key;
 						entry.publishedDateRaw = entry.publishedDate;
 						
-						entry.feedUrl = data.responseData.feed.feedUrl;
-						entry.feedTitle = data.responseData.feed.title;
-						entry.feedLink = data.responseData.feed.link;
-						entry.feedDescription = data.responseData.feed.description;
-						entry.feedAuthor = data.responseData.feed.author;
+						entry.feedUrl = currentFeed.feedUrl;
+						entry.feedTitle = currentFeed.title;
+						entry.feedLink = currentFeed.link;
+						entry.feedDescription = currentFeed.description;
+						entry.feedAuthor = currentFeed.author;
 						
-						if ( this.settings.preprocess.call( entry, data.responseData.feed ) !== false ) {
+						if ( this.settings.xml ) {
+							if ( type.match( /^rss.*/ ) ) {
+								entry.xml = currentFeed.xml.find( 'item' ).eq( i );
+							} else if ( type.match( /^atom.*/ ) ) {
+								entry.xml = currentFeed.xml.find( 'entry' ).eq( i );
+							} else {
+								entry.xml = { };
+							}
+						}
+						
+						if ( this.settings.preprocess.call( entry, currentFeed ) !== false ) {
 							this.entries.push( entry );
 						}
 					}
