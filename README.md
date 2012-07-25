@@ -293,7 +293,7 @@ No changes where made to the code but the package got revamped!
 - Renamed test files to 'index.html' and 'tests.js'
 - Organized tests
 - Revamped 'dist' banner
-- Removed lincese files, lincese links were included in the banner
+- Removed lincense files, lincense links were included in the banner
 - Moved 'dist' files to root
 - Moved 'package.json' to 'feeds.jquery.json' (plugins.jquery.com compatible)
 - Plugin info was tuned
