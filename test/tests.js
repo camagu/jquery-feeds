@@ -631,7 +631,6 @@
 			max: 1,
 			ssl: true,
 			entryTemplate: function( entry ) {
-
 				equal( 'https:', this.service.substr( 0, 'https:'.length ), 'did protocols matched' );
 				timeout.teardown( );
 			}
@@ -649,6 +648,94 @@
 			ssl: false,
 			entryTemplate: function( entry ) {
 				equal( 'http:', this.service.substr( 0, 'http:'.length ), 'did protocols matched' );
+				timeout.teardown( );
+			}
+		} );
+	} );
+	
+	module( 'xml' );
+	
+	asyncTest( 'parse rss', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'rss': 'http://search.twitter.com/search.rss?q=blue'
+			},
+			xml: true,
+			preprocess: function( feed ) {
+				ok( feed.xml.find( 'item' ).length > 0, 'did the rss xml passed to preprocess had items' );
+				timeout.teardown( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'parse atom', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'atom': 'http://search.twitter.com/search.atom?q=blue'
+			},
+			xml: true,
+			preprocess: function( feed ) {
+				ok( feed.xml.find( 'entry' ).length > 0, 'did the rss xml passed to preprocess had entries' );
+				timeout.teardown( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'atom - attach to entries', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'atom': 'http://search.twitter.com/search.atom?q=blue'
+			},
+			xml: true,
+			onComplete: function( entries ) {
+				expect( entries.length );
+				for ( var i in entries ) {
+					var actual = entries[ i ].link;
+					var expected = entries[ i ].xml.find( 'link[rel=alternate]' ).attr( 'href' );
+					equal( actual, expected, "was entry's link and xml link equal" );
+				}
+				timeout.teardown( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'rss - attach to entries', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'rss': 'http://blog.jquery.com/feed/'
+			},
+			xml: true,
+			onComplete: function( entries ) {
+				expect( entries.length );
+				for ( var i in entries ) {
+					var actual = entries[ i ].link;
+					var expected = entries[ i ].xml.find( 'link' )[0].nextSibling.textContent;
+					equal( actual, expected, "was entry's link and xml link equal" );
+				}
+				timeout.teardown( );
+			}
+		} );
+	} );
+	
+	asyncTest( 'accesible by template', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'atom': 'http://search.twitter.com/search.atom?q=blue'
+			},
+			xml: true,
+			entryTemplate: 'withXmlTmplTest',
+			onComplete: function( entries ) {
+				expect( entries.length );
+				for ( var i in entries ) {
+					var actual = $( this ).find( 'p' ).eq( i ).text( );
+					var expected = entries[ i ].xml.find( 'link[rel=alternate]' ).attr( 'href' );
+					equal( actual, expected, "was printed link and xml link equal" );
+				}
 				timeout.teardown( );
 			}
 		} );
