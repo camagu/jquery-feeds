@@ -198,6 +198,31 @@
 			}
 		} );
 	} );
+	
+	asyncTest( 'entries excluded on preprocess', function( ) {
+		timeout.setup( );
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml',
+				'jquery': 'http://blog.jquery.com/feed/'
+			},
+			preprocess: function( feed ) {
+				if ( this.source === 'jquery' ) {
+					return false;
+				}
+			},
+			onComplete: function( entries ) {
+				timeout.teardown( );
+				for ( var i in entries ) {
+					if ( entries[ i ].source === 'jquery' ) {
+						ok( false, 'was jquery entries filtered' );
+						return;
+					}
+				}
+				ok( true, 'was jquery entries filtered' );
+			}
+		} );
+	} );
 
 	asyncTest( 'multiple feeds entries passed to onComplete', function( ) {
 		timeout.setup( );

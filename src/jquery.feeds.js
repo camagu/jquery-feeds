@@ -110,9 +110,9 @@
 						entry.feedDescription = data.responseData.feed.description;
 						entry.feedAuthor = data.responseData.feed.author;
 						
-						this.settings.preprocess.call( entry, data.responseData.feed );
-						
-						this.entries.push( entry );
+						if ( this.settings.preprocess.call( entry, data.responseData.feed ) !== false ) {
+							this.entries.push( entry );
+						}
 					}
 				}
 				
