@@ -10,11 +10,11 @@
 			service: '//ajax.googleapis.com/ajax/services/feed/load?v=1.0',
 			
 			settings: {
-				loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
+				loadingTemplate: '<div class="feeds-loader">Loading entries ...</div>',
 				entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
-								'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
-								'<div class="feed-entry-date"><!=publishedDate!></div>' + 
-								'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
+								'<a class="feeds-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
+								'<div class="feeds-entry-date"><!=publishedDate!></div>' + 
+								'<div class="feeds-entry-contentSnippet"><!=contentSnippet!></div>' + 
 								'</div>',
 				feeds: {},
 				max: -1,
@@ -23,7 +23,7 @@
 				onComplete: function( entries ) {
 
 				},
-				preprocess: function( entry, feed ) {
+				preprocess: function( feed ) {
 
 				}
 			},
