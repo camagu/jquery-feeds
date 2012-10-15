@@ -2,7 +2,7 @@
 /*global start:false, stop:false ok:false, equal:false, notEqual:false, deepEqual:false*/
 /*global notDeepEqual:false, strictEqual:false, notStrictEqual:false, raises:false*/
 ( function( $ ) {
-	
+
 	var timeout = {
 		to: null,
 		setup: function( ) {
@@ -16,7 +16,7 @@
 			start( );
 		}
 	};
-		
+
 	module( 'feeds' );
 
 	asyncTest( 'onComplete callback', function( ) {
@@ -57,7 +57,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'max', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -71,7 +71,7 @@
 			}
 		} );
 	});
-	
+
 	asyncTest( 'preprocess callback', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -113,7 +113,7 @@
 						entries[ entryCounter ].feedLink = data.responseData.feed.link;
 						entries[ entryCounter ].feedDescription = data.responseData.feed.description;
 						entries[ entryCounter ].feedAuthor = data.responseData.feed.author;
-						
+
 						deepEqual( this, entries[ entryCounter ], 'was the entry passed to preprocess equal to the one passed by the service' );
 						entryCounter++;
 
@@ -125,7 +125,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'feed properties', function( ) {
 		timeout.setup( );
 		$.ajax( {
@@ -137,7 +137,7 @@
 			},
 			success: function( data ) {
 				timeout.teardown( );
-				
+
 				var properties = [ 'feedUrl', 'title', 'link', 'description', 'author' ];
 				for ( var i in properties ) {
 					if ( typeof data.responseData.feed[ properties[ i ] ] === 'undefined' ) {
@@ -146,7 +146,7 @@
 						return;
 					}
 				}
-				
+
 				var feedData = {
 					feedUrl: data.responseData.feed.feedUrl,
 					feedTitle: data.responseData.feed.title,
@@ -154,7 +154,7 @@
 					feedDescription: data.responseData.feed.description,
 					feedAuthor: data.responseData.feed.author
 				};
-				
+
 				$( '#feeds' ).feeds( {
 					feeds: {
 						'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -170,7 +170,7 @@
 						for ( var i in feedData ) {
 							equal( entries[ 0 ][ i ], feedData[ i ], 'was property ' + i + ' appended to entry' );
 						}
-						
+
 						start( );
 					}
 				} );
@@ -198,7 +198,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'entries excluded on preprocess', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -226,7 +226,7 @@
 
 	asyncTest( 'multiple feeds entries passed to onComplete', function( ) {
 		timeout.setup( );
-		
+
 		var entries1 = {};
 		var entries2 = {};
 
@@ -292,7 +292,7 @@
 
 					for ( var i in entries ) {
 						var entry = entries[ i ];
-						
+
 						var expected = null;
 						if ( entry.source === 'feed1' ) {
 							expected = entries1[ feed1Pointer ];
@@ -309,7 +309,7 @@
 				}
 			} );
 		}
-		
+
 		loadEntries1( );
 	} );
 
@@ -336,7 +336,7 @@
 		} );
 
 	} );
-	
+
 	module( 'loadingTemplate' );
 
 	test( 'default', function( ) {
@@ -345,7 +345,7 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml?1'
 			}
 		} );
-		equal( $( '#feeds p' ).text( ), 'Loading entries ...', 'was default loading template injected' );
+		equal( $( '#feeds div' ).text( ), 'Loading entries ...', 'was default loading template injected' );
 	} );
 
 	test( 'custom', function( ) {
@@ -357,7 +357,7 @@
 		} );
 		equal( $( '#feeds div' ).text( ), 'my loading template', 'was custom template injected' );
 	} );
-	
+
 	test( 'as callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -369,7 +369,7 @@
 		} );
 		equal( $( '#feeds p' ).text( ), 'from callback', 'was callback for loading template called' );
 	} );
-	
+
 	test( 'context in callback', function( ) {
 		$( '#feeds' ).feeds( {
 			feeds: {
@@ -382,9 +382,9 @@
 			}
 		} );
 	} );
-	
+
 	module( 'entryTemplate' );
-	
+
 	asyncTest( 'populating feeds container', function( ) {
 		timeout.setup( );
 
@@ -420,17 +420,15 @@
 				'google': 'http://googleblog.blogspot.com/atom.xml'
 			},
 			onComplete: function( entries ) {
-				expect( $( '.feeds-entry' ).length );
+				expect( $( '.feeds-entry' ).length * 4 );
 				$( '.feeds-entry' ).each( function( i ) {
 					if ( typeof entries[ i ] === 'undefined' ) {
 						ok( false );
 					} else {
-						ok(
-							$( this ).find( '.feed-entry-title' ).text( ) === entries[ i ].title &&
-							$( this ).find( '.feed-entry-title' ).attr( 'href' ) === entries[ i ].link &&
-							$( this ).find( '.feed-entry-date' ).text( ) === entries[ i ].publishedDate &&
-							$( this ).find( '.feed-entry-content' ).text( ) === $( '<div />' ).html( entries[ i ].contentSnippet ).text( ),
-						'did entry passed to onComplete corresponded to rendered one' );
+						equal( $( this ).find( '.feeds-entry-title' ).text(  ), entries[ i ].title );
+						equal( $( this ).find( '.feeds-entry-title' ).attr( 'href' ), entries[ i ].link );
+						equal( $( this ).find( '.feeds-entry-date' ).text(  ), entries[ i ].publishedDate );
+						equal( $( this ).find( '.feeds-entry-contentSnippet' ).text(  ), entries[ i ].contentSnippet );
 					}
 				} );
 				timeout.teardown( );
@@ -506,7 +504,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'control structures', function( ) {
 		timeout.setup( );
 
@@ -527,11 +525,11 @@
 							'<! } !></ul></div>',
 			onComplete: function( entries ) {
 				expect( 4 );
-				
+
 				$( '#feeds > div' ).each( function( i ) {
 					var shouldEqual = entries[ i ].source === 'google' ? 'is google' : 'not google';
 					equal( $( this ).find( '.message' ).text( ), shouldEqual, 'was conditional used' );
-					
+
 					var categories = [];
 					$( this ).find( '.categories li' ).each( function( ) {
 						categories.push( $( this ).text() );
@@ -543,10 +541,10 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'external template', function( ) {
 		timeout.setup( );
-		
+
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -560,10 +558,10 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'as callback', function( ) {
 		timeout.setup( );
-		
+
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -578,10 +576,10 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'context in callback', function( ) {
 		timeout.setup( );
-		
+
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -597,9 +595,28 @@
 			}
 		} );
 	} );
-	
+
+	module( 'template' );
+
+	asyncTest( 'should be none by default', function() {
+		timeout.setup();
+
+		$( '#feeds' ).feeds( {
+			feeds: {
+				'google': 'http://googleblog.blogspot.com/atom.xml'
+			},
+			max: 1,
+			ssl: false,
+			entryTemplate: '<div class="entry"></div>',
+			onComplete: function( entries ) {
+				ok( $( '#feeds' ).first(  ).is( ".entry" ), "first child s entry template" );
+				timeout.teardown();
+			}
+		} );
+	} );
+
 	module( 'ssl' );
-	
+
 	asyncTest( 'auto', function( ) {
 		timeout.setup( );
 
@@ -615,15 +632,15 @@
 				}
 
 				equal( protocol, this.service.substr( 0, protocol.length ), 'did protocols matched' );
-				
+
 				timeout.teardown( );
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'true', function( ) {
 		timeout.setup( );
-		
+
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -636,10 +653,10 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'false', function( ) {
 		timeout.setup( );
-		
+
 		$( '#feeds' ).feeds( {
 			feeds: {
 				'google': 'http://googleblog.blogspot.com/atom.xml'
@@ -652,9 +669,9 @@
 			}
 		} );
 	} );
-	
+
 	module( 'xml' );
-	
+
 	asyncTest( 'parse rss', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -668,7 +685,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'parse atom', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -682,7 +699,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'atom - attach to entries', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -701,7 +718,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'rss - attach to entries', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
@@ -720,7 +737,7 @@
 			}
 		} );
 	} );
-	
+
 	asyncTest( 'accesible by template', function( ) {
 		timeout.setup( );
 		$( '#feeds' ).feeds( {
