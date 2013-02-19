@@ -596,25 +596,6 @@
 		} );
 	} );
 
-	module( 'template' );
-
-	asyncTest( 'should be none by default', function() {
-		timeout.setup();
-
-		$( '#feeds' ).feeds( {
-			feeds: {
-				'google': 'http://googleblog.blogspot.com/atom.xml'
-			},
-			max: 1,
-			ssl: false,
-			entryTemplate: '<div class="entry"></div>',
-			onComplete: function( entries ) {
-				ok( $( '#feeds' ).first(  ).is( ".entry" ), "first child s entry template" );
-				timeout.teardown();
-			}
-		} );
-	} );
-
 	module( 'ssl' );
 
 	asyncTest( 'auto', function( ) {
