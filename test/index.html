@@ -33,6 +33,11 @@
 		<script type="text/html" id="tmplTest">
 			<p><!=title!></p>
 		</script>
+		
+		<!-- xml -->
+		<script type="text/html" id="withXmlTmplTest">
+			<p><!=xml.find( 'link[rel=alternate]' ).attr( 'href' )!></p>
+		</script>
 	</div>
 </body>
 </html>
