@@ -105,7 +105,7 @@ Working with XML
 
 Sometimes the properties parsed by the Google Feed API don't include valuable information which is contained in the raw XML feed. By setting `xml` to `true` in the plugin's options, you can access the XML nodes in your preprocess callback or in your templates:
 
-```javascript:
+```javascript
 $('#container').feeds({
 	feeds: {
 		// A Twitter atom feed ...
@@ -140,7 +140,7 @@ $('#container').feeds({
 	preprocess: function ( feed ) {
 		// Show entries written by Mr. T
 		if (this.title !== 'Mr. T') {
-			// It's not Mr. T, so by bye!
+			// It's not Mr. T, so bye bye!
 			return false;
 		}
 	}
