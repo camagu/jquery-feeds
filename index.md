@@ -43,7 +43,7 @@ $('#container').feeds({
 	}
 });
 {% endhighlight %}
-	
+
 The `feeds`' keys (i.e. *feed1* and *feed2* in the example) are used to identify the source of the entries. You can use any alphanum string as a key but try to keep them short and descriptive (e.g. *google*, *jquery*, *smashingmag*).
 
 ----
@@ -75,7 +75,7 @@ $('#container').feeds({
     },
     preprocess: function ( feed ) {
         // Change the publishedDate format from UTC to dd-mm-yyyy
-        
+
         // Inside the callback 'this' corresponds to the entry being processed
         var date = new Date(this.publishedDate);
         var pieces = [date.getDate(), date.getMonth(), date.getFullYear()]
@@ -105,6 +105,54 @@ Available properties are:
 
 Refer to the [Google developer's guide](https://developers.google.com/feed/v1/jsondevguide#resultJson) for more information.
 
+
+Working with XML
+----------------
+
+Sometimes the properties parsed by the Google Feed API don't include valuable information which is contained in the raw XML feed. By setting `xml` to `true` in the plugin's options, you can access the XML nodes in your preprocess callback or in your templates:
+
+{% highlight javascript %}
+$('#container').feeds({
+	feeds: {
+		// A Twitter atom feed ...
+		twitter: 'http://search.twitter.com/search.atom?q=sayhi'
+	},
+	// Set XML to true
+	xml: true,
+	preprocess: function ( feed ) {
+		// Atom feeds provide an author uri which is not accesible
+		// through the properties exposed by the Google Feed API.
+		this.userLink = '<a href="' + this.xml.find( 'author uri').text() +'">'
+					  + this.xml.find('author name') + '</a>';
+
+		// You can also access the full XML feed:
+		feed.xml;
+	}
+});
+{% endhighlight %}
+
+The XML is parsed using jQuery and you can access it just like any other jQuery object.
+
+Filtering entries
+-----------------
+
+If you return `false` on a `prepcorcess` callback, the entry will not be rendered.
+
+{% highlight javascript %}
+$('#container').feeds({
+	feeds: {
+		// Your feeds ...
+	},
+	preprocess: function ( feed ) {
+		// Show entries written by Mr. T
+		if (this.title !== 'Mr. T') {
+			// It's not Mr. T, so bye bye!
+			return false;
+		}
+	}
+});
+{% endhighlight %}
+
 onComplete callback
 -------------------
 
@@ -121,7 +169,7 @@ $('#container').feeds({
     }
 });
 {% endhighlight %}
-    
+
 Templating
 ----------
 
@@ -198,7 +246,7 @@ $('#container').feeds({
 	},
 	entryTemplate: function(entry) {
 		var template = '';
-		
+
 		if (entry.source == 'blog') {
 			// Full view for blog entry
 			template =	'<div>' +
@@ -209,7 +257,7 @@ $('#container').feeds({
 			// Just the content for twitter entries
 			template = '<div><!=content!></div>';
 		}
-		
+
 		// Render the template
 		return this.tmpl(template, entry);
 	}
@@ -252,7 +300,7 @@ $('#container').feeds({
     loadingTemplate: '<p>Fetching entries, please wait.</p>'
 });
 {% endhighlight %}
-    
+
 Options
 -------
 
@@ -271,6 +319,9 @@ max: -1,
 //	- 'auto': use same as current domain
 ssl: 'auto',
 
+// Retrieve and parse XML elements when true
+xml: false,
+
 // Called when all entries are rendered
 onComplete: function( entries ) { },
 
@@ -281,15 +332,20 @@ preprocess: function( feed ) { },
 loadingTemplate: '<p class="feeds-loader">Loading entries ...</p>',
 
 // Template used to render each entry
-entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' + 
+entryTemplate:	'<div class="feeds-entry feeds-source-<!=source!>">' +
 				'<a class="feed-entry-title" target="_blank" href="<!=link!>" title="<!=title!>"><!=title!></a>' +
-				'<div class="feed-entry-date"><!=publishedDate!></div>' + 
-				'<div class="feed-entry-content"><!=contentSnippet!></div>' + 
+				'<div class="feed-entry-date"><!=publishedDate!></div>' +
+				'<div class="feed-entry-content"><!=contentSnippet!></div>' +
 				'</div>'
 {% endhighlight %}
 
 Changelog
 ---------
+
+**v0.6**
+
+- Filter entries on `preprocess`
+- Added *xml* option
 
 **v0.5**
 
@@ -299,7 +355,7 @@ No changes where made to the code but the package got revamped!
 - Renamed test files to 'index.html' and 'tests.js'
 - Organized tests
 - Revamped 'dist' banner
-- Removed lincese files, lincese links were included in the banner
+- Removed lincense files, lincense links were included in the banner
 - Moved 'dist' files to root
 - Moved 'package.json' to 'feeds.jquery.json' (plugins.jquery.com compatible)
 - Plugin info was tuned
@@ -321,11 +377,11 @@ No changes where made to the code but the package got revamped!
 
 - Cloned `publishedDate` property to avoid sorting problems
 - Added feed data to entries
- 
+
 **v0.1**
 
 - First version
-                  
+
 License
 -------
 
