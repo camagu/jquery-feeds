@@ -72,7 +72,7 @@ $('#container').feeds({
 
         // Inside the callback 'this' corresponds to the entry being processed
         var date = new Date(this.publishedDate);
-        var pieces = [date.getDate(), date.getMonth(), date.getFullYear()]
+        var pieces = [date.getDate(), date.getMonth() + 1, date.getFullYear()]
         this.publishedDate = pieces.join('-');
     }
 });
