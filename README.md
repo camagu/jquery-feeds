@@ -1,9 +1,19 @@
+Broken and unmaintained
+=======================
+
+[Google Feed API](https://developers.google.com/feed/) was officially retired,
+thus the plugin is broken. :(
+
+There are no plans to fix or maintain the project. If you happen to be
+interested just let me know!
+
 jQuery Feeds - RSS/Atom aggregator using jQuery
 ===============================================
 
 Easily create news streams and social activity widgets using the jQuery Feeds Plugin.
 
-**[Launch the demo!](http://camagu.github.com/jquery-feeds/demos/)**
+**[Launch the demo!](http://camagu.github.com/jquery-feeds/demos/)** (Not
+working)
 
 Features
 --------
