@@ -15,22 +15,29 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 		<title>{{page.title}} &bull; jQuery Feeds</title>
 		<meta name="description" content="{{page.description}}" />
 		<meta name="author" content="Camilo Aguilar" />
-		
+
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
 		<link rel="stylesheet" href="{{ site.basepath }}/ui/styles.css"/>
-				
+
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 		<!-- <link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" /> -->
-		
+
 		<!-- Analytics -->
 		{% include ga.html %}
 	</head>
 
 	<body>
 		<div class="{{page.class}} page">
+      <div class="notice">
+        <div class="content">
+          <p>Google Feed API was retired, thus this project is broken.
+          There are no plans to fix it.</p>
+        </div>
+      </div>
+
 			<header class="header">
 				<hgroup class="brand">
 					<h1 class="title">jQuery Feeds</h1>
@@ -38,13 +45,13 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 				</hgroup>
 
 				<p class="description">RSS/Atom aggregator with templating and cross-domain support</p>
-				
+
 				<nav class="menu">
 					<a class="download item" title="Get jquery.feeds.min.js (3.7kb)" href="https://raw.github.com/camagu/jquery-feeds/master/jquery.feeds.min.js">Download</a>
 					<a class="documentation item" href="{{ site.basepath }}/">Read the docs</a>
 					<a class="demo item" href="{{ site.basepath }}/demos">Launch the demo</a>
 				</nav>
-				
+
 				<nav class="submenu">
 					<a class="test item" title="qUnit tests" href="{{ site.basepath }}/test">Run the tests</a>
 					<a class="github item" href="https://github.com/camagu/jquery-feeds/">Fork on GitHub</a>
@@ -56,18 +63,18 @@ Icons by Icon8 (http://icons8.com/) and Icon Dock (http://icondock.com).
 			<div class="content">
 {{content}}
 			</div>
-			
+
 			<footer class="footer">
 				<p>jQuery Feeds and site by Camilo Aguilar. Except for the icons and the js libraries this site is <a href="http://unlicense.org/" title="Check lincense specifics">UNLICENSED</a>. Icons by <a href="http://icons8.com/">Icon8</a> and <a href="http://icondock.com">Icon Dock</a>.</p>
 			</footer>
 		</div>
-		
+
 		<!-- Include jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-		
+
 		<!-- Include site script -->
 		<script src="{{ site.basepath }}/ui/site.js"></script>
-		
+
 		{% if page.is_demo %}{% include scripts.html %}{% endif %}
 
 	</body>

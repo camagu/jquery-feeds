@@ -2,11 +2,11 @@
  * jQuery Feeds' site style definitions.
  * http://camagu.github.com/jquery-feeds
  * Camilo Aguilar
- * 
+ *
  * Used http://github.com/necolas/normalize.css as boilerplate.
- * 
+ *
  * Unlicense http://unlicense.org/
- * 
+ *
  * Icons from:
  *     - http://icons8.com/
  *     - http://icondock.com/
@@ -72,12 +72,12 @@ body {
     margin: 0;
     line-height: 1.5em;
     min-width: 320px;
-    
+
     /*
        Uncomment to check vertical rythm
        --------------------------------------------------------------------------
        http://forrst.com/posts/Check_Your_Vertical_Rhythm_With_CSS3_gradients-6XE */
-      
+
     /*
     background-image: -webkit-linear-gradient(#eee .05em, transparent .05em);
     background-image:    -moz-linear-gradient(#eee 1px, transparent 1px);
@@ -164,7 +164,7 @@ blockquote {
 
 i,
 em {
-	
+
 }
 
 dfn {
@@ -306,7 +306,7 @@ svg:not(:root) {
 /* ==========================================================================
    Figures
    ========================================================================== */
-  
+
 figure {
     margin: 0;
 }
@@ -314,7 +314,7 @@ figure {
 /* ==========================================================================
    Forms
    ========================================================================== */
-  
+
 form {
     margin: 0;
 }
@@ -405,14 +405,30 @@ table {
    Theme shared elements
    ========================================================================== */
 
+.notice {
+  background: #F75D59;
+  color: black;
+  font-weight: bold;
+}
+
+.notice > .content {
+  max-width: 1114px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.notice > .content p {
+  margin: 0;
+}
+
 .page {
-	
+
 }
 
 /* --------------------------------------------------------------------------
    Theme header
    -------------------------------------------------------------------------- */
-  
+
 .page > .header {
 	background-color: #F1F2F3;
 	margin: 0 0 1.5em 0;
@@ -423,7 +439,7 @@ table {
 /*
    Branding
    -------------------------------------------------------------------------- */
-  
+
 .page > .header > .brand {
 
 }
@@ -489,7 +505,7 @@ table {
 /*
    Secondary menu
    -------------------------------------------------------------------------- */
-  
+
 .page > .header > .submenu {
 
 }
@@ -533,7 +549,7 @@ table {
 /* --------------------------------------------------------------------------
    Theme header
    -------------------------------------------------------------------------- */
-  
+
 .page > .content {
 	margin: 0 auto;
 	max-width: 1114px;
@@ -543,7 +559,7 @@ table {
 /* --------------------------------------------------------------------------
    Theme footer
    -------------------------------------------------------------------------- */
-  
+
 .page > .footer {
 	border-top: #F1F2F3 solid 1px;
 	color: #666;
@@ -561,8 +577,8 @@ table {
 /* ==========================================================================
    Docs
    ========================================================================== */
-  
-  
+
+
 
 /* ==========================================================================
    Demo
@@ -583,7 +599,7 @@ table {
 /* --------------------------------------------------------------------------
    Feed's container
    -------------------------------------------------------------------------- */
-  
+
 .feed {
 	column-gap: 1em;
 	-moz-column-gap: 1em;
@@ -598,7 +614,7 @@ table {
 /* --------------------------------------------------------------------------
    Loading template
    -------------------------------------------------------------------------- */
-  
+
 .feed > .loading.entry {
 	text-align: center;
 	width: auto;
@@ -607,7 +623,7 @@ table {
 /* --------------------------------------------------------------------------
    Entry
    -------------------------------------------------------------------------- */
-  
+
 .feed > .entry {
 	border: 1px solid #ccc;
 	border-radius: 2em;
@@ -669,7 +685,7 @@ table {
 }
 
 .feed > .twitter.entry .link {
-	
+
 	background-position: -40px -20px;
 }
 
@@ -681,7 +697,7 @@ table {
    Pygments' code highlighting - http://pygments.org/
    Based on 'friendly' style
    ========================================================================== */
-  
+
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #f0f0f0; }
 .highlight .c { color: #60a0b0; font-style: italic } /* Comment */
@@ -748,11 +764,11 @@ table {
 /* ==========================================================================
    Media queries
    ========================================================================== */
-  
+
 /* --------------------------------------------------------------------------
    Single column on distort
    -------------------------------------------------------------------------- */
-  
+
 @media screen and (max-width: 794px) {
 	.feed {
 		column-gap: 0;
@@ -762,7 +778,7 @@ table {
 		-moz-column-width: auto;
 		-webkit-column-width: auto;
 	}
-	
+
 	.feed > .entry {
 		width: auto;
 		display: block;
@@ -772,29 +788,29 @@ table {
 /* --------------------------------------------------------------------------
    Small devices
    -------------------------------------------------------------------------- */
-  
+
 @media screen and (max-width: 493px) {
 	body {
 		font-size: 0.75em;
 	}
-	
+
 	pre {
 		font-size: 1em;
 	}
-	
+
 	.page > .header > .brand > .slogan {
 		margin-bottom: 1.5em;
 	}
-	
+
 	.page > .header > .menu > .item {
 		display: block;
 		margin-bottom: 0.5em;
 	}
-	
+
 	.page > .header > .menu > .item:before {
 		display:none;
 	}
-	
+
 	.page > .header > .submenu > .item:before {
 		display: none;
 	}
