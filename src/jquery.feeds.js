@@ -57,7 +57,7 @@
 				this.$element = $( element );
 				
 				var render = typeof this.settings.loadingTemplate === 'function' ? this.settings.loadingTemplate : this.tmpl( this.settings.loadingTemplate );
-				this.$loader = $( render.call( this, { } ) );
+				this.$loader = $( $.parseHTML( render.call( this, { } ) ) );
 				this.$element.html( this.$loader );
 				
 				var output = this.settings.xml ? 'json_xml' : 'json';
